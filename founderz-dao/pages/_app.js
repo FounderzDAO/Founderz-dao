@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import Home from "./Home";
+import "remixicon/fonts/remixicon.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function App() {
+  return (
+    <div className="App">
+      <Home />
+    </div>
+  );
 }
 
-export default MyApp
+export default App;
