@@ -1,4 +1,6 @@
+
 import React from 'react';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Intro = () => {
   return (
@@ -14,7 +16,7 @@ const Intro = () => {
           <button className='border rounded-full p-3'><i className="ri-chat-1-fill p-3 bg-inherit"></i>Conversation</button>
           <button className='border rounded-full p-3'><i className="ri-play-fill p-3 bg-inherit"></i>Capsule</button>
           <button className='border rounded-full p-3'><i className="ri-global-line text-3xl bg-inherit"></i></button>
-          <button className='border rounded-full p-3'>Connect</button>
+          <ConnectButton />
         </div>
       </nav>
       <div className='grid grid-cols-2 m-32 gap-10 overflow-hidden'>
