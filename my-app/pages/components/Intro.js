@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
@@ -29,7 +28,7 @@ const Intro = () => {
               <button className='bg-white rounded-full p-2'><i className="ri-arrow-left-line bg-inherit"></i></button>
               <button className='bg-white rounded-full p-2'><i className="ri-arrow-right-line bg-inherit"></i></button>
             </div>
-            <h1 className='text-gray-500 text-2xl'>August 23, 2022</h1>
+            <h1 className='text-gray-500 text-2xl'>September 23, 2022</h1>
           </div>
           <div className='mt-5'>
             <h1 className='text-black text-7xl'>Founder 42</h1>

@@ -26,7 +26,7 @@ const MidSection = () => {
       </p>
       <p className="mt-4 text-2xl">
         Learn more below, or start creating Founderz off-chain using the{" "}
-        <b className="text-red-700">??CAPSULE??</b>.
+        <b className="text-red-700">?Capsule?</b>.
       </p>
     </div>
   );
