@@ -2,7 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import logo from '../assets/logo2.JPG';
-import capsule from '../assets/capsule.JPG';
+import capsule from '../assets/founderz-prequel 1.svg';
+
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Intro = () => {
@@ -18,10 +19,11 @@ const Intro = () => {
             42,000
           </button>
         </div>
+        <script defer src = "app.js"></script>
         <div className="flex gap-4">
           <button onClick={() => router.push("/")}>DAO</button>
           <button onClick={() => router.push("/")}>Docs</button>
-          <button onClick={() => router.push("/")}>Alpha</button>
+          <button onClick={() => router.push("/")}>Raffle</button>
           <button onClick={() => router.push("/")}>Capsule</button>
           <ConnectButton />
         </div>
