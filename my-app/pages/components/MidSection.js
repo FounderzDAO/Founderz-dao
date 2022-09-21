@@ -3,10 +3,10 @@ import React from 'react';
 const MidSection = () => {
   return (
     <div className="m-32">
-      <h1 className="text-black text-3xl font-semibold">Activity</h1>
+      <h1 className="text-black dark:text-white text-3xl font-semibold">Activity</h1>
       <hr className="text-gray-700 mt-2" />
       <div className="flex justify-between mt-2">
-        <h2 className="text-black mt-4 text-2xl">
+        <h2 className="text-black dark:text-white mt-4 text-2xl">
           <i className="ri-cake-2-fill p-5 text-2xl"></i>
           <b>Founder 42</b> won by <b>0x47...c7e9</b>
         </h2>
@@ -15,7 +15,7 @@ const MidSection = () => {
         </button>
       </div>
       <hr className="text-gray-700 mt-2" />
-      <h3 className="text-black text-6xl mt-10 font-semibold">WTF?</h3>
+      <h3 className="text-black text-6xl mt-10 font-semibold dark:text-white">WTF?</h3>
       <p className="mt-7 text-2xl">
         Founderz are an adjacent creation, inspired by Nouns Dao; with a focus
         on creating a 🌊 of Web3 builders, creators and dooers. Projects like{" "}

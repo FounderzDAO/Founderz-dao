@@ -1,33 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/router";
-import logo from '../assets/logo2.JPG';
 import capsule from '../assets/founderz-prequel 1.svg';
+import Header from './Header';
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+
 
 const Intro = () => {
   const router = useRouter();
 
   return (
-    <div className="bg-gray-200">
-      <nav className="flex mt-3 justify-between">
-        <div className="flex m-3 gap-5">
-          <Image src={logo} width={60} height={60} />
-          <button className="border rounded-full p-3">
-            Treasury <i className="ri-bar-chart-horizontal-line bg-inherit"></i>{" "}
-            42,000
-          </button>
-        </div>
-        <script defer src = "app.js"></script>
-        <div className="flex gap-4">
-          <button onClick={() => router.push("/")}>DAO</button>
-          <button onClick={() => router.push("/")}>Docs</button>
-          <button onClick={() => router.push("/")}>Raffle</button>
-          <button onClick={() => router.push("/")}>Capsule</button>
-          <ConnectButton />
-        </div>
-      </nav>
+    <div className="bg-gray-200 dark:bg-black">
+      <Header />
       <div className="grid grid-cols-2 m-32 gap-10 overflow-hidden">
         <div className="w-[500px] h-[500px] p-5">
           <Image src={capsule} width={442} height={442} />
