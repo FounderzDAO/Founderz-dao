@@ -29,7 +29,7 @@ const Intro = () => {
             <h1 className="text-gray-500 text-2xl">September 23, 2022</h1>
           </div>
           <div className="mt-5">
-            <h1 className="text-black text-7xl">Founder 42</h1>
+            <h1 className="text-black text-7xl">Founderz Pass 01</h1>
           </div>
           <div className="flex gap-8 mt-6">
             <div className="flex flex-col gap-4">
