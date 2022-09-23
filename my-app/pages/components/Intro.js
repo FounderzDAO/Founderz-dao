@@ -12,7 +12,7 @@ const Intro = () => {
   return (
     <div className="bg-gray-200 dark:bg-black">
       <Header />
-      <div className="grid grid-cols-2 m-32 gap-10 overflow-hidden">
+      <div className="grid grid-cols-2 mx-32 mt-32 gap-10 overflow-hidden">
         <div className="w-[500px] h-[500px] p-5">
           <Image src={capsule} width={442} height={442} />
         </div>
@@ -29,7 +29,7 @@ const Intro = () => {
             <h1 className="text-gray-500 text-2xl">September 23, 2022</h1>
           </div>
           <div className="mt-5">
-            <h1 className="text-black text-7xl">Founderz Pass 01</h1>
+            <h1 className="text-7xl">Founderz Pass 01</h1>
           </div>
           <div className="flex gap-8 mt-6">
             <div className="flex flex-col gap-4">
@@ -42,12 +42,12 @@ const Intro = () => {
             <div className="flex flex-col gap-4">
               <h2 className="text-2xl text-gray-700">Held by</h2>
               <div className="flex">
-                <h3 className="text-black text-3xl">0x42...c7e9</h3>
+                <h3 className="text-3xl">0x42...c7e9</h3>
               </div>
             </div>
           </div>
           <div className="mt-4">
-            <h2 className="text-black">
+            <h2>
               <i className="ri-cake-2-fill bg-inherit text-2xl p-2"></i>Born{" "}
               <b>August 23, 2022</b>
             </h2>
@@ -58,10 +58,10 @@ const Intro = () => {
             </h3>
           </div>
           <div className="flex gap-2 mt-4">
-            <button className="bg-white p-3 border rounded-3xl">
+            <button className="bg-white text-black p-3 border rounded-3xl">
               <i className="ri-folders-fill bg-inherit p-2"></i>Bid history
             </button>
-            <button className="bg-white p-3 border rounded-3xl">
+            <button className="bg-white text-black p-3 border rounded-3xl">
               <i className="ri-checkbox-circle-fill bg-inherit p-2"></i>
               Etherscan
             </button>
