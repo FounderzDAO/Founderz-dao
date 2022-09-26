@@ -6,6 +6,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+import { ThemeProvider } from 'next-themes';
 
 function MyApp({ Component, pageProps }) {
   const ethereumConnect = {
@@ -51,11 +52,15 @@ function MyApp({ Component, pageProps }) {
   });
   const router = useRouter();
   return (
+    
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
+        <ThemeProvider enableSystem={true} attribute="class">
+          <Component {...pageProps} />
+        </ThemeProvider>
       </RainbowKitProvider>
     </WagmiConfig>
+    
   );
 }
 
