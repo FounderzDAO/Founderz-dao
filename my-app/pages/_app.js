@@ -54,11 +54,11 @@ function MyApp({ Component, pageProps }) {
   return (
     
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <ThemeProvider enableSystem={true} attribute="class">
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </RainbowKitProvider>
+        <RainbowKitProvider chains={chains}>
+          <ThemeProvider enableSystem={true} attribute="class">
+              <Component {...pageProps} />
+          </ThemeProvider>
+        </RainbowKitProvider>
     </WagmiConfig>
     
   );
