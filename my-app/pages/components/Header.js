@@ -1,4 +1,3 @@
-import React from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
 import ThemeToggler from "../../src/ThemeToggler";

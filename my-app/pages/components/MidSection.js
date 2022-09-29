@@ -1,4 +1,3 @@
-import React from 'react';
 
 const MidSection = () => {
   return (
@@ -33,6 +32,8 @@ const MidSection = () => {
         ⌛️ Begin by talking to the peculiar scientist, what will you find I wonder? As a
         Founder <b className="text-red-700">☢️ Enter ☢️</b>.
       </p>
+      <div>
+      </div>
     </div>
   );
 }

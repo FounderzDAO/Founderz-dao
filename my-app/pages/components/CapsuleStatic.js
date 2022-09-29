@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { router } from "next/router";
 import CapsuleImage from "../assets/capsule-bg.svg";
