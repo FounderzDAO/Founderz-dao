@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@material-tailwind/react": "^1.2.4",
+    "@nextui-org/react": "^1.0.0-beta.10",
     "@rainbow-me/rainbowkit": "^0.5.1",
     "@react-three/drei": "^9.32.0",
     "@react-three/fiber": "^8.8.1",

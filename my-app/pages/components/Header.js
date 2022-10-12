@@ -7,7 +7,7 @@ function Header() {
 
   return (
     // <nav className="flex mt-3 justify-between">
-    <nav className="flex justify-between">
+    <nav className="flex justify-between items-center px-4">
       <div className="flex m-3 gap-5">
         <ThemeToggler />
         <button className="border rounded-full p-3">
