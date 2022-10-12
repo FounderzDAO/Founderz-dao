@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import capsule from '../assets/founderz-prequel 1.svg';

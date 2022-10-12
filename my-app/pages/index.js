@@ -1,4 +1,3 @@
-import React from "react";
 //import Footer from './Footer';
 import Intro from "./components/Intro";
 import CapsuleStatic from "./components/CapsuleStatic";
