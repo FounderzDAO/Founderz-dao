@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from "next/router";
-import capsule from '../assets/founderz-prequel 1.svg';
+import founderzpass from '../assets/founderzpass.png';
+import founderzstand from '../assets/founderzstand.png';
 import Header from './Header';
 
 
@@ -13,7 +14,8 @@ const Intro = () => {
       <Header />
       <div className="grid grid-cols-2 mx-32 mt-32 gap-10 overflow-hidden">
         <div className="w-[500px] h-[500px] p-5">
-          <Image src={capsule} width={442} height={442} />
+          <Image src={founderzpass} width={343.31} height={427.8} />
+          <Image src={founderzstand} width={396} height={159} />
         </div>
         <div className="flex flex-col">
           <div className="flex gap-6">
