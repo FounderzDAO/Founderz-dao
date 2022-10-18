@@ -15,11 +15,11 @@ const MidSection = () => {
 
   return (
     <div className="m-32">
-      <h1 className="text-black dark:text-white text-3xl font-semibold">
+      {/* <h1 className="text-black dark:text-white text-3xl font-semibold">
         Activity
       </h1>
-      <hr className="text-gray-700 mt-2" />
-      <div className="flex justify-between mt-2">
+      <hr className="text-gray-700 mt-2" /> */}
+      {/* <div className="flex justify-between mt-2">
         <h2 className="text-black dark:text-white mt-4 text-2xl">
           <i className="ri-cake-2-fill p-5 text-2xl"></i>
           <b>Founder 42</b> won by <b>0x47...c7e9</b>
@@ -49,7 +49,7 @@ const MidSection = () => {
         Find out our road-map and values below, or enter the magical capsule ⌛️
         Begin by talking to the peculiar scientist, what will you find I wonder?
         As a Founder <b className="text-red-700">☢️ Enter ☢️</b>.
-      </p>
+      </p> */}
       <div className="mt-5">
         <Accordion open={open === 1}>
           <AccordionHeader
