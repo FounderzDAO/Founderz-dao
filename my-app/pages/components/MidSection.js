@@ -54,9 +54,9 @@ const MidSection = () => {
         <Accordion open={open === 1}>
           <AccordionHeader
             onClick={() => handleOpen(1)}
-            className="dark:text-white"
+            className="dark:text-#4965D8"
           >
-            Summary
+            FAQ
           </AccordionHeader>
           <AccordionBody className="dark:text-white">
             Founderz artwork is a progressive modular NFT collection.
