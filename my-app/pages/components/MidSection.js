@@ -1,3 +1,4 @@
+
 import { Fragment, useState } from "react";
 import {
   Accordion,
@@ -14,92 +15,130 @@ const MidSection = () => {
   };
 
   return (
-    <div className="m-32">
-      {/* <h1 className="text-black dark:text-white text-3xl font-semibold">
-        Activity
-      </h1>
-      <hr className="text-gray-700 mt-2" /> */}
-      {/* <div className="flex justify-between mt-2">
-        <h2 className="text-black dark:text-white mt-4 text-2xl">
-          <i className="ri-cake-2-fill p-5 text-2xl"></i>
-          <b>Founder 42</b> won by <b>0x47...c7e9</b>
-        </h2>
-        <button className="bg-gray-300 text-white p-3 rounded-3xl">
-          <i className="ri-edit-box-line bg-inherit p-2"></i>0x11...a0c0
-        </button>
+    <div className="overflow-x-hidden bg-[#F7F9FC] dark:bg-[#160744] relative" >
+      <div className="h-[450px]   bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8]  rotate-[-3deg] w-[130%] mt-8 mx-[-100px] overflow-hidden absolute" />
+      <div className=" flex flex-col items-center mb-[200px] justify-center h-[480px]  z-10  relative ">
+        <h2 className=" font-bold text-[30px] mb-11 dark:text-black">How it works in <spam className='text-[#F7F9FC]' >3 steps</spam></h2>
+        <div className="flex">
+          <div className="border dark:border-black border-r-0 rounded-l-xl  p-5 w-[260px]     text-[#F7F9FC]">
+            <div className="flex gap-4 items-center">
+              <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] dark:text-white dark:bg-black py-[2px] px-2 rounded-lg">1</p>
+              <p className="text-[12px]  dark:text-black">GET YOUR FOUNDER PASS</p>
+            </div>
+            <img className="h-[70px] mt-7 mb-4" src="img/icon-get-your-pass.png" />
+            <p className="text-[12px]">Win the daily auction to receive the Founderz pass and have access to the capsule.</p>
+          </div>
+          <div className="border dark:border-black border-r-0 ml-[-10px]  rounded-l-xl p-5 w-[260px]    text-[#F7F9FC]">
+            <div className="flex gap-4 items-center">
+              <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] dark:text-white dark:bg-black py-[2px] px-2 rounded-lg">2</p>
+              <p className="text-[12px] dark:text-black">CUSTOMIZE YOUR NFT</p>
+            </div>
+            <img className="h-[70px] mt-7 mb-4" src="img/icon-create-your-nft.png" />
+            <p className="text-[12px]">Access the capsule, the restricted area where you can customize your 2D avatar NFT.</p>
+          </div>
+          <div className="border dark:border-black  ml-[-10px] rounded-xl p-5 w-[260px]    text-[#F7F9FC]">
+            <div className="flex gap-4 items-center">
+              <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] dark:text-white dark:bg-black py-[2px] px-2 rounded-lg">3</p>
+              <p className="text-[12px] dark:text-black">BECOME A FOUNDERZ</p>
+            </div>
+            <img className="h-[70px] mt-7 mb-4" src="img/icon-become-a-founderz.png" />
+            <p className="text-[12px]">Acquire voting and proposal power of the community treasury pool by holding the NFT.</p>
+          </div>
+
+        </div>
       </div>
-      <hr className="text-gray-700 mt-2" />
-      <h3 className="text-black text-6xl mt-10 font-semibold dark:text-white">
-        WTF?
-      </h3>
-      <p className="mt-7 text-2xl">
-        Founderz are an adjacent creation, inspired by Nouns Dao; with a focus
-        on creating a 🌊 of Web3 builders, creators and dooers. Projects like{" "}
-        <b className="text-red-700">
-          Cryptopunks, and many other founderz of Web3 projects{" "}
-        </b>
-        have attempted to bootstrap digital community and identity, enabling
-        signalling of idenitifed value, with a shared vision. Founderz DAO
-        attempts and aims to bootstrap teams, actualize ideas, and startups with
-        a shared treasury pool, for all Founderz in this realm, that can be used
-        by the our commnunity to fund best-performing projects, or take us to a
-        new realm. let us build together 🚀 Where will this new DAO take us?
-      </p>
-      <p className="mt-4 text-2xl">
-        Find out our road-map and values below, or enter the magical capsule ⌛️
-        Begin by talking to the peculiar scientist, what will you find I wonder?
-        As a Founder <b className="text-red-700">☢️ Enter ☢️</b>.
-      </p> */}
-      <div className="mt-5">
-        <Accordion open={open === 1}>
+
+
+
+
+      <div className="m-20">
+
+
+        <div className="mb-28">
+          <h2 className="text-center">FAQ</h2>
+          <p>SUMMARY</p>
+          <ul>
+            <li>
+              Founderz artwork is a progressive modular NFT collection.
+            </li>
+            <li>
+              One Founderz is trustlessly auctioned every 24 hours, until climate doomsday.
+            </li>
+            <li>
+              Winner of the auction will get access to the Capsule
+            </li>
+            <li>
+              The Capsule will allow the user to forge his NFT by selecting his
+              favorite trait for each layer.
+            </li>
+            <li>
+              100% of Founderz auction proceeds are trustlessly sent to the
+              community treasury, plus a 5% on secondary sales fee.
+            </li>
+            <li>
+              Settlement of one auction kicks off the next.
+            </li>
+            <li>
+              All Founderz are members of Founderz DAO.
+            </li>
+            <li>
+              Founderz DAO uses a fork of Compound Governance.
+            </li>
+            <li>
+              One Founderz is equal to one vote.
+            </li>
+            <li>
+              The treasury is controlled exclusively by Founderz via governance.
+            </li>
+            <li>
+              Artwork is generative and stored on IPFS.
+            </li>
+            <li>
+              No explicit rules exist for attribute scarcity; all Founderz are
+              equally rare.
+            </li>
+            <li>
+              Co-Founderz receive rewards in the form of Founderz, one every seven
+              auctions (~14% of supply).
+            </li>
+          </ul>
+        </div>
+
+
+        <Accordion open={open === 1} className="border border-[#4965D8] border-[#4965D8] rounded-lg rounded-t-2xl my-[1px]" >
           <AccordionHeader
             onClick={() => handleOpen(1)}
-            className="dark:text-white"
+            className="dark:text-white p-3 border-none"
           >
-            Summary
+            Daily Mint
           </AccordionHeader>
-          <AccordionBody className="dark:text-white">
-            Founderz artwork is a progressive modular NFT collection.
+          <AccordionBody className="dark:text-white p-3">
+            The Founderz Auction Contract will act as a self-sufficient Founderz generation and distribution mechanism, 
+            auctioning one FounderzPass every 24 hours, forever. 
             <br />
             <br />
-            One Founderz is trustlessly auctioned every 24 hours, until climate
-            doomsday.
+            100% of auction proceeds (ETH) are automatically deposited 
+            in the Founderz DAO treasury, where they are governed by Noun owners. 
             <br />
-            Winner of the auction will get access to the Capsule
             <br />
-            The Capsule will allow the user to forge his NFT by selecting his
-            favorite trait for each layer.
+            Each time an auction is settled, the settlement 
+            transaction will also cause a new Noun to be minted and a new 24 hour auction to begin. 
             <br />
-            100% of Founderz auction proceeds are trustlessly sent to the
-            community treasury, plus a 5% on secondary sales fee.
             <br />
-            Settlement of one auction kicks off the next.
-            <br />
-            All Founderz are members of Founderz DAO.
-            <br />
-            Founderz DAO uses a fork of Compound Governance.
-            <br />
-            One Founderz is equal to one vote.
-            <br />
-            The treasury is controlled exclusively by Founderz via governance.
-            <br />
-            Artwork is generative and stored on IPFS.
-            <br />
-            No explicit rules exist for attribute scarcity; all Founderz are
-            equally rare.
-            <br />
-            Co-Founderz receive rewards in the form of Founderz, one every seven
-            auctions (~14% of supply).
+            While settlement is most heavily 
+            incentivized for the winning bidder, it can be triggered by anyone, allowing the system to trustlessly auction Founderz 
+            as long as Ethereum is operational and there are interested bidders.
+
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 2}>
+        <Accordion open={open === 2} className="border border-[#4965D8] rounded-lg my-[1px]">
           <AccordionHeader
             onClick={() => handleOpen(2)}
-            className="dark:text-white"
+            className="dark:text-white p-3 border-none"
           >
             Founderz Dao
           </AccordionHeader>
-          <AccordionBody className="dark:text-white">
+          <AccordionBody className="dark:text-white p-3">
             Founderz DAO utilizes a fork of Compound Governance and is the main
             governing body of the Founderz Web3 Startup Factory.
             <br />
@@ -112,14 +151,14 @@ const MidSection = () => {
             vote to someone else as long as you own your Founderz.
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 3}>
+        <Accordion open={open === 3} className="border border-[#4965D8] rounded-lg my-[1px]">
           <AccordionHeader
             onClick={() => handleOpen(3)}
-            className="dark:text-white"
+            className="dark:text-white p-3 border-none"
           >
             Daily Actions
           </AccordionHeader>
-          <AccordionBody className="dark:text-white">
+          <AccordionBody className="dark:text-white p-3">
             The Founderz Auction Contract will act as a self-sufficient Founderz
             generation and distribution mechanism, auctioning one Founderz every
             24 hours, forever. 100% of auction proceeds (ETH) are automatically
@@ -144,14 +183,14 @@ const MidSection = () => {
             there are interested bidders.
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 4}>
+        <Accordion open={open === 4} className="border border-[#4965D8] rounded-lg my-[1px]">
           <AccordionHeader
             onClick={() => handleOpen(4)}
-            className="dark:text-white"
+            className="dark:text-white p-3 border-none"
           >
             Governance “slow start”
           </AccordionHeader>
-          <AccordionBody className="dark:text-white">
+          <AccordionBody className="dark:text-white p-3">
             The Co-Founderz will veto proposals that introduce non-trivial legal
             or existential risks to the Founderz DAO, including (but not
             necessarily limited to) proposals that:
@@ -173,14 +212,14 @@ const MidSection = () => {
             required), and proposals must be considered on a case-by-case basis.
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 5}>
+        <Accordion open={open === 5} className="border border-[#4965D8] rounded-lg my-[1px]">
           <AccordionHeader
             onClick={() => handleOpen(5)}
-            className="dark:text-white"
+            className="dark:text-white p-3 border-none"
           >
             Co-Founderz Reward
           </AccordionHeader>
-          <AccordionBody className="dark:text-white">
+          <AccordionBody className="dark:text-white p-3">
             'Co-Founderz' are the group of 6 builders that initiated Founderz.
             Here are the Founderz:
             <br />
@@ -198,14 +237,14 @@ const MidSection = () => {
             Founderz NFT.
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 6}>
+        <Accordion open={open === 6} className="border border-[#4965D8] rounded-lg rounded-b-2xl my-[1px]">
           <AccordionHeader
             onClick={() => handleOpen(6)}
-            className="dark:text-white"
+            className="dark:text-white p-3 border-none"
           >
             Founderz Traits
           </AccordionHeader>
-          <AccordionBody className="dark:text-white">
+          <AccordionBody className="dark:text-white p-3">
             The Founderz DAO NFT collection will be the first progressive
             modular collection ever.
             <br />
