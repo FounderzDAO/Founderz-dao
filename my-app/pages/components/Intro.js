@@ -10,16 +10,16 @@ import Header from './Header';
 const Intro = () => {
   const router = useRouter();
 
-  const NFTs = [
+  const nfts = [
     {
       id: 1,
       name: "card1",
-      img: founderzpass,
+      img: 'img/founderzpass.png',
     },
     {
       id: 2,
       name: "card2",
-      img: founderzpass,
+      img: 'img/founderzpass.png',
     },
   ]
 
@@ -49,13 +49,15 @@ const Intro = () => {
               },
             }}
           >
-            {NFTs.map((nft) => (
+            {nfts.map((nft) => {
+              return(
               <div className='' key={nft.id}>
                   <Image src={nft.img} />
               </div>
-            ))}
+            )})}
           </Carousel> */}
           </div>
+          <Image src={founderzpass} />
           <Image src={founderzstand} />
         </div>
         <div>
