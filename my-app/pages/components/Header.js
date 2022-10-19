@@ -27,7 +27,6 @@ function Header() {
         >
           Docs
         </button>
-        <button onClick={() => router.push("/")}>Community</button>
         <button onClick={() => router.push("/")}>Capsule</button>
         <ConnectButton />
       </div>
