@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from "next/router";
-import capsule from '../assets/founderz-prequel 1.svg';
+import Carousel from 'react-material-ui-carousel';
+import founderzpass from '../assets/founderzpass.png';
+import founderzstand from '../assets/founderzstand.png';
 import Header from './Header';
 
 
@@ -8,13 +10,96 @@ import Header from './Header';
 const Intro = () => {
   const router = useRouter();
 
+  const NFTs = [
+    {
+      id: 1,
+      name: "card1",
+      img: founderzpass,
+    },
+    {
+      id: 2,
+      name: "card2",
+      img: founderzpass,
+    },
+  ]
+
   return (
-    <div className="bg-gray-200 dark:bg-black">
+    <div 
+      className='dark:text-white bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#4966d85c] via-[#4965D833] to-[#F7F9FC]                dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-[#2c1b5e] dark:via-[#160744] dark:to-[#160744]' 
+      
+      // style={{ background: "linear-gradient(#000024, #0024), linear-gradient(#000024, #0024), radial-gradient(ellipse at bottom, #0000e4, #000024)"}}
+      >
       <Header />
-      <div className="grid grid-cols-2 mx-32 mt-32 gap-10 overflow-hidden">
-        <div className="w-[500px] h-[500px] p-5">
-          <Image src={capsule} width={442} height={442} />
+      <div className='flex justify-center items-center gap-9 py-14 w-full'>
+        <div className="flex flex-col h-[600px] p-5 w-[400px]">
+          <div>
+          {/* <Carousel
+            id="nft_carousel"
+            // className={}
+            navButtonsAlwaysVisible
+            swipe
+            autoPlay={false}
+            animation="fade"
+            indicators={false}
+            navButtonsProps={{
+              style: {
+                backgroundColor: '#4965D8',
+                opacity: 0.4,
+                margin: "0",
+              },
+            }}
+          >
+            {NFTs.map((nft) => (
+              <div className='' key={nft.id}>
+                  <Image src={nft.img} />
+              </div>
+            ))}
+          </Carousel> */}
+          </div>
+          <Image src={founderzstand} />
         </div>
+        <div>
+          <p className='text-[#4965D8]'>October 10, 2022</p>
+          <h2 className='font-bold my-2 text-5xl' style={{fontFamily: ''}}>Founderz #123</h2>
+          <div className='p-5' style={{ border: "solid", borderRadius: '2rem' ,borderImage: "linear-gradient(to bottom ,#4965D8, transparent) 1"}}>
+            <div className='flex justify-between  my-4 w-[400px]'>
+              <div>
+                <p className='text-[#4965D8] text-sm'>Current bid</p>
+                <p className=' text-4xl'>Ξ 3.45</p>
+              </div>
+              <div>
+                <p className='text-[#4965D8] text-sm'>Action ends in</p>
+                <p className=' text-4xl'>22h 44m 21s</p>
+              </div>
+            </div>
+            <div>
+              <p className='text-[#4965D8] text-sm'>PLACE BID</p>
+              <div className='flex justify-between my-2'>
+                <input type='text' placeholder='Insert your bid' className=' text-black rounded-2xl w-8/12' />
+                <button className='rounded-2xl w-3/12 bg-green-400'>Place bid</button>
+              </div>
+            </div>
+            <div className='my-8'>
+              {['acquisitions.lilnouns.eth','acquisitions.lilnouns.eth','nounishlab.eth'].map((i) => (
+                <div>
+                  <div className='flex justify-between w-full my-2'>
+                    <p className=''>{i}</p>
+                    <p className=''>Ξ 3.45</p>
+                  </div>
+                  <div className='h-[1px] bg-[#4965D8] w-full' />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='w-full h-px bg-gradient-to-r from-[#16074402] via-[#4966d8] to-[#16074401] dark:from-[#160744] dark:via-[#4965D8] dark:to-[#160744]' />
+      {/* <div className="grid grid-cols-2 mx-32 mt-32 gap-10 overflow-hidden">
+        <div className="w-[500px] h-[500px] p-5">
+          <Image src={founderzpass} width={343.31} height={427.8} />
+          <Image src={founderzstand} width={396} height={159} />
+        </div>
+        bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-amber-900 to-yellow-300
         <div className="flex flex-col">
           <div className="flex gap-6">
             <div className="flex gap-2">
@@ -66,7 +151,7 @@ const Intro = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
