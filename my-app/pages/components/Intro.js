@@ -1,5 +1,12 @@
 import Image from 'next/image';
 import { useRouter } from "next/router";
+import { Contract, providers } from "ethers";
+import { formatEther } from "ethers/lib/utils";
+// import {
+//   Founderz_NFT_CONTRACT_ADDRESS,
+//   // (abis also)
+//   NFT_Auction_House_CONTRACT_ADDRESS,
+// } from "../constants";
 import Carousel from 'react-material-ui-carousel';
 import founderzpass from '../assets/founderzpass.png';
 import founderzstand from '../assets/founderzstand.png';
