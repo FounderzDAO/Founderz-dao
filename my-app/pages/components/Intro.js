@@ -62,7 +62,7 @@ const Intro = () => {
         </div>
         <div>
           <p className='text-[#4965D8]'>October 10, 2022</p>
-          <h2 className='font-bold my-2 text-5xl' style={{fontFamily: ''}}>Founderz #123</h2>
+          <h2 className='font-bold my-2 text-5xl' style={{fontFamily: ''}}>Founderz #42</h2>
           <div className='p-5' style={{ border: "solid", borderRadius: '2rem' ,borderImage: "linear-gradient(to bottom ,#4965D8, transparent) 1"}}>
             <div className='flex justify-between  my-4 w-[400px]'>
               <div>
