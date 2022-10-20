@@ -16,16 +16,16 @@ import Header from './Header';
 const Intro = () => {
   const router = useRouter();
 
-  const NFTs = [
+  const nfts = [
     {
       id: 1,
       name: "card1",
-      img: founderzpass,
+      img: 'img/founderzpass.png',
     },
     {
       id: 2,
       name: "card2",
-      img: founderzpass,
+      img: 'img/founderzpass.png',
     },
   ]
 
@@ -55,18 +55,20 @@ const Intro = () => {
               },
             }}
           >
-            {NFTs.map((nft) => (
+            {nfts.map((nft) => {
+              return(
               <div className='' key={nft.id}>
                   <Image src={nft.img} />
               </div>
-            ))}
+            )})}
           </Carousel> */}
           </div>
+          <Image src={founderzpass} />
           <Image src={founderzstand} />
         </div>
         <div>
           <p className='text-[#4965D8]'>October 10, 2022</p>
-          <h2 className='font-bold my-2 text-5xl' style={{fontFamily: ''}}>Founderz #123</h2>
+          <h2 className='font-bold my-2 text-5xl' style={{fontFamily: ''}}>Founderz #42</h2>
           <div className='p-5' style={{ border: "solid", borderRadius: '2rem' ,borderImage: "linear-gradient(to bottom ,#4965D8, transparent) 1"}}>
             <div className='flex justify-between  my-4 w-[400px]'>
               <div>
