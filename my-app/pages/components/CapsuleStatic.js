@@ -21,7 +21,15 @@ export default function CapsuleStatic() {
 
       <div className='w-full h-px bg-gradient-to-r from-[#16074401]  via-[#4966d860] to-[#16074401] dark:from-[#160744]  dark:via-[#4965D8] dark:to-[#160744]' />
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center relative">
+        <img src="img/shape-background-7.png" className=" absolute -left-4 top-7" />
+        <img src="img/shape-background-6.png" className=" absolute right-24 top-36" />
+        <img src="img/shape-background-3.png" className=" absolute -right-4 top-2/4" />
+        <img src="img/shape-background-4.png" className=" absolute left-36 top-2/3" />
+        <img src="img/shape-background-2.png" className=" absolute left-16 bottom-16" />
+        <img src="img/shape-background-1.png" className=" absolute right-16 -bottom-14" />
+
+
         <div className="w-5/12 text-center my-6">
           <h2 className="text-[#160744] dark:text-white text-3xl my-2">WTF is <i className="font-bold">FounderzDAO?</i></h2>
           <p className="text-[#8094B7] text-xs">Founderz are an adjacent creation inspired by Nouns DAO, with a focus on creating a community of web3 builders, creators and doers.</p>

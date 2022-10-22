@@ -51,8 +51,7 @@ const MidSection = () => {
 
 
 
-      <div className="m-20">
-
+      <div className="m-48">
 
         <div className="mb-28">
           <h2 className="text-center">FAQ</h2>
@@ -105,7 +104,7 @@ const MidSection = () => {
         </div>
 
 
-        <Accordion open={open === 1} className="border border-[#4965D8] border-[#4965D8] rounded-lg rounded-t-2xl my-[1px]" >
+        <Accordion open={open === 1} className="border border-[#4965D8] rounded-lg rounded-t-2xl my-[1px]" >
           <AccordionHeader
             onClick={() => handleOpen(1)}
             className="dark:text-white p-3 border-none"
@@ -257,6 +256,32 @@ const MidSection = () => {
             wallpaper or PFP for Twitter.
           </AccordionBody>
         </Accordion>
+      </div>
+
+      <div className="flex flex-col items-center m-36">
+        <div className="border flex justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl w-[1000px] h-[420px]">
+          <div className="w-7/12 h-full bg-gradient-to-r z-20 flex flex-col justify-center  from-[#4965D8]  via-[#4966d8]">
+            <div className="ml-8">
+              <p className="font-bold text-black text-4xl">Discover</p>
+              <p className="text-white text-4xl">the capsule</p>
+              <button className='rounded-xl my-6 text-black text-[8px] w-fit px-3 py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE</button>
+            </div>
+          </div>
+          <img className="h-full absolute right-0 " src="img/portal.jpg" />
+        </div>
+      </div>
+
+      <div className='w-full h-px bg-gradient-to-r from-[#16074402] via-[#4966d8] to-[#16074401] dark:from-[#160744] dark:via-[#4965D8] dark:to-[#160744]' />
+      
+      <div className="flex justify-center w-full">
+        <div className="flex justify-between items-center w-8/12 my-6">
+          <img className="h-[35px]" src="img/fd_footerlogo.png"/>
+          <div className="flex gap-6">
+            <img className="h-[20px]" src="img/icon-twitter.png" />
+            <img className="h-[20px]" src="img/icon-discord.png" />
+            <img className="h-[20px]" src="img/icon-etherscan.png" />
+          </div>
+        </div>
       </div>
     </div>
   );
