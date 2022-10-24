@@ -15,6 +15,7 @@
     "@rainbow-me/rainbowkit": "^0.5.1",
     "@react-three/drei": "^9.32.0",
     "@react-three/fiber": "^8.8.1",
+    "babel-preset-next": "^1.4.0",
     "ethers": "^5.7.0",
     "flowbite": "^1.5.3",
     "next": "^12.2.5",
