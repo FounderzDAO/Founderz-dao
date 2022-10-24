@@ -21,7 +21,7 @@ export default function CapsuleStatic() {
 
       <div className='w-full h-px bg-gradient-to-r from-[#16074401]  via-[#4966d860] to-[#16074401] dark:from-[#160744]  dark:via-[#4965D8] dark:to-[#160744]' />
 
-      <div className="flex flex-col items-center relative">
+      <div className="flex flex-col items-center relative overflow-hidden">
         <img src="img/shape-background-7.png" className=" absolute -left-4 top-7" />
         <img src="img/shape-background-6.png" className=" absolute right-24 top-36" />
         <img src="img/shape-background-3.png" className=" absolute -right-4 top-2/4" />

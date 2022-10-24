@@ -17,16 +17,12 @@ function Header() {
       </div>
       <script defer src="app.js"></script>
       <div className="flex gap-16">
-        <button onClick={() => router.push("/components/Dao", "/Dao")}>
+        <button onClick={ () => router.push("/components/Dao", "/Dao")}>
           DAO
         </button>
-        <button
-          onClick={() =>
-            router.push("https://founderz-dao.gitbook.io/founderz/")
-          }
-        >
+        <a target="_blank" href="https://founderz-dao.gitbook.io/founderz/">
           Docs
-        </button>
+        </a>
         <button onClick={() => router.push("/")}>Capsule</button>
       </div>
       <div>

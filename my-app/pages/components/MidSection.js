@@ -54,51 +54,47 @@ const MidSection = () => {
       <div className="m-48">
 
         <div className="mb-28">
-          <h2 className="text-center">FAQ</h2>
+          <h2 className="text-center my-5">FAQ</h2>
           <p>SUMMARY</p>
-          <ul>
-            <li>
-              Founderz artwork is a progressive modular NFT collection.
+          <ul className="grid grid-cols-2 gap-2">
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Founderz artwork is a progressive modular NFT collection.
             </li>
-            <li>
-              One Founderz is trustlessly auctioned every 24 hours, until climate doomsday.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> One Founderz is trustlessly auctioned every 24 hours, until climate doomsday.
             </li>
-            <li>
-              Winner of the auction will get access to the Capsule
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Winner of the auction will get access to the Capsule
             </li>
-            <li>
-              The Capsule will allow the user to forge his NFT by selecting his
-              favorite trait for each layer.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> The Capsule will allow the user to forge his NFT by selecting his favorite trait for each layer.
             </li>
-            <li>
-              100% of Founderz auction proceeds are trustlessly sent to the
-              community treasury, plus a 5% on secondary sales fee.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> 100% of Founderz auction proceeds are trustlessly sent to the community treasury, plus a 5% on secondary sales fee.
             </li>
-            <li>
-              Settlement of one auction kicks off the next.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Settlement of one auction kicks off the next.
             </li>
-            <li>
-              All Founderz are members of Founderz DAO.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> All Founderz are members of Founderz DAO.
             </li>
-            <li>
-              Founderz DAO uses a fork of Compound Governance.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Founderz DAO uses a fork of Compound Governance.
             </li>
-            <li>
-              One Founderz is equal to one vote.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> One Founderz is equal to one vote.
             </li>
-            <li>
-              The treasury is controlled exclusively by Founderz via governance.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> The treasury is controlled exclusively by Founderz via governance.
             </li>
-            <li>
-              Artwork is generative and stored on IPFS.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Artwork is generative and stored on IPFS.
             </li>
-            <li>
-              No explicit rules exist for attribute scarcity; all Founderz are
-              equally rare.
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> No explicit rules exist for attribute scarcity; all Founderz are equally rare.
             </li>
-            <li>
-              Co-Founderz receive rewards in the form of Founderz, one every seven
-              auctions (~14% of supply).
+            <li className="flex items-center text-[#8094B7] font-[200]">
+              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Co-Founderz receive rewards in the form of Founderz, one every seven auctions (~14% of supply).
             </li>
           </ul>
         </div>
