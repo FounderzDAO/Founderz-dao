@@ -94,7 +94,7 @@ const MidSection = () => {
               <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> No explicit rules exist for attribute scarcity; all Founderz are equally rare.
             </li>
             <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px]  inline-block rounded-full mr-2 bg-[#4965D8]" /> Co-Founderz receive rewards in the form of Founderz, one every seven auctions (~14% of supply).
+              <span className="h-[5px] w-[5px]  inline-block rounded-full mr-2 bg-[#4965D8]" /> Co-Founderz receive rewards in the form of Founderz, one every seven auctions (~14% of supply).
             </li>
           </ul>
         </div>
