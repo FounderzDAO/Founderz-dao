@@ -24,7 +24,7 @@ function Header() {
         <button onClick={ () => router.push("/components/Dao", "/Dao")}>
           DAO
         </button>
-        <a target="_blank" href="https://founderz-dao.gitbook.io/founderz/">
+        <a target="blank" href="https://founderz-dao.gitbook.io/founderz/">
           Docs
         </a>
         <button onClick={() => router.push("/")}>Capsule</button>
