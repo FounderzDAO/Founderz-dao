@@ -31,7 +31,7 @@ const Intro = () => {
       >
       <Header />
       <div className='flex justify-center items-center gap-9 py-14 w-full'>
-        <div className="flex flex-col h-[600px] p-5 w-[400px]">
+        <div className="flex items-center w-[420px]">
           <div>
           {/* <Carousel
             id="nft_carousel"
@@ -57,8 +57,13 @@ const Intro = () => {
             )})}
           </Carousel> */}
           </div>
-          <Image src={founderzpass} />
-          <Image src={founderzstand} />
+          <img src="img/icon-arrow-L.svg" />
+          <div className=" flex flex-col items-center">         
+            <img src="img/founderzpass.png" />
+            <img src="img/founderzstand.png" />
+          </div>
+          <img src="img/icon-arrow-R.svg" />
+          
         </div>
         <div>
           <p className='text-[#4965D8]'>October 10, 2022</p>
