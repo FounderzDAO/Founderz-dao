@@ -6,12 +6,12 @@ function Dao() {
   const router = useRouter();
 
   return (
-    <>
+    <div className='bg-[#F7F9FC] dark:bg-[#160744]'>
       <Header />
       <div className="m-32">
-        <h2 className=' text-gray-500 text-2xl'>Governance</h2>
-        <h1 className='text-4xl'>Founderz DAO</h1>
-        <p>Founderz govern Founderz DAO. 
+        <h2 className=' text-[#4965D8] text-2xl'>Governance</h2>
+        <h1 className='text-4xl font-bold text-[#160744] dark:text-white'>Founderz DAO</h1>
+        <p className='text-[#8094B7]'>Founderz govern Founderz DAO. 
           Founderz can vote on proposals or delegate 
           their vote to a third party. A minimum of 2 
           Nouns is required to submit proposals.
@@ -52,7 +52,7 @@ function Dao() {
           )}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

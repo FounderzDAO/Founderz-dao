@@ -54,17 +54,17 @@ const MidSection = () => {
       <div className="m-48">
 
         <div className="mb-28">
-          <h2 className="text-center my-5">FAQ</h2>
-          <p>SUMMARY</p>
-          <ul className="grid grid-cols-2 gap-2">
+          <h2 className="text-center my-5 text-3xl font-bold text-[#160744] dark:text-white">FAQ</h2>
+          <p className="text-[#4965D8]">SUMMARY</p>
+          <ul className="grid grid-cols-2 gap-2 ">
             <li className="flex items-center text-[#8094B7] font-[200]">
               <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Founderz artwork is a progressive modular NFT collection.
             </li>
             <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> One Founderz is trustlessly auctioned every 24 hours, until climate doomsday.
+              <div className="h-[5px] w-[5px]  rounded-full mr-2 bg-[#4965D8]" /> One Founderz is trustlessly auctioned every 24 hours, until climate doomsday.
             </li>
             <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Winner of the auction will get access to the Capsule
+              <div className="h-[5px] w-[5px] inline-block rounded-full mr-2 bg-[#4965D8]" /> Winner of the auction will get access to the Capsule
             </li>
             <li className="flex items-center text-[#8094B7] font-[200]">
               <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> The Capsule will allow the user to forge his NFT by selecting his favorite trait for each layer.
@@ -94,7 +94,7 @@ const MidSection = () => {
               <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> No explicit rules exist for attribute scarcity; all Founderz are equally rare.
             </li>
             <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Co-Founderz receive rewards in the form of Founderz, one every seven auctions (~14% of supply).
+              <div className="h-[5px] w-[5px]  inline-block rounded-full mr-2 bg-[#4965D8]" /> Co-Founderz receive rewards in the form of Founderz, one every seven auctions (~14% of supply).
             </li>
           </ul>
         </div>
@@ -255,12 +255,12 @@ const MidSection = () => {
       </div>
 
       <div className="flex flex-col items-center m-36">
-        <div className="border flex justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl w-[1000px] h-[420px]">
+        <div className="border flex justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl w-[1200px] h-[510px]">
           <div className="w-7/12 h-full bg-gradient-to-r z-20 flex flex-col justify-center  from-[#4965D8]  via-[#4966d8]">
             <div className="ml-8">
-              <p className="font-bold text-black text-4xl">Discover</p>
-              <p className="text-white text-4xl">the capsule</p>
-              <button className='rounded-xl my-6 text-black text-[8px] w-fit px-3 py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE</button>
+              <p className="font-bold text-black text-5xl">Discover</p>
+              <p className="text-white text-5xl">the capsule</p>
+              <button className='rounded-xl my-6 text-black text-[11px] w-fit px-3 flex items-center py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
             </div>
           </div>
           <img className="h-full absolute right-0 " src="img/portal.jpg" />
@@ -271,7 +271,9 @@ const MidSection = () => {
       
       <div className="flex justify-center w-full">
         <div className="flex justify-between items-center w-8/12 my-6">
-          <img className="h-[35px]" src="img/fd_footerlogo.png"/>
+          <img className="h-[35px] dark:hidden" src="img/fd_footerlogo.png"/>
+          <img className="h-[35px] hidden dark:block" src="img/logo2.svg"/>
+
           <div className="flex gap-6">
             <img className="h-[20px]" src="img/icon-twitter.png" />
             <img className="h-[20px]" src="img/icon-discord.png" />
