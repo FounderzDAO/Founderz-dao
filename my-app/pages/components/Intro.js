@@ -84,7 +84,7 @@ const Intro = () => {
               <p className='text-[#4965D8] text-sm'>PLACE BID</p>
               <div className='flex justify-between my-2'>
                 <input type='text' placeholder='Insert your bid' className=' text-black rounded-2xl w-8/12' />
-                <button className='rounded-2xl w-3/12 bg-green-400'>Place bid</button>
+                <button className='rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]'>Place bid <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
               </div>
             </div>
             <div className='my-8'>
