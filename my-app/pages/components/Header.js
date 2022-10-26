@@ -12,7 +12,7 @@ function Header() {
         {/* <ThemeToggler /> */}
         <button onClick={ () => router.push("/")}>
           <img src="img/main-logo.svg" className="w-[70px] h-[70px] dark:hidden"  />
-          <img src="img/white-sun.webp" className="w-[70px] h-[70px] hidden dark:block text-white" style={{color: "white"}}  />
+          <img src="img/logo-white2.svg" className="w-[70px] h-[70px] hidden dark:block"  />
         </button>
         <button className="border  dark:text-white dark:border-gray-200 rounded-full p-3">
           Treasury <i className="ri-bar-chart-horizontal-line bg-inherit"></i>{" "}
