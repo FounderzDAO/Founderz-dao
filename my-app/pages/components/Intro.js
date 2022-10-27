@@ -64,7 +64,7 @@ const Intro = () => {
             )})}
           </Carousel> */}
           </div>
-          <Image src={founderzpass} className="animate-bounce" />
+          <Image src={founderzpass} className="" />
           <Image src={founderzstand} className="" />
         </div>
         <div>
