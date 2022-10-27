@@ -7,6 +7,7 @@ import { formatEther } from "ethers/lib/utils";
 //   Founderz_DAO_Logic_CONTRACT_ADDRESS,
 // } from "../constants";
 import { useRouter } from "next/router";
+import Footer from './Footer';
 
 function Dao() {
 
@@ -34,24 +35,24 @@ function Dao() {
             the Nouns project.
           </p>
         </div>
-        <div className='rounded-2xl bg-white flex items-center justify-between p-5 mb-11'>
+        <div className='rounded-2xl bg-white dark:bg-[#17055E] flex items-center justify-between p-5 mb-11'>
           <div className=''>
-            <p className='text-[#160744] font-bold text-2xl'>Lorem ipsum dolor sit amet</p>
+            <p className='text-[#160744] dark:text-white font-bold text-2xl'>Lorem ipsum dolor sit amet</p>
             <p className='text-[#8094B7]'>You will be able to discuss all the ideas proposed by users.</p>
           </div>
-          <button className='text-[#4965D8] underline underline-offset-2'>
-            Discover our forum
+          <button className='text-[#4965D8] flex items-center gap-1 underline underline-offset-2'>
+            Discover our forum <img src="img/icon-arrow-R.svg" className='h-6' />
           </button>
         </div>
 
         <div className='flex justify-between'>
           <h3 className='text-3xl'>Proposal</h3>
           <div>
-            <span>Connect wallet to make a proposal.</span>
-            <button className='bordered rounded-xl mx-2 bg-gray-300 p-2 text-gray-500 mb-8'>Submit proposal</button>
+            <span className='text-[#8094B7]'>Connect wallet to make a proposal.</span>
+            <button className='bordered border-[#8094B7] rounded-xl mx-2 bg-[#8094B766] p-2 text-[#8094B7] mb-8'>Submit proposal</button>
           </div>
         </div>
-        <div>
+        <div className='my-20'>
           { [1,2,3,4,5,6].map((i) => (
               // eslint-disable-next-line react/jsx-key
               <button onClick={() => router.push("/components/Proposal", `/Dao/${i}`)} className=' bordered w-full rounded-xl p-3 my-5 flex justify-between items-center bg-gray-200'>
@@ -69,6 +70,8 @@ function Dao() {
           )}
         </div>
       </div>
+
+      <Footer />
     </div>
   )
 }

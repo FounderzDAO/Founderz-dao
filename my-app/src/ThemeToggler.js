@@ -16,7 +16,7 @@ const ThemeToggler = () => {
     > 
     {/* <Image src={Logo} width={70} height={70} /> */}
     <img src="img/icon-night.svg " className='dark:hidden h-5'/>
-    <img src="img/white-sun.webp" className='hidden dark:block h-5'/>
+    <img src="img/icon-sun.svg" className='hidden dark:block h-5'/>
     </button>
   );
 };
