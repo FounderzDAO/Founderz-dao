@@ -63,7 +63,6 @@ const Intro = () => {
             <img src="img/founderzstand.png" />
           </div>
           <img src="img/icon-arrow-R.svg" />
-          
         </div>
         <div>
           <p className='text-[#4965D8]'>October 10, 2022</p>
