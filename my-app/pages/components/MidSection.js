@@ -104,9 +104,9 @@ const MidSection = () => {
         <Accordion open={open === 1} className="border border-[#4965D8] rounded-lg rounded-t-2xl my-[1px]" >
           <AccordionHeader
             onClick={() => handleOpen(1)}
-            className="dark:text-white p-3 border-none"
+            className="dark:text-#4965D8"
           >
-            Daily Mint
+            FAQ
           </AccordionHeader>
           <AccordionBody className="dark:text-white p-3">
             The Founderz Auction Contract will act as a self-sufficient Founderz generation and distribution mechanism, 
@@ -264,7 +264,7 @@ const MidSection = () => {
               <button className='rounded-xl my-6 text-black text-[11px] w-fit px-3 flex items-center py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
             </div>
           </div>
-          <img className="h-full absolute right-0 " src="img/portal.jpg" />
+          <img className="h-full absolute right-0 animate-pulse" src="img/capsulereal.png" />
         </div>
       </div>
 

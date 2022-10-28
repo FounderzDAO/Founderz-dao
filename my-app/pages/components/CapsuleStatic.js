@@ -22,12 +22,12 @@ export default function CapsuleStatic() {
       <div className='w-full h-px bg-gradient-to-r from-[#16074401]  via-[#4966d860] to-[#16074401] dark:from-[#160744]  dark:via-[#4965D8] dark:to-[#160744]' />
 
       <div className="flex flex-col items-center relative overflow-hidden">
-        <img src="img/shape-background-7.png" className=" absolute -left-4 top-7" />
-        <img src="img/shape-background-6.png" className=" absolute right-24 top-36" />
-        <img src="img/shape-background-3.png" className=" absolute -right-4 top-2/4" />
-        <img src="img/shape-background-4.png" className=" absolute left-36 top-2/3" />
-        <img src="img/shape-background-2.png" className=" absolute left-16 bottom-16" />
-        <img src="img/shape-background-1.png" className=" absolute right-16 -bottom-14" />
+        <img src="img/shape-background-7.png" className=" absolute -left-4 top-7 animate-bounce" />
+        <img src="img/shape-background-6.png" className=" absolute right-24 top-36 animate-bounce" />
+        <img src="img/shape-background-3.png" className=" absolute -right-4 top-2/4 animate-bounce" />
+        <img src="img/shape-background-4.png" className=" absolute left-36 top-2/3 animate-bounce" />
+        <img src="img/shape-background-2.png" className=" absolute left-16 bottom-16 animate-bounce" />
+        <img src="img/shape-background-1.png" className=" absolute right-16 -bottom-14 animate-bounce" />
 
 
         <div className="w-5/12 text-center my-6">
@@ -36,7 +36,7 @@ export default function CapsuleStatic() {
         </div>
         <div className="flex flex-col items-center my-7 w-7/12 gap-y-24">
           <div className="flex justify-between w-full  items-center ">
-            <img className=" order-2 w-[300px]" src='/img/1-Cyberpunk.png' />
+            <img className="order-2 w-[300px]" src='/img/1-Cyberpunk.png' />
             <div className=" w-6/12">
               <h3 className="text-[#4965D8] text-xl font-bold">Daily Mint</h3>
               <p className="text-[#8094B7]">Funds generated from the daily auctions flow into the treasury pool managed by the Founderz Members.</p>
