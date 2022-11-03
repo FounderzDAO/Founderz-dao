@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import Image from 'next/image';
 import { useRouter } from "next/router";
+// import ReactPlayer from "react-player";
 import { Contract, providers } from "ethers";
 import { formatEther } from "ethers/lib/utils";
 // import {
@@ -37,7 +38,7 @@ const Intro = () => {
       // style={{ background: "linear-gradient(#000024, #0024), linear-gradient(#000024, #0024), radial-gradient(ellipse at bottom, #0000e4, #000024)"}}
     >
       <Header />
-      <div className='flex justify-center items-center gap-9 py-14 w-full'>
+      <div className="flex justify-center items-center gap-9 py-14 w-full">
         <div className="flex items-center w-[420px]">
           <div>
             {/* <Carousel
@@ -65,7 +66,8 @@ const Intro = () => {
           </Carousel> */}
           </div>
           <img src="img/icon-arrow-L.svg" />
-          <div className=" flex flex-col items-center">         
+          <div className=" flex flex-col items-center">
+            {/* <ReactPlayer url="" /> */}
             <img src="img/founderzpass.png" />
             <img src="img/founderzstand.png" />
           </div>
