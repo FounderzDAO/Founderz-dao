@@ -1,5 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 import { useTheme } from 'next-themes';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Logo from '../pages/assets/main-logo.svg';
 import { useState, useEffect } from 'react';
 

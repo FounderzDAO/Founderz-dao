@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 import Header from './Header'
 import { useRouter } from "next/router";
 import Footer from './Footer';

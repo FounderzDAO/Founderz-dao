@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import Carousel from 'react-material-ui-carousel';

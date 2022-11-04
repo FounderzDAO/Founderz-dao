@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
 import ThemeToggler from "../../src/ThemeToggler";
@@ -24,7 +26,7 @@ function Header() {
         <button onClick={ () => router.push("/components/Dao", "/Dao")}>
           DAO
         </button>
-        <a target="_blank" href="https://founderz-dao.gitbook.io/founderz/">
+        <a target="_blank" href="https://founderz-dao.gitbook.io/founderz/" rel="noreferrer">
           Docs
         </a>
         <button onClick={() => router.push("/")}>Capsule</button>
