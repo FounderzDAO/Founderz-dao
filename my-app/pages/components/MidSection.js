@@ -267,7 +267,7 @@ const MidSection = () => {
               <button className='rounded-xl my-6 text-black text-[11px] w-fit px-3 flex items-center py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
             </div>
           </div>
-          <img className="h-full absolute right-0 " src="img/portal.jpg" />
+          <img className="h-full absolute right-0 animate-pulse" src="img/capsulereal.png" />
         </div>
       </div>
 
