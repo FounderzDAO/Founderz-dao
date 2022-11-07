@@ -1,12 +1,14 @@
 import "../styles/globals.css";
 import type, { AppProps } from "next/app";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useRouter } from "next/router";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { ThemeProvider } from 'next-themes';
+import Head from 'next/head'
+import founderzpass from './assets/founderzpass.png';
 
 function MyApp({ Component, pageProps }) {
   const ethereumConnect = {
@@ -52,15 +54,19 @@ function MyApp({ Component, pageProps }) {
   });
   const router = useRouter();
   return (
-    
-    <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <ThemeProvider enableSystem={true} attribute="class">
-              <Component {...pageProps} />
-          </ThemeProvider>
-        </RainbowKitProvider>
-    </WagmiConfig>
-    
+    <>
+      <Head>
+        <title>Founderz</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <ThemeProvider enableSystem={true} attribute="class">
+                <Component {...pageProps} />
+            </ThemeProvider>
+          </RainbowKitProvider>
+      </WagmiConfig>
+    </>
   );
 }
 

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import Image from "next/image";
-import founderzpass from '../assets/founderzpass.png';
+import founderzpass from '../../assets/founderzpass.png';
 
 export default function CapsuleStatic() {
   return (
@@ -38,7 +38,7 @@ export default function CapsuleStatic() {
         </div>
         <div className="flex flex-col items-center my-7 w-7/12 gap-y-24">
           <div className="flex justify-between w-full  items-center ">
-            <img className=" order-2 w-[300px]" src='/img/1-Cyberpunk.png' />
+            <img className="order-2 w-[300px]" src='/img/1-Cyberpunk.png' />
             <div className=" w-6/12">
               <h3 className="text-[#4965D8] text-xl font-bold">Daily Mint</h3>
               <p className="text-[#8094B7]">Funds generated from the daily auctions flow into the treasury pool managed by the Founderz Members.</p>

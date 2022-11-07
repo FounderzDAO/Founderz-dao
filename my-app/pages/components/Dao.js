@@ -1,6 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import Header from './Header'
+import { Contract, providers } from "ethers";
+import { formatEther } from "ethers/lib/utils";
+// import {
+//   DAO_Executor_CONTRACT_ADDRESS,
+//   // (abis also)
+//   Founderz_DAO_Logic_CONTRACT_ADDRESS,
+// } from "../constants";
 import { useRouter } from "next/router";
 import Footer from './Footer';
 
@@ -50,11 +57,11 @@ function Dao() {
         <div className='my-20'>
           { [1,2,3,4,5,6].map((i) => (
               // eslint-disable-next-line react/jsx-key
-              <button onClick={() => router.push("/components/Proposal", `/Dao/${i}`)} className=' bordered w-full rounded-xl p-3 my-5 flex justify-between items-center bg-gray-200'>
+              <button onClick={() => router.push("/components/Proposal", `/Proposal`)} className=' border w-full rounded-xl p-3 my-5 flex justify-between items-center border-[#8094B7] bg-[#8094B71A] '>
              {/* <button onClick={() => router.push("/")} className=' bordered w-full rounded-xl p-3 my-5 flex justify-between items-center bg-gray-200'> */}
                 <div className='flex'>
-                  <p className='text-gray-600 mr-2'>141</p>
-                  <p className='text-black'>Nounish Friends - Stage 2</p>
+                  <p className=' text-[#8094B7] dark:text-[#4965D8] mr-2'>141</p>
+                  <p className='text-[#160744] dark:text-white'>Nounish Friends - Stage 2</p>
                 </div>
                 <div className='flex'>
                   <button className='bordered rounded-xl mx-2 bg-gray-300 p-2 text-gray-500'>Start in a day</button>

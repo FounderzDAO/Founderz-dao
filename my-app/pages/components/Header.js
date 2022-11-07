@@ -14,7 +14,7 @@ function Header() {
         {/* <ThemeToggler /> */}
         <button onClick={ () => router.push("/")}>
           <img src="img/main-logo.svg" className="w-[70px] h-[70px] dark:hidden"  />
-          <img src="img/logo-white.svg" className="w-[70px] h-[70px] hidden dark:block"  />
+          <img src="img/white-logo2.svg" className="w-[70px] h-[70px] hidden dark:block"  />
         </button>
         <button className="border  dark:text-white dark:border-gray-200 rounded-full p-3">
           Treasury <i className="ri-bar-chart-horizontal-line bg-inherit"></i>{" "}
@@ -29,7 +29,7 @@ function Header() {
         <a target="_blank" href="https://founderz-dao.gitbook.io/founderz/" rel="noreferrer">
           Docs
         </a>
-        <button onClick={() => router.push("/")}>Capsule</button>
+        <button onClick={() => router.push("/components/Proposal", "/p")}>Capsule</button>
       </div>
       <div className="flex gap-4">
         <ThemeToggler />
