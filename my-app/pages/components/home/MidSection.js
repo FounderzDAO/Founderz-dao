@@ -5,7 +5,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import Footer from "./Footer";
+import Footer from "../Footer";
 
 const MidSection = () => {
 
@@ -14,6 +14,22 @@ const MidSection = () => {
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
+
+  const summary = [
+    "Founderz artwork is a progressive modular NFT collection.",
+    "One Founderz is trustlessly auctioned every 24 hours, until climate doomsday.",
+    "Winner of the auction will get access to the Capsule",
+    "The Capsule will allow the user to forge his NFT by selecting his favorite trait for each layer.",
+    "100% of Founderz auction proceeds are trustlessly sent to the community treasury, plus a 5% on secondary sales fee.",
+    "Settlement of one auction kicks off the next.",
+    "All Founderz are members of Founderz DAO.",
+    "Founderz DAO uses a fork of Compound Governance.",
+    "One Founderz is equal to one vote.",
+    "The treasury is controlled exclusively by Founderz via governance.",
+    "Artwork is generative and stored on IPFS.",
+    "No explicit rules exist for attribute scarcity; all Founderz are equally rare.",
+    "Co-Founderz receive rewards in the form of Founderz, one every seven auctions (~14% of supply).",
+  ]
 
   return (
     <div className="overflow-x-hidden bg-[#F7F9FC] dark:bg-[#160744] relative" >
@@ -58,45 +74,11 @@ const MidSection = () => {
           <h2 className="text-center my-5 text-3xl font-bold text-[#160744] dark:text-white">FAQ</h2>
           <p className="text-[#4965D8]">SUMMARY</p>
           <ul className="grid grid-cols-2 gap-2 ">
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Founderz artwork is a progressive modular NFT collection.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px]  rounded-full mr-2 bg-[#4965D8]" /> One Founderz is trustlessly auctioned every 24 hours, until climate doomsday.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] inline-block rounded-full mr-2 bg-[#4965D8]" /> Winner of the auction will get access to the Capsule
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> The Capsule will allow the user to forge his NFT by selecting his favorite trait for each layer.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> 100% of Founderz auction proceeds are trustlessly sent to the community treasury, plus a 5% on secondary sales fee.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Settlement of one auction kicks off the next.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> All Founderz are members of Founderz DAO.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Founderz DAO uses a fork of Compound Governance.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> One Founderz is equal to one vote.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> The treasury is controlled exclusively by Founderz via governance.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> Artwork is generative and stored on IPFS.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <div className="h-[5px] w-[5px] rounded-full mr-2 bg-[#4965D8]" /> No explicit rules exist for attribute scarcity; all Founderz are equally rare.
-            </li>
-            <li className="flex items-center text-[#8094B7] font-[200]">
-              <span className="h-[5px] w-[5px]  inline-block rounded-full mr-2 bg-[#4965D8]" /> Co-Founderz receive rewards in the form of Founderz, one every seven auctions (~14% of supply).
-            </li>
+            {summary.map((i) => (
+              <li className="flex  text-[#8094B7] font-[200]">
+                <div className="w-4 pt-[10px]"><div className="h-[5px] w-[5px]  rounded-full mr-2 bg-[#4965D8]" /></div> {i}
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -104,9 +86,9 @@ const MidSection = () => {
         <Accordion open={open === 1} className="border border-[#4965D8] rounded-lg rounded-t-2xl my-[1px]" >
           <AccordionHeader
             onClick={() => handleOpen(1)}
-            className="dark:text-#4965D8"
+            className="dark:text-white p-3 border-none"
           >
-            FAQ
+            Daily Mint
           </AccordionHeader>
           <AccordionBody className="dark:text-white p-3">
             The Founderz Auction Contract will act as a self-sufficient Founderz generation and distribution mechanism, 

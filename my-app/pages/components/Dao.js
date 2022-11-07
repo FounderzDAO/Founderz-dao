@@ -55,11 +55,11 @@ function Dao() {
         <div className='my-20'>
           { [1,2,3,4,5,6].map((i) => (
               // eslint-disable-next-line react/jsx-key
-              <button onClick={() => router.push("/components/Proposal", `/Dao/${i}`)} className=' bordered w-full rounded-xl p-3 my-5 flex justify-between items-center border-[#8094B7] bg-[#8094B71A]'>
+              <button onClick={() => router.push("/components/Proposal", `/Proposal`)} className=' border w-full rounded-xl p-3 my-5 flex justify-between items-center border-[#8094B7] bg-[#8094B71A] '>
              {/* <button onClick={() => router.push("/")} className=' bordered w-full rounded-xl p-3 my-5 flex justify-between items-center bg-gray-200'> */}
                 <div className='flex'>
-                  <p className='text-[#8094B7] mr-2'>141</p>
-                  <p className='text-[#160744]'>Nounish Friends - Stage 2</p>
+                  <p className=' text-[#8094B7] dark:text-[#4965D8] mr-2'>141</p>
+                  <p className='text-[#160744] dark:text-white'>Nounish Friends - Stage 2</p>
                 </div>
                 <div className='flex'>
                   <button className='bordered rounded-xl mx-2 bg-gray-300 p-2 text-gray-500'>Start in a day</button>

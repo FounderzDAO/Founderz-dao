@@ -27,7 +27,7 @@ function Header() {
         <a target="blank" href="https://founderz-dao.gitbook.io/founderz/">
           Docs
         </a>
-        <button onClick={() => router.push("/")}>Capsule</button>
+        <button onClick={() => router.push("/components/Proposal", "/p")}>Capsule</button>
       </div>
       <div className="flex gap-4">
         <ThemeToggler />

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import founderzpass from '../assets/founderzpass.png';
+import founderzpass from '../../assets/founderzpass.png';
 
 export default function CapsuleStatic() {
   return (
