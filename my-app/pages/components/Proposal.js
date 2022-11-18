@@ -15,7 +15,7 @@ function Proposal() {
         <div className='mb-5'>
           <button className='flex items-center gap-1' onClick={ () => router.push("/components/Dao", "/Dao")}>
             <img src="img/icon-arrow-L.svg" className='h-6' />
-            <h2 className=' text-[#4965D8] text-sm mr-2'>Proposal 148</h2>
+            <h2 className=' text-[#4965D8] text-sm mr-2'>Proposal 142</h2>
           </button>
           <div className='flex w-full my-2'>
             <button className="rounded-3xl text-sm w-fit flex items-center px-3 dark:text-black bg-[#1BEDA4]">
