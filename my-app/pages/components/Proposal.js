@@ -1,15 +1,18 @@
 import Header from './Header'
+import { useRouter } from "next/router";
 
 function Proposal() {
+  const router = useRouter();
+
   return (
     <div className=' bg-[#F7F9FC] dark:bg-[#160744]'>
       <Header />
       <div className="w-9/12 mx-auto mt-20">
         <div className='mb-5'>
-          <div className='flex items-center gap-1'>
+          <button className='flex items-center gap-1' onClick={ () => router.push("/components/Dao", "/Dao")}>
             <img src="img/icon-arrow-L.svg" className='h-6' />
             <h2 className=' text-[#4965D8] text-sm mr-2'>Proposal 148</h2>
-          </div>
+          </button>
           <div className='flex w-full my-2'>
             <button className="rounded-3xl text-sm w-fit flex items-center px-3 dark:text-black bg-[#1BEDA4]">
               Active
