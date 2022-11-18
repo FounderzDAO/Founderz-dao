@@ -13,8 +13,8 @@ function Footer() {
         <img className="h-[35px] hidden dark:block" src="img/logo2.svg"/>
 
         <div className="flex gap-6">
-          <img className="h-[20px]" src="/public/img/icon-twitter.png" />
-          <img className="h-[20px]" src="/public/img/icon-discord.png" />
+          <img className="h-[20px]" src="img/icon-twitter.png" />
+          <img className="h-[20px]" src="img/icon-discord.png" />
           <img className="h-[20px]" src="img/icon-etherscan.png" />
         </div>
       </div>
