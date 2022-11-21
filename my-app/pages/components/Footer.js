@@ -6,7 +6,7 @@ function Footer() {
     <div className='w-full h-px bg-gradient-to-r from-[#16074402] via-[#4966d8] to-[#16074401] dark:from-[#160744] dark:via-[#4965D8] dark:to-[#160744]' />
       
     <div className="flex justify-center w-full">
-      <div className="flex justify-between items-center w-8/12 my-6">
+      <div className="flex justify-between items-center sm:w-8/12 my-6">
         <img className="h-[35px] dark:hidden" src="img/fd_footerlogo.png"/>
         <img className="h-[35px] hidden dark:block" src="img/logo2.svg"/>
 

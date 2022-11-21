@@ -35,8 +35,8 @@ const MidSection = () => {
     <div className="flex flex-col items-center pt-14 bg-[#F7F9FC] dark:bg-[#160744] w-full" >
       {/* <div className="h-[450px]   bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8]  rotate-[-3deg] w-[130%] mt-8 mx-[-100px] overflow-hidden absolute" /> */}
       <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-8/12  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8] ">
-        <h2 className=" font-bold text-center text-[30px] mb-11 dark:text-black">How it works in <spam className='text-[#F7F9FC]' >3 steps</spam></h2>
-        <button>FIND HOW</button>
+        <h2 className=" font-bold text-center text-[30px] mb-7 mx-2 dark:text-black">How it works in <spam className='text-[#F7F9FC]' >3 steps</spam></h2>
+        <button className="my-5 text-[12px]">FIND HOW</button>
         <div className="flex lg:flex-row flex-col gap-3">
 
           <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC]">
@@ -241,8 +241,8 @@ const MidSection = () => {
         </Accordion>
       </div>
 
-      <div className="flex flex-col items-center m-36">
-        <div className="border flex justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl w-[1200px] h-[510px]">
+      <div className="m-36 ">
+        <div className="border flex justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl lg:w-[1200px] w-[800px] h-[510px]">
           <div className="w-7/12 h-full bg-gradient-to-r z-20 flex flex-col justify-center  from-[#4965D8]  via-[#4966d8]">
             <div className="ml-8">
               <p className="font-bold text-black text-5xl">Discover</p>
