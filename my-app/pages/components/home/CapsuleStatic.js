@@ -55,7 +55,7 @@ export default function CapsuleStatic() {
             <img className="lg:order-2  w-[300px]" src='/img/21-Cyberspace.png' />
             <div className=" lg:w-6/12 w-10/12">
               <h3 className="text-[#4965D8] text-xl font-bold">Community Bounties</h3>
-              <p className="text-[#8094B7]">Founderz web3 Startups are developed by our community using Dework.</p>
+              <p className="text-[#8094B7]">Founderz web3 Startups can be developed by our community using web3 bounties.</p>
             </div>
           </div>
         </div>
