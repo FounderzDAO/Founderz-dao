@@ -34,7 +34,7 @@ const MidSection = () => {
   return (
     <div className="flex flex-col items-center pt-14 bg-[#F7F9FC] dark:bg-[#160744] w-full" >
       {/* <div className="h-[450px]   bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8]  rotate-[-3deg] w-[130%] mt-8 mx-[-100px] overflow-hidden absolute" /> */}
-      <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-8/12  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8] ">
+      <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8] ">
         <h2 className=" font-bold text-center text-[30px] mb-7 mx-2 dark:text-black">How it works in <spam className='text-[#F7F9FC]' >3 steps</spam></h2>
         <button className="my-5 text-[12px]">FIND HOW</button>
         <div className="flex lg:flex-row flex-col gap-3">
@@ -72,7 +72,7 @@ const MidSection = () => {
 
 
 
-      <div className="my-48 lg:mx-52 mx-20">
+      <div className="my-48 lg:mx-52 mx-10 sm:mx-20">
 
         <div className="mb-28">
           <h2 className="text-center my-5 text-3xl font-bold text-[#160744] dark:text-white">FAQ</h2>
@@ -241,16 +241,16 @@ const MidSection = () => {
         </Accordion>
       </div>
 
-      <div className="m-36 ">
-        <div className="border flex justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl lg:w-[1200px] w-[800px] h-[510px]">
-          <div className="w-7/12 h-full bg-gradient-to-r z-20 flex flex-col justify-center  from-[#4965D8]  via-[#4966d8]">
-            <div className="ml-8">
-              <p className="font-bold text-black text-5xl">Discover</p>
-              <p className="text-white text-5xl">the capsule</p>
+      <div className="sm:mb-36 mb-12 w-full max-w-[1000px] flex justify-center">
+        <div className="border flex flex-col  sm:flex-row justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl w-10/12 h-fit sm:h-[400px] lg:h-[510px]">
+          <div className=" w-full sm:w-5/12 lg:w-7/12 sm:h-full bg-gradient-to-r z-20 flex flex-col justify-center  from-[#4965D8]  via-[#4966d8]">
+            <div className="ml-8 my-4">
+              <p className="font-bold text-black text-4xl md:text-5xl">Discover</p>
+              <p className="text-white text-4xl md:text-5xl">the capsule</p>
               <button className='rounded-xl my-6 text-black text-[11px] w-fit px-3 flex items-center py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
             </div>
           </div>
-          <img className="h-full absolute right-0 animate-pulse" src="img/capsulereal.png" />
+          <img className="sm:h-full   sm:absolute right-0 animate-pulse" src="img/capsulereal.png" />
         </div>
       </div>
 

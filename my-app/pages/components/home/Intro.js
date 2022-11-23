@@ -37,7 +37,7 @@ const Intro = () => {
     >
       <Header />
       <div className='flex flex-col lg:flex-row  justify-center  items-center gap-9 py-14 w-full'>
-        <div className="flex items-center w-[420px]">
+        <div className="flex items-center justify-center w-full sm:w-[420px]">
           <div>
             {/* <Carousel
             id="nft_carousel"
@@ -64,9 +64,9 @@ const Intro = () => {
           </Carousel> */}
           </div>
           <img src="img/icon-arrow-L.svg" />
-          <div className=" flex flex-col items-center">         
-            <img src="img/founderzpass.png" />
-            <img src="img/founderzstand.png" />
+          <div className=" w-7/12 sm:w-full flex flex-col items-center">         
+            <img  src="img/founderzpass.png" />
+            <img  src="img/founderzstand.png" />
           </div>
           <img src="img/icon-arrow-R.svg" />
         </div>
@@ -130,22 +130,22 @@ const Intro = () => {
 
     <div className=' lg:hidden bg-[#F7F9FC] dark:bg-[#160744] w-full flex justify-center pt-10'>
 
-      <div className='max-w-[430px]'>
+      <div className='w-11/12 max-w-[430px]'>
           <p className="text-[#4965D8]">October 10, 2022</p>
-          <h2 className="font-bold my-2 text-5xl" style={{ fontFamily: "" }}>
+          <h2 className="font-bold my-2 text-3xl sm:text-5xl" style={{ fontFamily: "" }}>
             Founderz #42
           </h2>
 
           <div className=" bg-gradient-to-b from-[#4965D8] rounded-2xl p-px">
-            <div className='p-5 rounded-2xl bg-[#F7F9FC] dark:bg-[#160744]'>
-              <div className="flex justify-between  my-4 w-[400px]">
+            <div className='p-3 sm:p-5 rounded-2xl bg-[#F7F9FC] dark:bg-[#160744]'>
+              <div className="flex justify-between  my-4 w-full">
                 <div>
                   <p className="text-[#4965D8] text-sm">Current bid</p>
-                  <p className=" text-4xl">Ξ 3.45</p>
+                  <p className=" text-2xl sm:text-4xl">Ξ 3.45</p>
                 </div>
                 <div>
                   <p className="text-[#4965D8] text-sm">Action ends in</p>
-                  <p className=" text-4xl">22h 44m 21s</p>
+                  <p className=" text-2xl sm:text-4xl">22h 44m 21s</p>
                 </div>
               </div>
               <div>
@@ -154,9 +154,9 @@ const Intro = () => {
                   <input
                     type="text"
                     placeholder="Insert your bid"
-                    className=" text-black rounded-2xl w-8/12"
+                    className=" text-black rounded-2xl w-7/12 sm:w-8/12"
                   />
-                  <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
+                  <button className="rounded-2xl w-fit text-sm flex text-black items-center px-3 bg-[#1BEDA4]">
                     Place bid{" "}
                     <img className="h-5 ml-1" src="img/icon-arrow.svg" />
                   </button>

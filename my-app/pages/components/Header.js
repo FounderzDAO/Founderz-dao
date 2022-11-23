@@ -8,13 +8,13 @@ function Header() {
   return (
     // <nav className="flex mt-3 justify-between">
     <nav className="flex justify-between md:justify-evenly dark:text-white items-center lg:px-4 px-2">
-      <div className="flex m-3 gap-5 items-center">
+      <div className="flex mx-1 my-3 sm:m-3 gap-5 items-center">
         {/* <ThemeToggler /> */}
         <button onClick={ () => router.push("/")}>
-          <img src="img/main-logo.svg" className="w-[70px] h-[70px] dark:hidden"  />
-          <img src="img/white-logo2.svg" className="w-[70px] h-[70px] hidden dark:block"  />
+          <img src="img/main-logo.svg" className="sm:w-[70px] w-[45px] h-[45px] sm:h-[70px]  dark:hidden"  />
+          <img src="img/white-logo2.svg" className="sm:w-[70px] w-[45px] h-[45px] sm:h-[70px]  hidden dark:block"  />
         </button>
-        <button className="border  dark:text-white dark:border-gray-200 rounded-full px-3 py-1">
+        <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
           Treasury <i className="ri-bar-chart-horizontal-line bg-inherit"></i>{" "}
           Ξ42,000
         </button>
