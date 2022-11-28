@@ -10,12 +10,12 @@ export default function CapsuleStatic() {
       <div className="flex flex-col lg:flex-row justify-center  lg:gap-24 items-center w-full py-32">
         <div className="flex justify-center w-8/12 lg:w-4/12 lg:order-2"  >
           {/* <Image className="rotate-[-90deg]" src={founderzpass} /> */}
-          <img className="z-20 h-[370px] lg:h-[430px] rotate-[-90deg]" src='/img/founderzpass.png' />
-          <img className="z-10 h-[370px] lg:h-[430px] mt-[-33px] ml-[-250px] lg:ml-[-300px] rotate-[-83deg]" src='/img/founderzpass.png' />
-          <img className=" h-[370px] lg:h-[430px] mt-[-60px] ml-[-250px] lg:ml-[-300px] rotate-[-78deg]" src='/img/founderzpass.png' />
-        </div>
-        <div className="w-8/12 lg:w-4/12 lg:order-1">
-          <p className="text-4xl"><span className="text-[#4965D8] font-bold ">Customize your Founderz Pass in the <i>Capsule</i></span>  and join the first decentralized Web3 Startup Studio </p>
+          <img className="z-20 h-[340px] sm:h-[370px] lg:h-[430px] rotate-[-90deg]" src='/img/founderzpass.png' />
+          <img className="z-10 h-[340px] sm:h-[370px] lg:h-[430px] mt-[-33px] ml-[-230px] sm:ml-[-250px] lg:ml-[-300px] rotate-[-83deg]" src='/img/founderzpass.png' />
+          <img className=" h-[340px] sm:h-[370px] lg:h-[430px] mt-[-60px] ml-[-230px] sm:ml-[-250px] lg:ml-[-300px] rotate-[-78deg]" src='/img/founderzpass.png' />
+        </div> 
+        <div className="w-10/12 lg:w-4/12 lg:order-1">
+          <p className="text-3xl sm:text-4xl"><span className="text-[#4965D8] font-bold ">Customize your Founderz Pass in the <i>Capsule</i></span>  and join the first decentralized Web3 Startup Studio </p>
           <button className='rounded-xl my-10 text-black text-xs flex items-center w-fit px-3 py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
         </div>
       </div>
@@ -32,7 +32,7 @@ export default function CapsuleStatic() {
         <img src="img/shape-background-1.png" className=" hidden lg:block absolute right-16 -bottom-14 animate-bounce" />
 
 
-        <div className="w-5/12 text-center my-6">
+        <div className="w-7/12 sm:w-5/12 text-center my-6">
           <h2 className="text-[#160744] dark:text-white text-3xl my-2">WTF is <i className="font-bold">FounderzDAO?</i></h2>
           <p className="text-[#8094B7] text-xs">Founderz are an adjacent creation inspired by Nouns DAO, with a focus on creating a community of web3 builders, creators and doers.</p>
         </div>

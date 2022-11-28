@@ -58,6 +58,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Founderz</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="icon" type="image/svg" href="img/main-logo.svg" />
       </Head>
       <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
