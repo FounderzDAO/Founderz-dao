@@ -56,10 +56,10 @@ function Header() {
         </div>
         <div className="flex gap-4">
           <ThemeToggler />
-          <div class="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow md:hidden" ref={openMenu} onClick={handleOpenMenu} /*onClick={() => setShowMenu(true)}*/>
-            <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-            <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-            <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+          <div className="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow md:hidden" ref={openMenu} onClick={handleOpenMenu} /*onClick={() => setShowMenu(true)}*/>
+            <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+            <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+            <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
           </div>
           <div className="hidden md:block">
             <ConnectButton />
@@ -77,10 +77,10 @@ function Header() {
                 Ξ42,000
               </button>
             </div>
-            <div class="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow md:hidden" ref={closeMenu} onClick={handleCloseMenu}>
-              <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-              <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-              <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+            <div className="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow md:hidden" ref={closeMenu} onClick={handleCloseMenu}>
+              <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+              <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+              <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
             </div>
           </div>
           <div className="mt-32 p-3 flex flex-col gap-10 items-center">
