@@ -13,7 +13,7 @@ export default function CapsuleStatic() {
           <img className=" h-[340px] sm:h-[370px] lg:h-[430px] mt-[-60px] ml-[-230px] sm:ml-[-250px] lg:ml-[-300px] rotate-[-78deg]" src='/img/founderzpass.png' />
         </div> 
         <div className="w-10/12 lg:w-4/12 lg:order-1">
-          <p className="text-3xl sm:text-4xl"><span className="text-[#4965D8] font-bold ">Customize your Founderz Pass in the <i>Capsule</i></span>  and join the first decentralized Web3 Startup Studio </p>
+          <p className="text-3xl sm:text-4xl font-[all-round-gothic]"><span className="text-[#4965D8] font-bold ">Customize your Founderz Pass in the <i>Capsule</i></span>  and join the first decentralized Web3 Startup Studio </p>
           <button className='rounded-xl my-10 text-black text-xs flex items-center w-fit px-3 py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
         </div>
       </div>
