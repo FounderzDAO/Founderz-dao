@@ -1,6 +1,9 @@
 const hre = require("hardhat");
 const hre = require("");
 
+
+// Testing use cases here: Todo = Add test cases for sendValue, functionCallWithValue, _verifyCallResult, transferFrom, _safeMint,
+
 async function main() {
   const AmountToPay = hre.ethers.utils.parseEther("4.2");
   const NFTMint = await hre.ethers.getContractFactory("FounderzNFT");
