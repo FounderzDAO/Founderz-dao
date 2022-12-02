@@ -19,8 +19,8 @@ function Dao() {
     <div className='bg-[#F7F9FC] dark:bg-[#160744]'>
       <Header />
       <div className="lg:mx-32 md:mx-14 mx-6 mt-24">
-        <h2 className=' text-[#4965D8] text-xl'>Governance</h2>
-        <h1 className='text-3xl md:text-5xl my-4 font-bold text-[#160744] dark:text-white'>Founderz DAO</h1>
+        <h2 className=' text-[#4965D8] text-xl font-[all-round-gothic]'>Governance</h2>
+        <h1 className='text-3xl md:text-5xl my-4 font-bold text-[#160744] font-[all-round-gothic] dark:text-white'>Founderz DAO</h1>
         <p className='text-[#8094B7] font-[200] text-[15px] sm:text-lg'>Founderz govern <b>Founderz DAO</b>. 
           Founderz can vote on proposals or delegate 
           their vote to a third party. A minimum of <b>2 
@@ -28,7 +28,7 @@ function Dao() {
         </p>
         <div className='border border-[#4965D8] rounded-2xl p-7 my-5 flex flex-col sm:flex-row gap-6 sm:gap-1 justify-between'>
           <div className=''>
-            <p className='text-xl sm:text-2xl font-bold text-[#8094B7]'>Treasury</p>
+            <p className='text-xl sm:text-2xl font-bold text-[#8094B7] font-[all-round-gothic]'>Treasury</p>
             <p className='text-2xl sm:text-4xl'><span className='text-[#4965D8] font-bold'>Ξ 28,597 </span><span className='text-[#8094B7]'>$45,497,892.00</span></p>
           </div>
           <p className='text-[15px] sm:w-2/5'>This treasury exists for Founderz 
@@ -39,7 +39,7 @@ function Dao() {
         </div>
         <div className='rounded-2xl bg-white dark:bg-[#17055E] sm:flex items-center justify-between p-5 mb-11'>
           <div className=''>
-            <p className='text-[#160744] dark:text-white font-bold text-2xl'>Lorem ipsum dolor sit amet</p>
+            <p className='text-[#160744] dark:text-white font-bold text-2xl font-[all-round-gothic]'>Lorem ipsum dolor sit amet</p>
             <p className='text-[#8094B7]'>You will be able to discuss all the ideas proposed by users.</p>
           </div>
           <button className='text-[#4965D8] flex items-center gap-1 underline underline-offset-2'>
@@ -48,10 +48,10 @@ function Dao() {
         </div>
 
         <div className='sm:flex justify-between'>
-          <h3 className=' text-2xl sm:text-3xl'>Proposal</h3>
+          <h3 className=' text-2xl sm:text-3xl font-[all-round-gothic]'>Proposal</h3>
           <div>
             <span className='text-[#8094B7]'>Connect wallet to make a proposal.</span>
-            <button className='bordered border-[#8094B7] rounded-xl mx-2 bg-[#8094B766] p-2 text-[#8094B7] mb-8'>Submit proposal</button>
+            <button className='bordered border-[#8094B7] rounded-xl mx-2 bg-[#8094B766] p-2 text-[#8094B7] mb-8 font-[all-round-gothic]'>Submit proposal</button>
           </div>
         </div>
         <div className='my-20'>
