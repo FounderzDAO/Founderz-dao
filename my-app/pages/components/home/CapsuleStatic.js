@@ -14,7 +14,7 @@ export default function CapsuleStatic() {
         </div> 
         <div className="w-10/12 lg:w-4/12 lg:order-1">
           <p className="text-3xl sm:text-4xl font-[all-round-gothic]"><span className="text-[#4965D8] font-bold ">Customize your Founderz Pass in the <i>Capsule</i></span>  and join the first decentralized Web3 Startup Studio </p>
-          <button className='rounded-xl my-10 text-black text-xs flex items-center w-fit px-3 py-2 bg-[#1BEDA4]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
+          <button className='rounded-xl my-10 text-black text-xs flex items-center w-fit px-3 py-2 bg-[#1BEDA4] font-[all-round-gothic]'>ENTER THE CAPSULE <img className='h-5 ml-1' src='img/icon-arrow.svg' /></button>
         </div>
       </div>
 
@@ -31,28 +31,28 @@ export default function CapsuleStatic() {
 
 
         <div className="w-7/12 sm:w-5/12 text-center my-6">
-          <h2 className="text-[#160744] dark:text-white text-3xl my-2">WTF is <i className="font-bold">FounderzDAO?</i></h2>
+          <h2 className="text-[#160744] dark:text-white text-3xl my-2 font-[all-round-gothic]">WTF is <i className="font-bold">FounderzDAO?</i></h2>
           <p className="text-[#8094B7] text-xs">Founderz are an adjacent creation inspired by Nouns DAO, with a focus on creating a community of web3 builders, creators and doers.</p>
         </div>
         <div className="flex flex-col items-center my-7 w-10/12 lg:w-7/12 gap-y-24">
           <div className="flex flex-col lg:flex-row lg:justify-between w-full  items-center ">
             <img className="lg:order-2 w-[300px]" src='/img/1-Cyberpunk.png' />
             <div className=" lg:w-6/12 w-10/12">
-              <h3 className="text-[#4965D8] text-xl font-bold">Daily Mint</h3>
+              <h3 className="text-[#4965D8] text-xl font-bold font-[all-round-gothic]">Daily Mint</h3>
               <p className="text-[#8094B7]">Funds generated from the daily auctions flow into the treasury pool managed by the Founderz Members.</p>
             </div>
           </div>
           <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center ">
             <img className="order-1  w-[300px]" src='/img/22-High-Tech.png' />
             <div className="order-2 lg:w-6/12 w-10/12">
-              <h3 className="text-[#4965D8] text-xl font-bold">Web3 Startups</h3>
+              <h3 className="text-[#4965D8] text-xl font-bold font-[all-round-gothic]">Web3 Startups</h3>
               <p className="text-[#8094B7]">Treasury pool funds are used to finance the creation of web3 startups through Founderz proposals.</p>
             </div>
           </div>
           <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center ">
             <img className="lg:order-2  w-[300px]" src='/img/21-Cyberspace.png' />
             <div className=" lg:w-6/12 w-10/12">
-              <h3 className="text-[#4965D8] text-xl font-bold">Community Bounties</h3>
+              <h3 className="text-[#4965D8] text-xl font-bold font-[all-round-gothic]">Community Bounties</h3>
               <p className="text-[#8094B7]">Founderz web3 Startups are developed by our community using Dework.</p>
             </div>
           </div>
