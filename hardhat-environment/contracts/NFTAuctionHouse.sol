@@ -1,6 +1,12 @@
 /**
+ *Submitted for verification at polygonscan.com on 2022-11-04
+*/
+
+/**
  *Submitted for verification at Etherscan.io on 2022-09-08
 */
+
+// // Begining of NFTAuctionHouse.sol
 
 // SPDX-License-Identifier: GPL-3.0
 
@@ -13,7 +19,7 @@
 // AuctionHouse.sol source code Copyright Zora licensed under the GPL-3.0 license.
 // With modifications by Founderz DAO.
 
-pragma solidity ^0.8.6;
+pragma solidity 0.8.17;
 
 /**
  * @dev Provides information about the current execution context, including the
@@ -785,6 +791,7 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, Pausable, Reentran
         if (_auction.amount > 0) {
             _safeTransferETHWithFallback(owner(), _auction.amount);
         }
+
 
         emit AuctionSettled(_auction.founderId, _auction.bidder, _auction.amount);
     }

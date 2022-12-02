@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at Etherscan.io on 2022-09-08
+ *Submitted for verification at polygonscan.com on 2022-11-04
 */
 
 /* Web3 Startup Factory for builders and investors only.
@@ -7,9 +7,11 @@
    Website: https://founderz.wtf/
 */
 
+// Begining of FounderzNFT.sol
+
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 
 /**
  * @dev Collection of functions related to the address type
@@ -1137,7 +1139,7 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
  */
-interface IBEP20 {
+interface IERC20 {
     /**
      * @dev Returns the amount of tokens in existence.
      */
@@ -1208,6 +1210,98 @@ interface IBEP20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
+/**
+ * @title SafeERC20
+ * @dev Wrappers around ERC20 operations that throw on failure (when the token
+ * contract returns false). Tokens that return no value (and instead revert or
+ * throw on failure) are also supported, non-reverting calls are assumed to be
+ * successful.
+ * To use this library you can add a `using SafeERC20 for IERC20;` statement to your contract,
+ * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.
+ */
+library SafeERC20 {
+    using Address for address;
+
+    function safeTransfer(
+        IERC20 token,
+        address to,
+        uint256 value
+    ) internal {
+        _callOptionalReturn(token, abi.encodeWithSelector(token.transfer.selector, to, value));
+    }
+
+    function safeTransferFrom(
+        IERC20 token,
+        address from,
+        address to,
+        uint256 value
+    ) internal {
+        _callOptionalReturn(token, abi.encodeWithSelector(token.transferFrom.selector, from, to, value));
+    }
+
+    /**
+     * @dev Deprecated. This function has issues similar to the ones found in
+     * {IERC20-approve}, and its usage is discouraged.
+     *
+     * Whenever possible, use {safeIncreaseAllowance} and
+     * {safeDecreaseAllowance} instead.
+     */
+    function safeApprove(
+        IERC20 token,
+        address spender,
+        uint256 value
+    ) internal {
+        // safeApprove should only be called when setting an initial allowance,
+        // or when resetting it to zero. To increase and decrease it, use
+        // 'safeIncreaseAllowance' and 'safeDecreaseAllowance'
+        require(
+            (value == 0) || (token.allowance(address(this), spender) == 0),
+            "SafeERC20: approve from non-zero to non-zero allowance"
+        );
+        _callOptionalReturn(token, abi.encodeWithSelector(token.approve.selector, spender, value));
+    }
+
+    function safeIncreaseAllowance(
+        IERC20 token,
+        address spender,
+        uint256 value
+    ) internal {
+        uint256 newAllowance = token.allowance(address(this), spender) + value;
+        _callOptionalReturn(token, abi.encodeWithSelector(token.approve.selector, spender, newAllowance));
+    }
+
+    function safeDecreaseAllowance(
+        IERC20 token,
+        address spender,
+        uint256 value
+    ) internal {
+        unchecked {
+            uint256 oldAllowance = token.allowance(address(this), spender);
+            require(oldAllowance >= value, "SafeERC20: decreased allowance below zero");
+            uint256 newAllowance = oldAllowance - value;
+            _callOptionalReturn(token, abi.encodeWithSelector(token.approve.selector, spender, newAllowance));
+        }
+    }
+
+    /**
+     * @dev Imitates a Solidity high-level call (i.e. a regular function call to a contract), relaxing the requirement
+     * on the return value: the return value is optional (but if data is returned, it must not be false).
+     * @param token The token targeted by the call.
+     * @param data The call data (encoded using abi.encode or one of its variants).
+     */
+    function _callOptionalReturn(IERC20 token, bytes memory data) private {
+        // We need to perform a low level call here, to bypass Solidity's return data size checking mechanism, since
+        // we're implementing it ourselves. We use {Address.functionCall} to perform this call, which verifies that
+        // the target address contains contract code and also asserts for success in the low-level call.
+
+        bytes memory returndata = address(token).functionCall(data, "SafeERC20: low-level call failed");
+        if (returndata.length > 0) {
+            // Return data is optional
+            require(abi.decode(returndata, (bool)), "SafeERC20: ERC20 operation did not succeed");
+        }
+    }
+}
+
 /// @title IERC2981Royalties
 /// @dev Interface for the ERC2981 - Token Royalty standard
 interface IERC2981Royalties {
@@ -1274,11 +1368,13 @@ abstract contract ERC2981PerTokenRoyalties is ERC165, IERC2981Royalties {
 
 contract FounderzNFT is ERC721, ERC721Enumerable, Ownable, ERC2981PerTokenRoyalties {
     using Counters for Counters.Counter;
+    using SafeERC20 for IERC20;  
     using Strings for uint256;
 
     Counters.Counter private _tokenIdTracker;
 
-    uint256 private contractRoyalties = 800;
+    uint256 private contractRoyalties = 1000;
+    address public royaltiesReceiver = 0x8f4F241b6504D6Fc6B02D24d56Fee604C5D96bc8;
     string constant ContractCreator = "@FrankFourier";
     string public baseExtension = ".json";
 
@@ -1328,7 +1424,7 @@ contract FounderzNFT is ERC721, ERC721Enumerable, Ownable, ERC2981PerTokenRoyalt
         return _totalSupply();
     }
 
-    function mint(address _to) public payable  {
+    function mint(address _to) external onlyOwner {
         _mintAnElement(_to);
     }
 	
@@ -1336,7 +1432,7 @@ contract FounderzNFT is ERC721, ERC721Enumerable, Ownable, ERC2981PerTokenRoyalt
         uint id = _totalSupply() + 1;
         _tokenIdTracker.increment();
         _safeMint(_to, id);
-        _setTokenRoyalty(id, owner(), contractRoyalties);
+        _setTokenRoyalty(id, royaltiesReceiver, contractRoyalties);
         emit CreateFounderzNFT(id);
     }
 
@@ -1358,10 +1454,10 @@ contract FounderzNFT is ERC721, ERC721Enumerable, Ownable, ERC2981PerTokenRoyalt
      * @dev Callable by owner
      */
     function recoverToken(address _token) external onlyOwner {
-        uint256 balance = IBEP20(_token).balanceOf(address(this));
+        uint256 balance = IERC20(_token).balanceOf(address(this));
         require(balance != 0, "Operations: Cannot recover zero balance");
 
-        IBEP20(_token).transfer(address(msg.sender), balance);
+        IERC20(_token).safeTransfer(address(msg.sender), balance);
 
         emit TokenRecovery(_token, balance);
     }
