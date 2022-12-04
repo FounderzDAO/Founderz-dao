@@ -32,8 +32,10 @@ function Header() {
         <div className="flex mx-1 my-3 sm:m-3 gap-5 items-center">
           {/* <ThemeToggler /> */}
           <button onClick={ () => { router.push("/")}}>
-            <img src="img/main-logo.svg" className="sm:w-[70px] w-[45px] h-[45px] sm:h-[70px]  dark:hidden"  />
-            <img src="img/white-logo2.svg" className="sm:w-[70px] w-[45px] h-[45px] sm:h-[70px]  hidden dark:block"  />
+          {/* fd_footerlogo.png */}
+            <img src="img/fd_footerlogo.png" className=" h-[20px] sm:h-[30px] dark:hidden"  />
+            {/* <img src="img/main-logo.svg" className="sm:w-[70px] w-[45px] h-[45px] sm:h-[70px]  dark:hidden"  /> */}
+            <img src="img/logo2.svg" className=" h-[20px] sm:h-[30px]  hidden dark:block"  />
           </button>
           <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
             Treasury <i className="ri-bar-chart-horizontal-line bg-inherit"></i>{" "}
