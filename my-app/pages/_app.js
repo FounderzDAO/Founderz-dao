@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }) {
   );
 
   const { connectors } = getDefaultWallets({
-    appName: "Founderz Dao",
+    appName: "Founderz-Dao",
     chains,
   });
   const wagmiClient = createClient({
@@ -56,7 +56,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Founderz</title>
+        <title>FounderzDAO</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" type="image/svg" href="img/main-logo.svg" />
         <link rel="stylesheet" href="https://use.typekit.net/mef2bdi.css" />
