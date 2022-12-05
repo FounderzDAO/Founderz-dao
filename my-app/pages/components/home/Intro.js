@@ -74,7 +74,7 @@ const Intro = () => {
         </div>
         <div className='hidden lg:block max-w-[430px]'>
           <p className="text-[#4965D8]">October 10, 2022</p>
-          <h2 className="font-bold my-2 text-5xl" style={{ fontFamily: "" }}>
+          <h2 className="font-bold my-2 text-5xl font-[all-round-gothic]" style={{ fontFamily: "" }}>
             Founderz #42
           </h2>
 
