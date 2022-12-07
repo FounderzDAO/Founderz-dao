@@ -34,12 +34,13 @@ const MidSection = () => {
   return (
     <div className="flex flex-col pb-32 items-center pt-14 bg-[#F7F9FC] dark:bg-[#160744] w-full" >
       {/* <div className="h-[450px]   bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8]  rotate-[-3deg] w-[130%] mt-8 mx-[-100px] overflow-hidden absolute" /> */}
-      <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8] ">
-        <h2 className=" font-bold text-center text-[30px] mb-7 mx-2 dark:text-black font-[all-round-gothic]">How it works in <spam className='text-[#F7F9FC]' >3 steps</spam></h2>
-        <button className="my-5 text-[12px]">FIND HOW</button>
-        <div className="flex lg:flex-row flex-col gap-3">
+      {/* <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8] "> */}
+      <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  ">
+        <h2 className=" font-bold text-center text-[30px] mx-2  font-[all-round-gothic]">How it works in <spam className='text-[#4965D8] font-[500]' >3 steps</spam></h2>
+        <button className="my-5 text-[12px] font-[all-round-gothic] text-[#4965D8] flex items-center gap-1">FIND HOW<img src="img/icon-arrow-R.svg" className="h-4" /></button>
+        <div className="flex lg:flex-row flex-col gap-3 mt-5">
 
-          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC]">
+          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8] ">
             <img className="h-[70px]" src="img/icon-get-your-pass.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">1</p>
@@ -48,7 +49,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Win the daily auction to receive the Founderz pass and have access to the capsule.</p>
           </div>
 
-          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC]">
+          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-create-your-nft.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">2</p>
@@ -57,7 +58,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Access the capsule, the restricted area where you can customize your 2D avatar NFT.</p>
           </div>
 
-          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC]">
+          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-become-a-founderz.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">3</p>

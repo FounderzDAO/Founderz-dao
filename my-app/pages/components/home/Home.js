@@ -5,7 +5,7 @@ import MidSection from "./MidSection"
 
 const Home = () => {
   return (
-    <div>
+    <div className="overflow-hidden">
       <Intro />
       <CapsuleStatic />
       <MidSection />
