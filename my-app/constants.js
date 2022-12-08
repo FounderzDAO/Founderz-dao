@@ -5,7 +5,7 @@
 
 export const Founderz_NFT_CONTRACT_ADDRESS =
   "0xff17C12ce2323c2623B84C017ed64681B7cB9C0B";
-export const NFT_Auction_House_CONTRACT_ADDRESS =
+export const Auction_House_CONTRACT_ADDRESS =
   "0xec80f52727a6ab8431FF5ac5a6CEBeb09B7ABfcC";
 // ABIS BELOW
 export const Founderz_NFT_ABI = [
@@ -405,7 +405,7 @@ export const Founderz_NFT_ABI = [
     },
   ],
 ];
-export const NFT_Auction_House_ABI = [
+export const Auction_House_ABI = [
   [
     {
       anonymous: false,

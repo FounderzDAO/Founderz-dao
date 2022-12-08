@@ -3,11 +3,18 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Image from 'next/image';
 import { useRouter } from "next/router";
+// import { Contract, providers } from "ethers";
+// import { formatEther } from "ethers/lib/utils";
+// import {
+//   Founderz_NFT_CONTRACT_ADDRESS,
+//   Founderz_NFT_ABI,
+//   Auction_House_ABI,
+//   Auction_House_CONTRACT_ADDRESS,
+// } from "../constants";
 import Carousel from 'react-material-ui-carousel';
 import founderzpass from '../assets/founderzpass.png';
 import founderzstand from '../assets/founderzstand.png';
 import Header from './Header';
-
 
 
 const Intro = () => {
@@ -67,6 +74,8 @@ const Intro = () => {
           </div>
           <img src="img/icon-arrow-R.svg" />
         </div>
+        {/* Add event listeners, n Onclick for listening and calling funcs from AuctionHouse contract:
+        Call =   */}
         <div>
           <p className='text-[#4965D8]'>October 10, 2022</p>
           <h2 className='font-bold my-2 text-5xl' style={{fontFamily: ''}}>Founderz #42</h2>

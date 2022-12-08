@@ -13,7 +13,6 @@ import Carousel from 'react-material-ui-carousel';
 import Header from '../Header';
 
 
-
 const Intro = () => {
   const router = useRouter();
 
