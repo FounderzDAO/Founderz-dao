@@ -103,13 +103,13 @@ const Intro = () => {
                   </button>
                 </div>
               </div>
-              <div className="my-8">
+              <div className="mt-8 mb-1 flex flex-col items-center">
                 {[
                   "acquisitions.lilnouns.eth",
                   "acquisitions.lilnouns.eth",
                   "nounishlab.eth",
                 ].map((i) => (
-                  <div>
+                  <div className='w-full'>
                     <div className="flex justify-between w-full my-2">
                       <p className='flex items-center'><span className='h-4 w-4 mr-2 rounded-full bg-[#4965D8]' />{i}</p>
                       <p className="">Ξ 3.45</p>
@@ -117,6 +117,7 @@ const Intro = () => {
                     <div className="h-[1px] bg-[#4965D8] w-full" />
                   </div>
                 ))}
+                <p className='text-[#4965D8] underline underline-offset-2 mt-5' >View all bids</p>
               </div>
             </div>
           </div>
@@ -163,13 +164,13 @@ const Intro = () => {
                   </button>
                 </div>
               </div>
-              <div className="my-8">
+              <div className="my-8 flex flex-col items-center">
                 {[
                   "acquisitions.lilnouns.eth",
                   "acquisitions.lilnouns.eth",
                   "nounishlab.eth",
                 ].map((i) => (
-                  <div>
+                  <div className='w-full'>
                     <div className="flex justify-between w-full my-2">
                       <p className='flex items-center'><span className='h-4 w-4 mr-2 rounded-full bg-[#4965D8]' />{i}</p>
                       <p className="">Ξ 3.45</p>
@@ -177,6 +178,7 @@ const Intro = () => {
                     <div className="h-[1px] bg-[#4965D8] w-full" />
                   </div>
                 ))}
+                <p className='text-[#4965D8] underline underline-offset-2 mt-5' >View all bids</p>
               </div>
             </div>
           </div>
