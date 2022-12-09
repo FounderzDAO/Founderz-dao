@@ -11,7 +11,7 @@ import {
   Founderz_NFT_ABI,
   Auction_House_ABI,
   Auction_House_CONTRACT_ADDRESS,
-} from "./constants/constants.js";
+} from "../../constants/index.js";
 import Carousel from 'react-material-ui-carousel';
 import founderzpass from '../assets/founderzpass.png';
 import founderzstand from '../assets/founderzstand.png';
