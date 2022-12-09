@@ -14,7 +14,7 @@ function Footer() {
 
         <div className="flex gap-6">
           <img className="h-[20px]" src="img/twitter_logo.png" />
-          <img className="h-[20px]" src="img/discord_logo.png" />
+          <img className="h-[20px]" src="img/icon-discord.png" />
           <img className="h-[20px]" src="img/icon-etherscan.png" />
         </div>
       </div>

@@ -2,15 +2,16 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import Image from 'next/image';
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-// import { Contract, providers } from "ethers";
-// import { formatEther } from "ethers/lib/utils";
-// import {
-//   Founderz_NFT_CONTRACT_ADDRESS,
-//   Founderz_NFT_ABI,
-//   Auction_House_ABI,
-//   Auction_House_CONTRACT_ADDRESS,
-// } from "../constants";
+import { Contract, providers, utils } from "ethers";
+import { formatEther } from "ethers/lib/utils";
+import {
+  Founderz_NFT_CONTRACT_ADDRESS,
+  Founderz_NFT_ABI,
+  Auction_House_ABI,
+  Auction_House_CONTRACT_ADDRESS,
+} from "../constants";
 import Carousel from 'react-material-ui-carousel';
 import founderzpass from '../assets/founderzpass.png';
 import founderzstand from '../assets/founderzstand.png';
@@ -18,6 +19,8 @@ import Header from './Header';
 
 
 const Intro = () => {
+  // To be used list //
+  // const FounderzNftContract = new Contract(Founderz_NFT_CONTRACT_ADDRESS, Founderz_NFT_ABI);
   const router = useRouter();
 
   const nfts = [
@@ -32,6 +35,44 @@ const Intro = () => {
       img: 'img/founderzpass.png',
     },
   ]
+
+ // CreateAuction // 
+const CreateAuction = async () => {
+    const AuctionHouseContract = new Contract(Auction_House_CONTRACT_ADDRESS, Auction_House_ABI);
+    // call from the contract to create auction
+    const tx = await AuctionHouseContract._createAuction();
+    const auctionCreated = await AuctionHouseContract.AuctionCreated();
+    auctionCreated.on("data", (event) => {
+      console.log(event);
+    });
+  };
+
+// const CreateBid = async () => {
+//   try {
+//     // We need a Signer here since this is a 'write' transaction.
+//     const signer = await getProviderOrSigner(true);
+//     // Create a new instance of the Contract with a Signer, which allows
+//     // update methods
+//     const AuctionHouseContract = new Contract(
+//       Auction_House_CONTRACT_ADDRESS,
+//       Auction_House_ABI,
+//       signer
+//     );
+//     // call from the contract to create bid
+//     const tx = await AuctionHouseContract.createBid({
+//       // Mint Price in ETH mininum to create bid, but this instance needs AuctionCreated: This is 3rd step //
+//       value: utils.parseEther("1"),
+//     });
+//     setLoading(false);
+//     // wait for the transaction to get mined
+//     await tx.wait();
+//     setLoading(false);
+//     window.alert("You successfully won the auction");
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+  
 
   return (
     <div 
