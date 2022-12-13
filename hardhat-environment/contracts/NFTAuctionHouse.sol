@@ -383,6 +383,8 @@ interface IFounderzNFTAuctionHouse {
         bool settled;
     }
 
+     // Notes42 = Grab these functions for front end // 
+
     event AuctionCreated(uint256 indexed founderId, uint256 startTime, uint256 endTime);
 
     event AuctionBid(uint256 indexed founderId, address sender, uint256 value, bool extended);
@@ -590,6 +592,7 @@ abstract contract Pausable is Context {
     }
 }
 
+
 contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, Pausable, ReentrancyGuard, Ownable {
     // The FounderzNFT ERC721 token contract
     IFounderzToken public founders;
@@ -617,6 +620,9 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, Pausable, Reentran
      * populate configuration values, and pause the contract.
      * @dev This function can only be called once.
      */
+
+     // Notes42 = Call initialize function to set the configuration values from front end // 
+
     function initialize(
         IFounderzToken _founders,
         address _weth,
@@ -639,6 +645,10 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, Pausable, Reentran
     /**
      * @notice Settle the current auction, mint a new Founders, and put it up for auction.
      */
+     
+     // Notes42 = Call this function to settle the current auction, mint a new Founders, and put it up for auction //
+     // These are most important functions to call from front end, from settleCurrentAndCreateNewAuction() function to pause(not inc pause) //
+
     function settleCurrentAndCreateNewAuction() external override nonReentrant whenNotPaused {
         _settleAuction();
         _createAuction();
