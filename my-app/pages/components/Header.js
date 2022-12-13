@@ -56,16 +56,16 @@ function Header() {
         </div>
         <div className="flex gap-4">
           <ThemeToggler />
-          <div class="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow md:hidden" ref={openMenu} onClick={handleOpenMenu} /*onClick={() => setShowMenu(true)}*/>
-            <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-            <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-            <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+          <div className="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow md:hidden" ref={openMenu} onClick={handleOpenMenu} /*onClick={() => setShowMenu(true)}*/>
+            <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+            <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+            <span className="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
           </div>
           <div className="hidden md:block">
             <ConnectButton />
           </div>
         </div>    
-      </nav>
+      </nav>  
       {/*showMenu &&*/<div ref={menu} className=" fixed transition-all delay-500 ease-in-out overflow-hidden top-0 z-50 h-[100vh] w-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8]  flex-col " /*onClick={() => setShowMenu(false)}*/>
           <div className="flex  items-center justify-between pr-3">
             <div className="flex mx-1 my-3 sm:m-3 gap-5 items-center">
@@ -77,10 +77,8 @@ function Header() {
                 Ξ42,000
               </button>
             </div>
-            <div class="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow md:hidden" ref={closeMenu} onClick={handleCloseMenu}>
-              <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-              <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
-              <span class="block w-6 h-0.5 bg-gray-900 dark:bg-gray-100 animate-pulse"></span>
+            <div className="p-2 space-y-[5px] border border-gray-900 dark:border-gray-100 rounded-xl shadow" ref={closeMenu} onClick={handleCloseMenu}>
+              <img src="img/close_icon.png"  className="h-5"  />
             </div>
           </div>
           <div className="mt-32 p-3 flex flex-col gap-10 items-center">
