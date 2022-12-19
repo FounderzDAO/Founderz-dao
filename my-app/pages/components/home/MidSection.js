@@ -41,7 +41,7 @@ const MidSection = () => {
         <button className="my-5 text-[12px] font-[all-round-gothic] text-[#4965D8] flex items-center gap-1">FIND HOW<img src="img/icon-arrow-R.svg" className="h-4" /></button>
         <div className="flex lg:flex-row flex-col gap-3 mt-5">
 
-          <div className="border h-[240px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8] ">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8] ">
             <img className="h-[70px]" src="img/icon-get-your-pass.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">1</p>
@@ -50,7 +50,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Win the daily auction to receive the Founderz pass and have access to the capsule.</p>
           </div>
 
-          <div className="border h-[240px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-create-your-nft.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">2</p>
@@ -59,7 +59,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Access the capsule, the restricted area where you can customize your 2D avatar NFT.</p>
           </div>
 
-          <div className="border h-[240px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-become-a-founderz.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">3</p>
