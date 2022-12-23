@@ -1,30 +1,32 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import Image from 'next/image';
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Contract, providers, utils } from "ethers";
-import { ethereumConnect } from "_app.js";
-import { formatEther } from "ethers/lib/utils";
+import {
+  useAccount,
+  useProvider,
+  useSigner,
+  useContract,
+  useContractRead,
+  useContractReads,
+  useContactWrite,
+  useToken,
+} from "wagmi";
 import {
   Founderz_NFT_CONTRACT_ADDRESS,
   Founderz_NFT_ABI,
   Auction_House_ABI,
   Auction_House_CONTRACT_ADDRESS,
-} from "../../constants/index.js";
-import Carousel from 'react-material-ui-carousel';
-import founderzpass from '../assets/founderzpass.png';
-import founderzstand from '../assets/founderzstand.png';
-import Header from './Header';
-
+} from "../constants/index.js";
+import Carousel from "react-material-ui-carousel";
+import founderzpass from "../assets/founderzpass.png";
+import founderzstand from "../assets/founderzstand.png";
+import Header from "./Header";
 
 const Intro = () => {
-  // To be used list //
-  // const FounderzNftContract = new Contract(Founderz_NFT_CONTRACT_ADDRESS, Founderz_NFT_ABI);
-  // AuctionHouseContract.settleAuction(arg1, arg2).then(function(result) {
-   // Do something with the result
-    // }); //
+
   const router = useRouter();
 
   const nfts = [
@@ -39,89 +41,83 @@ const Intro = () => {
       img: "img/founderzpass.png",
     },
   ];
-
-  // Connect Wallet //
-
   // Wallet interaction //
 
-  // Create a new instance of ethereumConnect to connect to the users wallet //
-  const EthereumConnect = new ethereumConnect();
-  // walletConnected keeps track of whether the user has connected their wallet or not
-  const [walletConnected, setWalletConnected] = useState(false);
-  // AuctionStarted keeps track of whether the Auction has started or not
-  const [AuctionStarted, setAuctionStarted] = useState(false);
-  // AuctionEnded keeps track of whether the Auction ended
-  const [AuctionEnded, setAuctionEnded] = useState(false);
-  // loading is set to true when we are waiting for a transaction to get mined
-  const [loading, setLoading] = useState(false);
+  // Display this code in proper intro file //
+  // Now successfully displaying currentBid and all auctionBids as well as founderzId //
 
-  // CreateAuction //
-  const CreateAuctionEnableBid = async () => {
-    const AuctionHouseContract = new Contract(
-      Auction_House_CONTRACT_ADDRESS,
-      Auction_House_ABI
-    );
-    // call from the contract to create auction //
-    const createNewAuction = await AuctionHouseContract.createAuction();
-    const auctionCreated = await AuctionHouseContract.AuctionCreated();
-    auctionCreated.on("data", (event) => {
-      console.log(event);
-    });
-  };
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+  const [founderzId, setFounderzId] = useState(0);
+  const [auctionBids, setAuctionBids] = useState();
+  const [currentBid, setCurrentBid] = useState();
+  const [auctionTimer, setAuctionTimer] = useState();
 
-  // Enable Logic to continue auction when user wins //
-  const CurrentAndCreateNewAuction = async () => {
-     // Connect to the users wallet //
-    
-    // Create a new instance of the Contract // 
-    const AuctionHouseContract = new Contract(
-      Auction_House_CONTRACT_ADDRESS,
-      Auction_House_ABI
-    );
+  const AuctionHouseContract = useContract({
+    address: Auction_House_CONTRACT_ADDRESS,
+    abi: Auction_House_ABI,
+    signerOrProvider: signer || provider,
+  });
 
+  // const FounderzNft = useContract({
+  //   address: Founderz_NFT_CONTRACT_ADDRESS,
+  //   abi: Founderz_NFT_ABI,
+  //   signerOrProvider: signer || provider,
+  // });
 
-  // start timer to be displayed on UI //
-  const StartTimerForAuction = async () => {
-    const AuctionHouseContract = new Contract(
-      Auction_House_CONTRACT_ADDRESS,
-      Auction_House_ABI
-    );
-    const Timer = await AuctionHouseContract.setTimeBuffer();
-    const setTimeBuffer = await Timer.setTimeBuffer();
-    console.log(setTimeBuffer);
-  };
+  // Tools //
+  // const contract = new Contract(address, abi, provider);
+  // const wallet = new Wallet(priv_key, provider);
+  // const contractwithWallet = new contract.connect(wallet);
+  // const data  = await Contract.get() ;
+  // Place bid on private auction for only 10 people //
+  // Add this... //
+
+  // Auction Interaction //
 
   // Create Bid //
   const CreateBid = async () => {
-    try {
-      // We need a Signer here since this is a 'write' transaction.
-       await ethereumConnect.connect();
-       if (ethereumConnect.connected) {
-      setWalletConnected(true);
-       }
-      const signer = await getProviderOrSigner(true);
-      // Create a new instance of the Contract with a Signer, which allows
-      // update methods
-      const AuctionHouseContract = new Contract(
-        Auction_House_CONTRACT_ADDRESS,
-        Auction_House_ABI,
-        signer
-      );
-      // call from the contract to create bid
-      const tx = await AuctionHouseContract.createBid({
-        // Mint Price in ETH mininum to create bid, but this instance needs AuctionCreated: This is 3rd step //
-        value: utils.parseEther("0.1"),
-      });
-      setLoading(false);
-      // wait for the transaction to get mined
-      await tx.wait();
-      setLoading(false);
-      window.alert("You successfully won the auction");
-    } catch (err) {
-      console.error(err);
+    const bid = await AuctionHouseContract.createBid();
+    // useContractWrite({});
+    if (bid) {
+      console.log("Bid created");
     }
   };
-  // End Auction interaction //
+
+  // Use auction counter to get the founderzId //
+
+  const FetchAuctionBids = async () => {
+    const auction = await AuctionHouseContract.auction();
+    console.log(auction.founderId);
+    setFounderzId(auction.founderId);
+    AuctionStatusBids(auction.founderId);
+    setCurrentBid(auction);
+  };
+
+  useEffect(() => {
+    FetchAuctionBids();
+  }, []);
+
+  // Check auction status of bids from auctionhousecontract and display //
+  const AuctionStatusBids = async (id) => {
+     const auctionStatusBids = await AuctionHouseContract.getBiddersList(id);
+     console.log(auctionStatusBids);
+     setAuctionBids(auctionStatusBids);
+  };
+
+  
+  // 24h Timer to be displayed on UI //
+  const AuctionStatusTimer = async () => {};
+
+  // Display NFTS in carousel by reading token uri with useContractRead and by getting the IFPS hashes //
+  // const { data: founderzNFT } = useContractRead({
+  //   ...FounderzNft,
+  //   functionName: "",
+  //   args: [],
+  // });
+
+  // End Auction Interaction //
 
   return (
     <div
@@ -169,7 +165,7 @@ const Intro = () => {
         <div>
           <p className="text-[#4965D8]">October 10, 2022</p>
           <h2 className="font-bold my-2 text-5xl" style={{ fontFamily: "" }}>
-            Founderz #42
+            Founderz #{currentBid ? currentBid.founderId : 0}
           </h2>
           <div
             className="p-5"
@@ -182,11 +178,17 @@ const Intro = () => {
             <div className="flex justify-between  my-4 w-[400px]">
               <div>
                 <p className="text-[#4965D8] text-sm">Current bid</p>
-                <p className=" text-4xl">Ξ 3.45</p>
+                <p className=" text-4xl">
+                  Ξ
+                  {currentBid ? ethers.utils.formatEther(currentBid.amount) : 0}
+                </p>
               </div>
               <div>
                 <p className="text-[#4965D8] text-sm">Action ends in</p>
-                <p className=" text-4xl">22h 44m 21s</p>
+                {/* // Add a way here for Unix endTime to display time in 24h format // */}
+                <p className=" text-4xl">
+                  {currentBid ? currentBid.endTime : 0}
+                </p>
               </div>
             </div>
             <div>
@@ -208,19 +210,16 @@ const Intro = () => {
               </div>
             </div>
             <div className="my-8">
-              {[
-                "acquisitions.lilnouns.eth",
-                "acquisitions.lilnouns.eth",
-                "nounishlab.eth",
-              ].map((i) => (
-                <div>
-                  <div className="flex justify-between w-full my-2">
-                    <p className="">{i}</p>
-                    <p className="">Ξ 3.45</p>
+              {auctionBids &&
+                auctionBids.map((i) => (
+                  <div>
+                    <div className="flex justify-between w-full my-2">
+                      <p className="">{i}</p>
+                      <p className="">Ξ {pastBids ? pastBids : 0}</p>
+                    </div>
+                    <div className="h-[1px] bg-[#4965D8] w-full" />
                   </div>
-                  <div className="h-[1px] bg-[#4965D8] w-full" />
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
@@ -228,6 +227,6 @@ const Intro = () => {
       <div className="w-full h-px bg-gradient-to-r from-[#16074402] via-[#4966d8] to-[#16074401] dark:from-[#160744] dark:via-[#4965D8] dark:to-[#160744]" />
     </div>
   );
-}
+};
 
 export default Intro;

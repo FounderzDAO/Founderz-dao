@@ -12,7 +12,7 @@
     "@heroicons/react": "^1.0.6",
     "@material-tailwind/react": "^1.2.4",
     "@nextui-org/react": "^1.0.0-beta.10",
-    "@rainbow-me/rainbowkit": "^0.5.1",
+    "@rainbow-me/rainbowkit": "^0.8.1",
     "@react-three/drei": "^9.32.0",
     "@react-three/fiber": "^8.8.1",
     "babel-preset-next": "^1.4.0",
@@ -27,7 +27,7 @@
     "react-icons": "^4.4.0",
     "react-material-ui-carousel": "^3.4.2",
     "three": "^0.144.0",
-    "wagmi": "^0.6.4"
+    "wagmi": "^0.9.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.11",
