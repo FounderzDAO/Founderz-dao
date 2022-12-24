@@ -63,9 +63,9 @@ function Dao() {
                   <p className=' text-[#8094B7] dark:text-[#4965D8] mr-2'>141</p>
                   <p className='text-[#160744] dark:text-white'>Nounish Friends - Stage 2</p>
                 </div>
-                <div className='sm:flex '>
-                  <button className='bordered rounded-xl mx-2 bg-gray-300 p-2 text-gray-500 my-1'>Start in a day</button>
-                  <button className='rounded-xl bg-green-500 flex items-center content-center p-2 text-white my-1 '>Pending</button>
+                <div className='flex flex-col items-end  sm:flex-row text-[13px] md:text-[15px]'>
+                  <button className='bordered rounded-xl sm:mx-2 bg-gray-300 p-2 text-gray-500 my-1'>Start in a day</button>
+                  <button className='rounded-xl bg-green-500 flex items-center  content-center p-2 text-white my-1 '>Pending</button>
                 </div>
               </button>
             )
