@@ -5,7 +5,7 @@ import Home from "./components/home/Home";
 
 const index = () => {
   return (
-    <div>
+    <div className="font-sarabun">
       <Home />
     </div>
   );

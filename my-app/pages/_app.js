@@ -39,6 +39,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" type="image/svg" href="img/main-logo.svg" />
         <link rel="stylesheet" href="https://use.typekit.net/mef2bdi.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@200&display=swap" rel="stylesheet" />
       </Head>
       <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>

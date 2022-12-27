@@ -14,6 +14,7 @@ import Footer from "../Footer";
 const MidSection = () => {
 
   const [open, setOpen] = useState(0);
+  const [showBanner, setShowBanner] = useState(true)
  
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -36,7 +37,7 @@ const MidSection = () => {
   ]
 
   return (
-    <div className="flex flex-col pb-32 items-center pt-14 bg-[#F7F9FC] dark:bg-[#160744] w-full" >
+    <div className="flex flex-col  items-center pt-14 bg-[#F7F9FC] dark:bg-[#160744] w-full" >
       {/* <div className="h-[450px]   bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8]  rotate-[-3deg] w-[130%] mt-8 mx-[-100px] overflow-hidden absolute" /> */}
       {/* <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8] "> */}
       <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  ">
@@ -44,7 +45,7 @@ const MidSection = () => {
         <button className="my-5 text-[12px] font-[all-round-gothic] text-[#4965D8] flex items-center gap-1">FIND HOW<img src="img/icon-arrow-R.svg" className="h-4" /></button>
         <div className="flex lg:flex-row flex-col gap-3 mt-5">
 
-          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8] ">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8] ">
             <img className="h-[70px]" src="img/icon-get-your-pass.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">1</p>
@@ -53,7 +54,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Win the daily auction to receive the Founderz pass and have access to the capsule.</p>
           </div>
 
-          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-create-your-nft.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">2</p>
@@ -62,7 +63,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Access the capsule, the restricted area where you can customize your 2D avatar NFT.</p>
           </div>
 
-          <div className="border h-[230px] rounded-3xl p-5 w-[260px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-become-a-founderz.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">3</p>
@@ -260,14 +261,15 @@ const MidSection = () => {
       </div>
 
       <Footer />
-      <div className="w-11/12 p-2 hidden  max-w-[1200px] gap-8 font-[all-round-gothic] items-center h-20 bg-gradient-to-r md:flex justify-center from-[#4965D8] via-[#F7F9FC] to-[#4965D8] fixed bottom-4 z-[100] rounded-2xl">
+      {showBanner && <div className="w-11/12 p-2 hidden  max-w-[1200px] gap-8 font-[all-round-gothic] items-center h-20 bg-gradient-to-r md:flex justify-center from-[#4965D8] via-[#F7F9FC] to-[#4965D8] fixed bottom-4 z-[100] rounded-2xl">
+        <img src="img/close_icon.png" className=" absolute h-4 right-4 top-3" alt="close" onClick={() => setShowBanner(false)}/>
         <p className="w-[250px] text-[#17055E] text-xl font-[800]"><span className="text-[#F7F9FC]">The final version</span> of FounderzDAO is coming!</p>
         <div className='text-[#160744]'>
           <p className="text-[12px] font-[500]  text-center">The update will arrive within:</p>
           <div className="border rounded-3xl border-[#4965D8] py-2 px-3 font-[700]">32<span className="text-[12px]"> Days</span> | 10<span className="text-[12px]"> Hours</span> | 30<span className="text-[12px]"> Minutes</span></div>
         </div>
         <p className="w-[250px] text-[#4965D8] font-[500] text-sm">Learn more about the update</p>
-      </div>
+      </div>}
     </div>
   );
 }
