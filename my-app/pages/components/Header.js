@@ -28,7 +28,7 @@ function Header() {
   };
   return (
     <>
-      <nav className="flex justify-between md:justify-evenly dark:text-white items-center lg:px-4 px-2">
+      <nav className="flex justify-between md:justify-evenly dark:text-white items-center lg:px-4 pt-[10px] md:pt-[31px] lg:pt-[61px] px-2">
         <div className="flex mx-1 my-3 sm:m-3 gap-5 items-center">
           {/* <ThemeToggler /> */}
           <button onClick={ () => { router.push("/")}}>

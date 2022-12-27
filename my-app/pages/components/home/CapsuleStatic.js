@@ -22,12 +22,12 @@ export default function CapsuleStatic() {
       <div className='w-full h-px bg-gradient-to-r from-[#16074401]  via-[#4966d860] to-[#16074401] dark:from-[#160744]  dark:via-[#4965D8] dark:to-[#160744]' />
 
       <div className="flex flex-col items-center relative overflow-hidden">
-        <img src="img/shape-background-7.png" className=" hidden lg:block absolute -left-4 top-7 animate-bounce" />
-        <img src="img/shape-background-6.png" className=" hidden lg:block absolute right-24 top-36 animate-bounce" />
-        <img src="img/shape-background-3.png" className=" hidden lg:block absolute -right-4 top-2/4 animate-bounce" />
-        <img src="img/shape-background-4.png" className=" hidden lg:block absolute left-36 top-2/3 animate-bounce" />
-        <img src="img/shape-background-2.png" className=" hidden lg:block absolute left-16 bottom-16 animate-bounce" />
-        <img src="img/shape-background-1.png" className=" hidden lg:block absolute right-16 -bottom-14 animate-bounce" />
+        <img src="img/shape-background-7.png" className=" hidden lg:block absolute -left-4 top-7" />
+        <img src="img/shape-background-6.png" className=" hidden lg:block absolute right-24 top-36" />
+        <img src="img/shape-background-3.png" className=" hidden lg:block absolute -right-4 top-2/4" />
+        <img src="img/shape-background-4.png" className=" hidden lg:block absolute left-36 top-2/3" />
+        <img src="img/shape-background-2.png" className=" hidden lg:block absolute left-16 bottom-16" />
+        <img src="img/shape-background-1.png" className=" hidden lg:block absolute right-16 -bottom-14" />
 
 
         <div className="w-7/12 sm:w-5/12 text-center my-6">
@@ -38,21 +38,21 @@ export default function CapsuleStatic() {
           <div className="flex flex-col lg:flex-row lg:justify-between w-full  items-center ">
             <img className="lg:order-2 w-[300px]" src='/img/1-Cyberpunk.png' />
             <div className=" lg:w-6/12 w-10/12">
-              <h3 className="text-[#4965D8] text-xl font-bold font-[all-round-gothic]">Daily Mint</h3>
+              <h3 className="text-[#4965D8] text-3xl md:text-[35px] font-bold font-[all-round-gothic]">Daily Mint</h3>
               <p className="text-[#8094B7]">Funds generated from the daily auctions flow into the treasury pool managed by the Founderz Members.</p>
             </div>
           </div>
           <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center ">
             <img className="order-1  w-[300px]" src='/img/22-High-Tech.png' />
             <div className="order-2 lg:w-6/12 w-10/12">
-              <h3 className="text-[#4965D8] text-xl font-bold font-[all-round-gothic]">Web3 Startups</h3>
+              <h3 className="text-[#4965D8] text-3xl md:text-[35px] font-bold font-[all-round-gothic]">Web3 Startups</h3>
               <p className="text-[#8094B7]">Treasury pool funds are used to finance the creation of web3 startups through Founderz proposals.</p>
             </div>
           </div>
           <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center ">
             <img className="lg:order-2  w-[300px]" src='/img/21-Cyberspace.png' />
             <div className=" lg:w-6/12 w-10/12">
-              <h3 className="text-[#4965D8] text-xl font-bold font-[all-round-gothic]">Community Bounties</h3>
+              <h3 className="text-[#4965D8] text-3xl md:text-[35px] font-bold font-[all-round-gothic]">Community Bounties</h3>
               <p className="text-[#8094B7]">Founderz web3 Startups are developed by our community using Dework.</p>
             </div>
           </div>

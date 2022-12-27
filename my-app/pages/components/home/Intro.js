@@ -71,7 +71,7 @@ const Intro = () => {
           <img src="img/icon-arrow-R.svg" />
         </div>
         <div className='hidden lg:block max-w-[430px]'>
-          <p className="text-[#4965D8]">October 10, 2022</p>
+          <p className="text-[#4965D8] text-[14px]">October 10, 2022</p>
           <h2 className="font-bold my-2 text-5xl font-[all-round-gothic]" style={{ fontFamily: "" }}>
             Founderz #42
           </h2>
@@ -132,7 +132,7 @@ const Intro = () => {
     <div className=' lg:hidden bg-[#F7F9FC] dark:bg-[#160744] w-full flex justify-center pt-10'>
 
       <div className='w-11/12 max-w-[430px]'>
-          <p className="text-[#4965D8]">October 10, 2022</p>
+          <p className="text-[#4965D8] text-[14px]">October 10, 2022</p>
           <h2 className="font-bold my-2 text-3xl sm:text-5xl" style={{ fontFamily: "" }}>
             Founderz #42
           </h2>
