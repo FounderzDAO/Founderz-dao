@@ -196,6 +196,7 @@ const IntroPage = () => {
                   <div>
                     <p className="text-[#4965D8] text-sm">Action ends in</p>
                     <p className=" text-4xl">
+                      {/* Change this... */}
                       {currentBid ? currentBid.endTime._hex : 0}
                     </p>
                   </div>
@@ -239,6 +240,7 @@ const IntroPage = () => {
                     ))}
                   <p className="text-[#4965D8] underline underline-offset-2 mt-5">
                     View all bids
+                    {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
                   </p>
                 </div>
               </div>
@@ -250,7 +252,7 @@ const IntroPage = () => {
 
       <div className=" lg:hidden bg-[#F7F9FC] dark:bg-[#160744] w-full flex justify-center pt-10">
         <div className="w-11/12 max-w-[430px]">
-          <p className="text-[#4965D8]">October 10, 2022</p>
+          <p className="text-[#4965D8]"> {currentAuctionDate} </p>
           <h2
             className="font-bold my-2 text-3xl sm:text-5xl"
             style={{ fontFamily: "" }}
@@ -304,13 +306,19 @@ const IntroPage = () => {
                           <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
                           {i}
                         </p>
-                        <p className="">Ξ 3.45</p>
+                        <p className="">
+                          Ξ{" "}
+                          {currentBid
+                            ? ethers.utils.formatEther(currentBid.amount)
+                            : 0}
+                        </p>
                       </div>
                       <div className="h-[1px] bg-[#4965D8] w-full" />
                     </div>
                   ))}
                 <p className="text-[#4965D8] underline underline-offset-2 mt-5">
                   View all bids
+                  {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
                 </p>
               </div>
             </div>
