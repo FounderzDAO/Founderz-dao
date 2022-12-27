@@ -19,6 +19,7 @@
     "disable-scroll": "^0.6.0",
     "ethers": "^5.7.2",
     "flowbite": "^1.5.3",
+    "moment": "^2.29.4",
     "next": "^12.3.1",
     "next-themes": "^0.2.1",
     "nextjs-progressbar": "^0.0.14",

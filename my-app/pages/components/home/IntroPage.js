@@ -17,6 +17,7 @@ import {
   Auction_House_ABI,
   Auction_House_CONTRACT_ADDRESS,
 } from "../../constants/index.js";
+import moment from "moment";
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
 import { parse } from "@ethersproject/transactions";
@@ -37,6 +38,8 @@ const IntroPage = () => {
     },
   ];
 
+  // Current Date for auction // 
+  const currentAuctionDate = moment().format("MMMM Do YYYY");
   // Wallet and contract interaction //
   const { address, isConnected } = useAccount();
   const provider = useProvider();
@@ -44,7 +47,7 @@ const IntroPage = () => {
   const [founderzId, setFounderzId] = useState(0);
   const [auctionBids, setAuctionBids] = useState();
   const [currentBid, setCurrentBid] = useState();
-  // const [auctionTimer, setAuctionTimer] = useState();
+  const [auctionTimer, setAuctionTimer] = useState(null);
   // Error handling //
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState();
@@ -94,8 +97,26 @@ const IntroPage = () => {
     FetchAuctionBids();
   }, []);
 
+  // Test // 
+// useEffect(() => {
+//   const interval = setInterval(async () => {
+//     // Get the current auction end time from the contract
+//     const auctionEndTime = await AuctionHouseContract.auction();
+
+//     // Convert the Unix timestamp to a Date object
+//     const auctionEndDate = new Date(auctionEndTime * 1000);
+
+//     // Update the state with the current time
+//     setAuctionTimer(auctionEndDate.endTime.toString());
+//   }, 1000);
+
+//   return () => clearInterval(interval);
+// }, []);
+  // Test // 
+
   // 24h Timer to be displayed on UI //
-  // const AuctionStatusTimer = async () => {};
+  const AuctionStatusCountdownTimer = async () => {
+  };
 
   // Error handling- potential fixes for Type Error //
   // if (loading) {
@@ -149,7 +170,7 @@ const IntroPage = () => {
             <img src="img/icon-arrow-R.svg" />
           </div>
           <div className="hidden lg:block max-w-[430px]">
-            <p className="text-[#4965D8]">October 10, 2022</p>
+            <p className="text-[#4965D8]"> {currentAuctionDate} </p>
             <h2
               className="font-bold my-2 text-5xl font-[all-round-gothic]"
               style={{ fontFamily: "" }}
@@ -175,7 +196,7 @@ const IntroPage = () => {
                   <div>
                     <p className="text-[#4965D8] text-sm">Action ends in</p>
                     <p className=" text-4xl">
-                      {/* {currentBid ? currentBid.auctionTimer : 0} */}
+                      {currentBid ? currentBid.endTime._hex : 0}
                     </p>
                   </div>
                 </div>
