@@ -16,6 +16,7 @@
     "@react-three/drei": "^9.32.0",
     "@react-three/fiber": "^8.8.1",
     "babel-preset-next": "^1.4.0",
+    "dayjs": "^1.11.7",
     "disable-scroll": "^0.6.0",
     "ethers": "^5.7.2",
     "flowbite": "^1.5.3",

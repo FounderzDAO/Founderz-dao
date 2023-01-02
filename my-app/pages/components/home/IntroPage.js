@@ -8,8 +8,12 @@ import {
   useAccount,
   useProvider,
   useSigner,
-  useContract
+  useContract, 
+  useSendTransaction,
+  usePrepareSendTransaction,
+  useContractWrite
 } from "wagmi";
+// import { dayjs } from "dayjs";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Founderz_NFT_CONTRACT_ADDRESS,
@@ -17,7 +21,7 @@ import {
   Auction_House_ABI,
   Auction_House_CONTRACT_ADDRESS,
 } from "../../constants/index.js";
-import moment from "moment";
+import moment, { isMoment } from "moment";
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
 import { parse } from "@ethersproject/transactions";
@@ -38,7 +42,7 @@ const IntroPage = () => {
     },
   ];
 
-  // Current Date for auction // 
+  // Current Date for auction //
   const currentAuctionDate = moment().format("MMMM Do YYYY");
   // Wallet and contract interaction //
   const { address, isConnected } = useAccount();
@@ -47,10 +51,17 @@ const IntroPage = () => {
   const [founderzId, setFounderzId] = useState(0);
   const [auctionBids, setAuctionBids] = useState();
   const [currentBid, setCurrentBid] = useState();
-  const [auctionTimer, setAuctionTimer] = useState(null);
   // Error handling //
   // const [loading, setLoading] = useState(false);
   // const [error, setError] = useState();
+
+  // Timer //
+  // We need ref in this, because we are dealing
+  // with JS setInterval to keep track of it and
+  // stop it when needed
+  const Ref = useRef(null);
+  const [auctionTimer, setAuctionTimer] = useState("00:00:00");
+
 
   // Contract interaction //
   const AuctionHouseContract = useContract({
@@ -68,13 +79,9 @@ const IntroPage = () => {
   // Auction Interaction //
 
   // Create Bid //
-  // const CreateBid = async () => {
-  //   const bid = await AuctionHouseContract.createBid();
-  //   // useContractWrite({});
-  //   if (bid) {
-  //     console.log("Bid created");
-  //   }
-  // };
+  const CreateBid = async () => {
+    const bid = await AuctionHouseContract.createBid();
+  };
 
   // Check auction status of bids from auctionhousecontract and display //
   const AuctionStatusBids = async (id) => {
@@ -97,26 +104,78 @@ const IntroPage = () => {
     FetchAuctionBids();
   }, []);
 
-  // Test // 
-// useEffect(() => {
-//   const interval = setInterval(async () => {
-//     // Get the current auction end time from the contract
-//     const auctionEndTime = await AuctionHouseContract.auction();
-
-//     // Convert the Unix timestamp to a Date object
-//     const auctionEndDate = new Date(auctionEndTime * 1000);
-
-//     // Update the state with the current time
-//     setAuctionTimer(auctionEndDate.endTime.toString());
-//   }, 1000);
-
-//   return () => clearInterval(interval);
-// }, []);
-  // Test // 
+  // Test 1 //
+  const getTimeRemaining = (e) => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+    return {
+      total,
+      hours,
+      minutes,
+      seconds,
+    };
+  };
+  const startTimer = (e) => {
+    let { total, hours, minutes, seconds } = getTimeRemaining(e);
+    if (total >= 0) {
+      // update the timer
+      // check if less than 10 then we need to
+      // add '0' at the beginning of the variable
+      setAuctionTimer(
+        (hours > 9 ? hours : "0" + hours) +
+          ":" +
+          (minutes > 9 ? minutes : "0" + minutes) +
+          ":" +
+          (seconds > 9 ? seconds : "0" + seconds)
+      );
+    }
+  };
+  const clearTimer = (e) => {
+    // If you adjust it you should also need to
+    // adjust the Endtime formula we are about
+    // to code next
+    setAuctionTimer("24:00:00");
+    // If you try to remove this line the
+    // updating of timer Variable will be
+    // after 1000ms or 1sec
+    if (Ref.current) clearInterval(Ref.current);
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
+  const getDeadTime = () => {
+    let deadline = new Date();
+    // This is where you need to adjust if
+    // you entend to add more time
+    deadline.setSeconds(deadline.getSeconds() + 10);
+    return deadline;
+  };
+  // We can use useEffect so that when the component
+  // mount the timer will start as soon as possible
+  // We put empty array to act as componentDid
+  // mount only
+  useEffect(() => {
+    clearTimer(getDeadTime());
+  }, []);
+  // Another way to call the clearTimer() to start
+  // the countdown is via action event from the
+  // button first we create function to be called
+  // by the button
+  const onClickReset = () => {
+    clearTimer(getDeadTime());
+  };
+  // Test 2 //
 
   // 24h Timer to be displayed on UI //
-  const AuctionStatusCountdownTimer = async () => {
-  };
+  // const AuctionStatusCountdownTimer = async () => {
+  //   const auctionEndTime = await AuctionHouseContract.auction();
+  //   const auctionEndDate = new Date(auctionEndTime.endTime * 1000);
+  //   const timeLeft = dayjs(auctionEndDate).fromNow();
+  //   setAuctionTimer(timeLeft);
+  // };
 
   // Error handling- potential fixes for Type Error //
   // if (loading) {
@@ -197,7 +256,7 @@ const IntroPage = () => {
                     <p className="text-[#4965D8] text-sm">Action ends in</p>
                     <p className=" text-4xl">
                       {/* Change this... */}
-                      {currentBid ? currentBid.endTime._hex : 0}
+                      {/* {auctionTimer ? parseInt(auctionTimer.endTime._hex) : 0} */}
                     </p>
                   </div>
                 </div>
@@ -214,7 +273,7 @@ const IntroPage = () => {
                       <img
                         className="h-5 ml-1"
                         src="img/icon-arrow.svg"
-                        // onClick={CreateBid}
+                        onClick={CreateBid}
                       />
                     </button>
                   </div>
