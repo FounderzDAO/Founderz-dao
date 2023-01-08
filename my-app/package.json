@@ -29,6 +29,7 @@
     "react-icons": "^4.4.0",
     "react-material-ui-carousel": "^3.4.2",
     "three": "^0.144.0",
+    "truncate-eth-address": "^1.0.2",
     "wagmi": "^0.9.4"
   },
   "devDependencies": {
