@@ -14,6 +14,7 @@ import {
   useContractWrite
 } from "wagmi";
 import React, { useEffect, useRef, useState } from "react";
+import truncateEthAddress from 'truncate-eth-address'
 import {
   Founderz_NFT_CONTRACT_ADDRESS,
   Founderz_NFT_ABI,
@@ -24,6 +25,7 @@ import moment from "moment";
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
 import { parse } from "@ethersproject/transactions";
+import disableScroll from 'disable-scroll';
 
 const IntroPage = () => {
   const router = useRouter();
@@ -51,6 +53,7 @@ const IntroPage = () => {
   const [auctionBids, setAuctionBids] = useState();
   // const [auctionBid, setAuctionBid] = useState();
   const [currentBid, setCurrentBid] = useState();
+  const [showAllBids, setShowAllBids] = useState(false);
   // Timer //
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
@@ -204,9 +207,9 @@ const IntroPage = () => {
                     <p className=" text-4xl">
                       Ξ
                       {currentBid
-                        ? ethers.utils.formatEther(
+                        ? parseFloat(ethers.utils.formatEther(
                             parseInt(currentBid.amount._hex)
-                          )
+                          ))
                         : 0}
                     </p>
                   </div>
@@ -246,22 +249,22 @@ const IntroPage = () => {
                         <div className="flex justify-between w-full my-2">
                           <p className="flex items-center">
                             <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                            {i}
+                            {truncateEthAddress(i)}
                           </p>
                           <p className="">
                             Ξ{" "}
                             {currentBid
-                              ? ethers.utils.formatEther(currentBid.amount)
+                              ? parseFloat(ethers.utils.formatEther(currentBid.amount))
                               : 0}
                           </p>
                         </div>
                         <div className="h-[1px] bg-[#4965D8] w-full" />
                       </div>
                     ))}
-                  <p className="text-[#4965D8] underline underline-offset-2 mt-5">
+                  <a className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer" onClick={() => {setShowAllBids(true)}}>
                     View all bids
                     {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
-                  </p>
+                  </a>
                 </div>
               </div>
             </div>
@@ -290,7 +293,9 @@ const IntroPage = () => {
                   <p className=" text-2xl sm:text-4xl">
                     Ξ{" "}
                     {currentBid
-                      ? ethers.utils.formatEther(currentBid.amount)
+                      ? parseFloat(ethers.utils.formatEther(
+                        parseInt(currentBid.amount._hex)
+                      ))
                       : 0}
                   </p>
                 </div>
@@ -324,12 +329,12 @@ const IntroPage = () => {
                       <div className="flex justify-between w-full my-2">
                         <p className="flex items-center">
                           <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                          {i}
+                          {truncateEthAddress(i)}
                         </p>
                         <p className="">
                           Ξ{" "}
                           {currentBid
-                            ? ethers.utils.formatEther(currentBid.amount)
+                            ? parseFloat(ethers.utils.formatEther(currentBid.amount))
                             : 0}
                         </p>
                       </div>
@@ -337,14 +342,55 @@ const IntroPage = () => {
                     </div>
                   ))}
                 <p className="text-[#4965D8] underline underline-offset-2 mt-5">
-                  View all bids
-                  {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
+                  <a className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer" onClick={() => {setShowAllBids(true)}}>
+                    View all bids
+                    {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
+                  </a>
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {showAllBids && <div className="fixed top-0 overflow-hidden z-[1000]  h-[100vh] w-[100vw] bg-[#00000020] flex items-center justify-center">
+          <div className="bg-[#F7F9FC] border border-[#8094B7] rounded-2xl py-3 px-3 w-[340px] md:w-[450px]">
+            <div className="flex  justify-between">
+              <div>
+                <p className="text-[#4965D8] text-[10px]"> {currentAuctionDate} </p>
+                <h2 className="font-bold  text-xl text-[#160744] font-[all-round-gothic]">
+                  Founderz #{currentBid ? parseInt(currentBid.founderId._hex) : 0}
+                </h2>
+              </div>
+              <img src="img/icon-close.svg" className='h-3 mt-2 cursor-pointer' onClick={() => {setShowAllBids(false)}}/>
+            </div>
+            <div className="w-[100%] p-2 bg-[#E0E5ED] rounded-xl h-[180px] overflow-auto">
+
+              {auctionBids &&
+                auctionBids.map((i) => (
+                  <div className="w-full bg-white text-[#160744] rounded-lg mb-2 p-1">
+                    <div className="flex justify-between w-full my-2 text-[14px]">
+                      <p className="flex items-center">
+                        <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
+                        {truncateEthAddress(i)}
+                      </p>
+                      <p className="">
+                        Ξ{" "}
+                        {currentBid
+                          ? parseFloat(ethers.utils.formatEther(currentBid.amount))
+                          : 0}
+                      </p>
+                    </div>
+                  </div>
+              ))}
+
+
+
+
+
+
+            </div>
+          </div>
+      </div>}
     </>
   );
 };
