@@ -87,7 +87,7 @@ const IntroPage = () => {
   const settledAuction = async () => {
     const auctionSettled = await AuctionHouseContract.auction(settled);
     if (auctionSettled.settled == true) {
-       setAuctionTimer("00:00:00");
+       setAuctionTimer("24:00:00");
     }
   };
  // To set the state (countdown) to be in progress //
