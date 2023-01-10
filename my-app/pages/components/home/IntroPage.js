@@ -21,7 +21,6 @@ import {
   Auction_House_CONTRACT_ADDRESS,
 } from "../../constants/index.js";
 import moment from "moment";
-import { Countdown } from "countdown-js";
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
 import { parse } from "@ethersproject/transactions";
@@ -81,15 +80,21 @@ const IntroPage = () => {
   //   setAuctionBid(parseInt(bid.amount._hex));
   //   console.log(amount);
   //  };
-
+// Start of Timer //
   const settledAuction = async () => {
-    const auctionSettled = await AuctionHouseContract.auction();
+    const auctionSettled = await AuctionHouseContract.auction(settled);
     if (auctionSettled.settled == true) {
        setAuctionTimer("00:00:00");
     }
   };
-
-  // or call endTime == true then restart timer 
+ // To set the state (countdown) to be in progress //
+  const auctionRunning = async () => {
+    const auctionRunning = await AuctionHouseContract.auction(settled);
+    if (auctionRunning.settled == false) {
+       setAuctionTimer("In Progress");
+    }
+  };
+  // End of Timer //
 
   // Check auction status of bids from auctionhousecontract and display //
   const AuctionStatusBids = async (id) => {
@@ -120,20 +125,22 @@ const IntroPage = () => {
   // Test 1 //
   // 24h Timer to be displayed on UI //
   const startTimer = () => {
-    const endTime = new Date(auctionTimer).getTime();
-    const now = new Date().getTime();
-    const distance = endTime - now;
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    setAuctionTimer(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-    if (distance < 0) {
-      clearInterval(Ref.current);
-      setAuctionTimer("Auction Ended");
-    }
+    Ref.current = setInterval(() => {
+      // const auctionTime = AuctionHouseContract.auction();
+      // const auctionEndTime = auctionTime.endTime;
+      // const auctionStartTime = auctionTime.startTime;
+      // console.log(auctionStartTime);
+      // const distance = auctionEndTime - auctionStartTime;
+      const distance = 86400;
+      const hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
+      const minutes = Math.floor((distance % (60 * 60)) / 60);
+      const seconds = Math.floor(distance % 60);
+      setAuctionTimer(`${hours}h ${minutes}m ${seconds}s`);
+      if (distance < 0) {
+        clearInterval(Ref.current);
+        setAuctionTimer("Auction Won: Next Auction Begins");
+      }
+    }, 1000);
   };
 
 
