@@ -22,6 +22,8 @@ import {
   Auction_House_CONTRACT_ADDRESS,
 } from "../../constants/index.js";
 import moment from "moment";
+//import { Countdown } from "countdown-js";
+
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
 import { parse } from "@ethersproject/transactions";
@@ -58,6 +60,7 @@ const IntroPage = () => {
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
   // stop it when needed
+
   // test //
   // const startTimeRef = useRef(Date.now());
   // test //
@@ -85,18 +88,29 @@ const IntroPage = () => {
   //   console.log(amount);
   //  };
 
+  const settledAuction = async () => {
+    const auctionSettled = await AuctionHouseContract.auction();
+    console.log("test", auctionSettled)
+    if (auctionSettled.settled == true) {
+       setAuctionTimer("00:00:00");
+    }
+    startTimer()
+  };
+
+  // or call endTime == true then restart timer 
+
   // Check auction status of bids from auctionhousecontract and display //
   const AuctionStatusBids = async (id) => {
     const auctionStatusBids = await AuctionHouseContract.getBiddersList(id);
-    console.log(auctionStatusBids);
+    // console.log(auctionStatusBids);
     setAuctionBids(auctionStatusBids);
   };
 
   // Fetch Auction status of Nft Id, And Id of bid status, and current bid //
   const FetchAuctionBids = async () => {
     const auction = await AuctionHouseContract.auction();
-    console.log(auction.founderId);
-    console.log(auction);
+    // console.log(auction.founderId);
+    // console.log(auction);
     setFounderzId(parseInt(auction.founderId._hex));
     AuctionStatusBids(auction.founderId);
     setCurrentBid(auction);
@@ -106,30 +120,58 @@ const IntroPage = () => {
     FetchAuctionBids();
     // CreateBid();
   }, []);
+  
+  useEffect(() => {
+    settledAuction();
+  }, []);
+    
+  // Test 1 //
+  // 24h Timer to be displayed on UI //
+  const startTimer = () => {
+
+    const endTime = new Date("Jan 12, 2023 09:37:25").getTime();
+
+    setInterval(function() {
+      const now = new Date().getTime();
+      const distance = endTime - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      setAuctionTimer(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      if (distance < 0) {
+        clearInterval(Ref.current);
+        setAuctionTimer("Auction Ended");
+      }
+    }, 1000)
+    
+  };
 
   // Fetch Endtime of auction and format it // 
   // refresh page every 10 seconds to update time that is being fetch and formatted from endTime //
 
   // 24h Timer to be displayed on UI //
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setAuctionTimer((auctionTimer) => auctionTimer - 1);
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+ // useEffect(() => {
+//    const intervalId = setInterval(() => {
+ //     setAuctionTimer((auctionTimer) => auctionTimer - 1);
+ //   }, 1000);
+  //  return () => clearInterval(intervalId);
+ // }, []);
 
-  useEffect(() => {
-    if (auctionTimer === 0) {
-      setAuctionTimer(24 * 60 * 60);
-    }
-  }, [auctionTimer]);
+ // useEffect(() => {
+ //   if (auctionTimer === 0) {
+ //     setAuctionTimer(24 * 60 * 60);
+ //   }
+//  }, [auctionTimer]);
   // Format time to display on UI //
-  const formatTime = (time) => {
-    const hours = Math.floor(time / 3600);
-    const minutes = Math.floor((time % 3600) / 60);
-    const seconds = time % 60;
-    return `${hours} : ${minutes} : ${seconds}`;
-  };
+ // const formatTime = (time) => {
+//    const hours = Math.floor(time / 3600);
+ //   const minutes = Math.floor((time % 3600) / 60);
+//    const seconds = time % 60;
+ //   return `${hours} : ${minutes} : ${seconds}`;
+//  };
 
   // Logic to extend time if bid in last ten mins //
 
@@ -213,7 +255,14 @@ const IntroPage = () => {
                   </div>
                   <div>
                     <p className="text-[#4965D8] text-sm">Action ends in</p>
+                    <p className=" text-4xl">
+                      {/* Change this... */}
+                      {/* {auctionTimer ? parseInt(auctionTimer.endTime._hex) : 0} */}
+                      {auctionTimer}
+                    </p>
+
                     <p className=" text-4xl">{formatTime(auctionTimer)}</p>
+
                   </div>
                 </div>
                 <div>
@@ -303,9 +352,13 @@ const IntroPage = () => {
                 </div>
                 <div>
                   <p className="text-[#4965D8] text-sm">Action ends in</p>
+
+                  <p className=" text-2xl sm:text-4xl">{auctionTimer}</p>
+
                   <p className=" text-2xl sm:text-4xl">
                     {formatTime(auctionTimer)}
                   </p>
+
                 </div>
               </div>
               <div>
