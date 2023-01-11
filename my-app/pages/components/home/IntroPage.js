@@ -107,6 +107,9 @@ const IntroPage = () => {
     // CreateBid();
   }, []);
 
+  // Fetch Endtime of auction and format it // 
+  // refresh page every 10 seconds to update time that is being fetch and formatted from endTime //
+
   // 24h Timer to be displayed on UI //
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -127,6 +130,8 @@ const IntroPage = () => {
     const seconds = time % 60;
     return `${hours} : ${minutes} : ${seconds}`;
   };
+
+  // Logic to extend time if bid in last ten mins //
 
   // Auction Timer reset logic //
   // Once auction reads settled as true, timer will reset to 00:00:00 for next auction //
