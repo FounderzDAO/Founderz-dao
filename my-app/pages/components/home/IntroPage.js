@@ -13,7 +13,6 @@ import {
   usePrepareSendTransaction,
   useContractWrite
 } from "wagmi";
-// import { dayjs } from "dayjs";
 import React, { useEffect, useRef, useState } from "react";
 import truncateEthAddress from 'truncate-eth-address'
 import {
@@ -22,7 +21,8 @@ import {
   Auction_House_ABI,
   Auction_House_CONTRACT_ADDRESS,
 } from "../../constants/index.js";
-import moment, { isMoment } from "moment";
+import moment from "moment";
+import { Countdown } from "countdown-js";
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
 import { parse } from "@ethersproject/transactions";
@@ -52,19 +52,15 @@ const IntroPage = () => {
   const { data: signer } = useSigner();
   const [founderzId, setFounderzId] = useState(0);
   const [auctionBids, setAuctionBids] = useState();
+  // const [auctionBid, setAuctionBid] = useState();
   const [currentBid, setCurrentBid] = useState();
   const [showAllBids, setShowAllBids] = useState(false);
-  // Error handling //
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState();
-
   // Timer //
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
   // stop it when needed
   const Ref = useRef(null);
   const [auctionTimer, setAuctionTimer] = useState("00:00:00");
-
 
   // Contract interaction //
   const AuctionHouseContract = useContract({
@@ -82,22 +78,36 @@ const IntroPage = () => {
   // Auction Interaction //
 
   // Create Bid //
-  const CreateBid = async () => {
-    const bid = await AuctionHouseContract.createBid();
+  // const CreateBid = async () => {
+  //   const bid = await AuctionHouseContract.createBid(signer);
+  //   console.log(bid);
+  //   setAuctionBid(parseInt(bid.amount._hex));
+  //   console.log(amount);
+  //  };
+
+  const settledAuction = async () => {
+    const auctionSettled = await AuctionHouseContract.auction();
+    console.log("test", auctionSettled)
+    if (auctionSettled.settled == true) {
+       setAuctionTimer("00:00:00");
+    }
+    startTimer()
   };
+
+  // or call endTime == true then restart timer 
 
   // Check auction status of bids from auctionhousecontract and display //
   const AuctionStatusBids = async (id) => {
     const auctionStatusBids = await AuctionHouseContract.getBiddersList(id);
-    console.log(auctionStatusBids);
+    // console.log(auctionStatusBids);
     setAuctionBids(auctionStatusBids);
   };
 
   // Fetch Auction status of Nft Id, And Id of bid status, and current bid //
   const FetchAuctionBids = async () => {
     const auction = await AuctionHouseContract.auction();
-    console.log(auction.founderId);
-    console.log(auction);
+    // console.log(auction.founderId);
+    // console.log(auction);
     setFounderzId(parseInt(auction.founderId._hex));
     AuctionStatusBids(auction.founderId);
     setCurrentBid(auction);
@@ -105,89 +115,37 @@ const IntroPage = () => {
 
   useEffect(() => {
     FetchAuctionBids();
+    // CreateBid();
   }, []);
-
-  // Test 1 //
-  const getTimeRemaining = (e) => {
-    const total = Date.parse(e) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-    return {
-      total,
-      hours,
-      minutes,
-      seconds,
-    };
-  };
-  const startTimer = (e) => {
-    let { total, hours, minutes, seconds } = getTimeRemaining(e);
-    if (total >= 0) {
-      // update the timer
-      // check if less than 10 then we need to
-      // add '0' at the beginning of the variable
-      setAuctionTimer(
-        (hours > 9 ? hours : "0" + hours) +
-          ":" +
-          (minutes > 9 ? minutes : "0" + minutes) +
-          ":" +
-          (seconds > 9 ? seconds : "0" + seconds)
-      );
-    }
-  };
-  const clearTimer = (e) => {
-    // If you adjust it you should also need to
-    // adjust the Endtime formula we are about
-    // to code next
-    setAuctionTimer("24:00:00");
-    // If you try to remove this line the
-    // updating of timer Variable will be
-    // after 1000ms or 1sec
-    if (Ref.current) clearInterval(Ref.current);
-    const id = setInterval(() => {
-      startTimer(e);
-    }, 1000);
-    Ref.current = id;
-  };
-  const getDeadTime = () => {
-    let deadline = new Date();
-    // This is where you need to adjust if
-    // you entend to add more time
-    deadline.setSeconds(deadline.getSeconds() + 10);
-    return deadline;
-  };
-  // We can use useEffect so that when the component
-  // mount the timer will start as soon as possible
-  // We put empty array to act as componentDid
-  // mount only
+  
   useEffect(() => {
-    clearTimer(getDeadTime());
+    settledAuction();
   }, []);
-  // Another way to call the clearTimer() to start
-  // the countdown is via action event from the
-  // button first we create function to be called
-  // by the button
-  const onClickReset = () => {
-    clearTimer(getDeadTime());
-  };
-  // Test 2 //
-
+    
+  // Test 1 //
   // 24h Timer to be displayed on UI //
-  // const AuctionStatusCountdownTimer = async () => {
-  //   const auctionEndTime = await AuctionHouseContract.auction();
-  //   const auctionEndDate = new Date(auctionEndTime.endTime * 1000);
-  //   const timeLeft = dayjs(auctionEndDate).fromNow();
-  //   setAuctionTimer(timeLeft);
-  // };
+  const startTimer = () => {
 
-  // Error handling- potential fixes for Type Error //
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
+    const endTime = new Date("Jan 12, 2023 09:37:25").getTime();
 
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
+    setInterval(function() {
+      const now = new Date().getTime();
+      const distance = endTime - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      setAuctionTimer(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      if (distance < 0) {
+        clearInterval(Ref.current);
+        setAuctionTimer("Auction Ended");
+      }
+    }, 1000)
+    
+  };
+
 
   return (
     <>
@@ -225,6 +183,7 @@ const IntroPage = () => {
           </Carousel> */}
             </div>
             <img src="img/icon-arrow-L.svg" />
+            {/* Map this arrow to display past ids and other data (auction call) */}
             <div className=" w-7/12 sm:w-full flex flex-col items-center">
               <img src="img/founderzpass.png" />
               <img src="img/founderzstand.png" />
@@ -260,6 +219,7 @@ const IntroPage = () => {
                     <p className=" text-4xl">
                       {/* Change this... */}
                       {/* {auctionTimer ? parseInt(auctionTimer.endTime._hex) : 0} */}
+                      {auctionTimer}
                     </p>
                   </div>
                 </div>
@@ -267,6 +227,7 @@ const IntroPage = () => {
                   <p className="text-[#4965D8] text-sm">PLACE BID</p>
                   <div className="flex justify-between my-2">
                     <input
+                      // {...setAuctionBid}
                       type="text"
                       placeholder="Insert your bid"
                       className=" text-black rounded-2xl w-8/12"
@@ -276,7 +237,7 @@ const IntroPage = () => {
                       <img
                         className="h-5 ml-1"
                         src="img/icon-arrow.svg"
-                        onClick={CreateBid}
+                        // onClick={CreateBid(auctionBid)}
                       />
                     </button>
                   </div>
@@ -340,7 +301,7 @@ const IntroPage = () => {
                 </div>
                 <div>
                   <p className="text-[#4965D8] text-sm">Action ends in</p>
-                  <p className=" text-2xl sm:text-4xl">22h 44m 21s</p>
+                  <p className=" text-2xl sm:text-4xl">{auctionTimer}</p>
                 </div>
               </div>
               <div>
