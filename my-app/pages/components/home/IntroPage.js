@@ -96,7 +96,6 @@ const IntroPage = () => {
   const FetchAuctionBids = async () => {
     const auction = await AuctionHouseContract.auction();
     console.log(auction.founderId);
-    console.log(auction);
     setFounderzId(parseInt(auction.founderId._hex));
     AuctionStatusBids(auction.founderId);
     setCurrentAuction(auction);
@@ -105,7 +104,6 @@ const IntroPage = () => {
 
   useEffect(() => {
     FetchAuctionBids();
-    // CreateBid();
   }, []);
 
   // const winningBid = async () => {
@@ -122,13 +120,8 @@ const IntroPage = () => {
       handleAuctionTime();
     }, 1000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [auctionEndTime]);
 
-  // useEffect(() => {
-  //   if (auctionTimer === 0) {
-  //     setAuctionTimer(24 * 60 * 60);
-  //   }
-  // }, [auctionTimer]);
   // Format time to display on UI //
   const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
@@ -141,7 +134,9 @@ const IntroPage = () => {
     return Math.floor(Date.now() / 1000);
   }
 
-  const handleAuctionTime = async() => {
+  const handleAuctionTime = () => {
+  //  if (!currentAuction) return;
+  //  const endAuctionTime = parseInt(currentAuction.endTime._hex);
    const currentTime = getTimestampInSeconds();
    const remainingTime = auctionEndTime - currentTime;
    setAuctionTimer(remainingTime); 
