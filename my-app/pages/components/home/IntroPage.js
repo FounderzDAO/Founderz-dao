@@ -51,9 +51,10 @@ const IntroPage = () => {
   const { data: signer } = useSigner();
   const [founderzId, setFounderzId] = useState(0);
   const [auctionBids, setAuctionBids] = useState();
-  // const [auctionBid, setAuctionBid] = useState();
-  const [currentBid, setCurrentBid] = useState();
+  const [currentAuction, setCurrentAuction] = useState();
   const [showAllBids, setShowAllBids] = useState(false);
+  const [bidAmount, setBidAmount] = useState();
+  const [auctionEndTime, setAuctionEndTime] = useState();
   // Timer //
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
@@ -78,12 +79,11 @@ const IntroPage = () => {
   // Auction Interaction //
 
   // Create Bid //
-  // const CreateBid = async () => {
-  //   const bid = await AuctionHouseContract.createBid(signer);
-  //   console.log(bid);
-  //   setAuctionBid(parseInt(bid.amount._hex));
-  //   console.log(amount);
-  //  };
+  const CreateBid = async () => {
+    const amountInWei = ethers.utils.parseEther(bidAmount);
+    const bid = await AuctionHouseContract.createBid(founderzId,{value: amountInWei});
+    await bid.wait();
+   };
 
   // Check auction status of bids from auctionhousecontract and display //
   const AuctionStatusBids = async (id) => {
@@ -99,7 +99,8 @@ const IntroPage = () => {
     console.log(auction);
     setFounderzId(parseInt(auction.founderId._hex));
     AuctionStatusBids(auction.founderId);
-    setCurrentBid(auction);
+    setCurrentAuction(auction);
+    setAuctionEndTime(parseInt(auction.endTime._hex));
   };
 
   useEffect(() => {
@@ -107,28 +108,43 @@ const IntroPage = () => {
     // CreateBid();
   }, []);
 
+  // const winningBid = async () => {
+  //   const winningBid = await AuctionHouseContract.AuctionSettled();
+  //   console.log(winningBid);
+  // };
+
   // Fetch Endtime of auction and format it // 
-  // refresh page every 10 seconds to update time that is being fetch and formatted from endTime //
+  // refresh page every 10 seconds to update time that is being fetched and formatted from endTime //
 
   // 24h Timer to be displayed on UI //
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setAuctionTimer((auctionTimer) => auctionTimer - 1);
+      handleAuctionTime();
     }, 1000);
     return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    if (auctionTimer === 0) {
-      setAuctionTimer(24 * 60 * 60);
-    }
-  }, [auctionTimer]);
+  // useEffect(() => {
+  //   if (auctionTimer === 0) {
+  //     setAuctionTimer(24 * 60 * 60);
+  //   }
+  // }, [auctionTimer]);
   // Format time to display on UI //
   const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = time % 60;
     return `${hours} : ${minutes} : ${seconds}`;
+  };
+
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
+
+  const handleAuctionTime = async() => {
+   const currentTime = getTimestampInSeconds();
+   const remainingTime = auctionEndTime - currentTime;
+   setAuctionTimer(remainingTime); 
   };
 
   // Logic to extend time if bid in last ten mins //
@@ -192,7 +208,8 @@ const IntroPage = () => {
               className="font-bold my-2 text-5xl font-[all-round-gothic]"
               style={{ fontFamily: "" }}
             >
-              Founderz #{currentBid ? parseInt(currentBid.founderId._hex) : 0}
+              Founderz #
+              {currentAuction ? parseInt(currentAuction.founderId._hex) : 0}
             </h2>
 
             <div className=" bg-gradient-to-b from-[#4965D8] rounded-2xl p-px">
@@ -202,12 +219,10 @@ const IntroPage = () => {
                     <p className="text-[#4965D8] text-sm">Current bid</p>
                     <p className=" text-4xl">
                       Ξ
-                      {currentBid
-                        ? parseFloat(
-                            ethers.utils.formatEther(
-                              parseInt(currentBid.amount._hex)
-                            )
-                          )
+                      {currentAuction
+                        ? ethers.utils
+                            .formatEther(currentAuction.amount._hex)
+                            .slice(0, 7)
                         : 0}
                     </p>
                   </div>
@@ -220,7 +235,7 @@ const IntroPage = () => {
                   <p className="text-[#4965D8] text-sm">PLACE BID</p>
                   <div className="flex justify-between my-2">
                     <input
-                      // {...setAuctionBid}
+                      onChange={(e) => setBidAmount(e.target.value)}
                       type="text"
                       placeholder="Insert your bid"
                       className=" text-black rounded-2xl w-8/12"
@@ -230,7 +245,7 @@ const IntroPage = () => {
                       <img
                         className="h-5 ml-1"
                         src="img/icon-arrow.svg"
-                        // onClick={CreateBid(auctionBid)}
+                        onClick={() => CreateBid()}
                       />
                     </button>
                   </div>
@@ -246,10 +261,10 @@ const IntroPage = () => {
                           </p>
                           <p className="">
                             Ξ{" "}
-                            {currentBid
-                              ? parseFloat(
-                                  ethers.utils.formatEther(currentBid.amount)
-                                )
+                            {currentAuction
+                              ? ethers.utils
+                                  .formatEther(currentAuction.amount._hex)
+                                  .slice(0, 7)
                               : 0}
                           </p>
                         </div>
@@ -280,24 +295,23 @@ const IntroPage = () => {
             className="font-bold my-2 text-3xl sm:text-5xl"
             style={{ fontFamily: "" }}
           >
-            Founderz #{currentBid ? parseInt(currentBid.founderId._hex) : 0}
+            Founderz #
+            {currentAuction ? parseInt(currentAuction.founderId._hex) : 0}
           </h2>
           {/* Tools */}
-          {/* {currentBid ? parseInt(currentBid.endTime._hex) : 0}
-          {currentBid ? parseInt(currentBid.startTime._hex) : 0} */}
+          {/* {currentAuction ? parseInt(currentAuction.endTime._hex) : 0}
+          {currentAuction ? parseInt(currentAuction.startTime._hex) : 0} */}
           <div className=" bg-gradient-to-b from-[#4965D8] rounded-2xl p-px">
             <div className="p-3 sm:p-5 rounded-2xl bg-[#F7F9FC] dark:bg-[#160744]">
               <div className="flex justify-between  my-4 w-full">
                 <div>
                   <p className="text-[#4965D8] text-sm">Current bid</p>
                   <p className=" text-2xl sm:text-4xl">
-                    Ξ{" "}
-                    {currentBid
-                      ? parseFloat(
-                          ethers.utils.formatEther(
-                            parseInt(currentBid.amount._hex)
-                          )
-                        )
+                    Ξ
+                    {currentAuction
+                      ? ethers.utils
+                          .formatEther(currentAuction.amount._hex)
+                          .slice(0, 7)
                       : 0}
                   </p>
                 </div>
@@ -336,11 +350,11 @@ const IntroPage = () => {
                           {truncateEthAddress(i)}
                         </p>
                         <p className="">
-                          Ξ{" "}
-                          {currentBid
-                            ? parseFloat(
-                                ethers.utils.formatEther(currentBid.amount)
-                              )
+                          Ξ
+                          {currentAuction
+                            ? ethers.utils
+                                .formatEther(currentAuction.amount._hex)
+                                .slice(0, 7)
                             : 0}
                         </p>
                       </div>
@@ -374,7 +388,7 @@ const IntroPage = () => {
                 </p>
                 <h2 className="font-bold  text-xl text-[#160744] font-[all-round-gothic]">
                   Founderz #
-                  {currentBid ? parseInt(currentBid.founderId._hex) : 0}
+                  {currentAuction ? parseInt(currentAuction.founderId._hex) : 0}
                 </h2>
               </div>
               <img
@@ -396,9 +410,9 @@ const IntroPage = () => {
                       </p>
                       <p className="">
                         Ξ{" "}
-                        {currentBid
+                        {currentAuction
                           ? parseFloat(
-                              ethers.utils.formatEther(currentBid.amount)
+                              ethers.utils.formatEther(currentAuction.amount)
                             )
                           : 0}
                       </p>
