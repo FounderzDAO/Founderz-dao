@@ -8,13 +8,13 @@ import {
   useAccount,
   useProvider,
   useSigner,
-  useContract, 
+  useContract,
   useSendTransaction,
   usePrepareSendTransaction,
-  useContractWrite
+  useContractWrite,
 } from "wagmi";
 import React, { useEffect, useRef, useState } from "react";
-import truncateEthAddress from 'truncate-eth-address'
+import truncateEthAddress from "truncate-eth-address";
 import {
   Founderz_NFT_CONTRACT_ADDRESS,
   Founderz_NFT_ABI,
@@ -22,11 +22,10 @@ import {
   Auction_House_CONTRACT_ADDRESS,
 } from "../../constants/index.js";
 import moment from "moment";
-import { Countdown } from "countdown-js";
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
 import { parse } from "@ethersproject/transactions";
-import disableScroll from 'disable-scroll';
+import disableScroll from "disable-scroll";
 
 const IntroPage = () => {
   const router = useRouter();
@@ -52,17 +51,19 @@ const IntroPage = () => {
   const { data: signer } = useSigner();
   const [founderzId, setFounderzId] = useState(0);
   const [auctionBids, setAuctionBids] = useState();
-  // const [auctionBid, setAuctionBid] = useState();
-  const [currentBid, setCurrentBid] = useState();
+  const [currentAuction, setCurrentAuction] = useState();
   const [showAllBids, setShowAllBids] = useState(false);
-  const [isFirst10NFT, setIsFirst10NFT] = useState(true);
+  const [bidAmount, setBidAmount] = useState();
+  const [auctionEndTime, setAuctionEndTime] = useState();
+  const [isFirst10NFT, setIsFirst10NFT] = useState(false);
   // Timer //
   // We need ref in this, because we are dealing
   // with JS setInterval to keep track of it and
   // stop it when needed
-  const Ref = useRef(null);
-  const [auctionTimer, setAuctionTimer] = useState("00:00:00");
-
+  // test //
+  // const startTimeRef = useRef(Date.now());
+  // test //
+  const [auctionTimer, setAuctionTimer] = useState(24 * 60 * 60);
   // Contract interaction //
   const AuctionHouseContract = useContract({
     address: Auction_House_CONTRACT_ADDRESS,
@@ -79,23 +80,11 @@ const IntroPage = () => {
   // Auction Interaction //
 
   // Create Bid //
-  // const CreateBid = async () => {
-  //   const bid = await AuctionHouseContract.createBid(signer);
-  //   console.log(bid);
-  //   setAuctionBid(parseInt(bid.amount._hex));
-  //   console.log(amount);
-  //  };
-
-  const settledAuction = async () => {
-    const auctionSettled = await AuctionHouseContract.auction();
-    console.log("test", auctionSettled)
-    if (auctionSettled.settled == true) {
-       setAuctionTimer("00:00:00");
-    }
-    startTimer()
-  };
-
-  // or call endTime == true then restart timer 
+  const CreateBid = async () => {
+    const amountInWei = ethers.utils.parseEther(bidAmount);
+    const bid = await AuctionHouseContract.createBid(founderzId,{value: amountInWei});
+    await bid.wait();
+   };
 
   // Check auction status of bids from auctionhousecontract and display //
   const AuctionStatusBids = async (id) => {
@@ -107,45 +96,64 @@ const IntroPage = () => {
   // Fetch Auction status of Nft Id, And Id of bid status, and current bid //
   const FetchAuctionBids = async () => {
     const auction = await AuctionHouseContract.auction();
-    // console.log(auction.founderId);
-    // console.log(auction);
+    console.log(auction.founderId);
     setFounderzId(parseInt(auction.founderId._hex));
     AuctionStatusBids(auction.founderId);
-    setCurrentBid(auction);
+    setCurrentAuction(auction);
+    setAuctionEndTime(parseInt(auction.endTime._hex));
   };
 
   useEffect(() => {
     FetchAuctionBids();
-    // CreateBid();
   }, []);
-  
-  useEffect(() => {
-    settledAuction();
-  }, []);
-    
-  // Test 1 //
-  // 24h Timer to be displayed on UI //
-  const startTimer = () => {
-    const endTime = new Date("Jan 12, 2023 09:37:25").getTime();
 
-    setInterval(function() {
-      const now = new Date().getTime();
-      const distance = endTime - now;
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      setAuctionTimer(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-      if (distance < 0) {
-        clearInterval(Ref.current);
-        setAuctionTimer("Auction Ended");
-      }
-    }, 1000)
-    
+  // const winningBid = async () => {
+  //   const winningBid = await AuctionHouseContract.AuctionSettled();
+  //   console.log(winningBid);
+  // };
+
+  // Fetch Endtime of auction and format it // 
+  // refresh page every 10 seconds to update time that is being fetched and formatted from endTime //
+
+  // 24h Timer to be displayed on UI //
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      handleAuctionTime();
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, [auctionEndTime]);
+
+  // Format time to display on UI //
+  const formatTime = (time) => {
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+    return `${hours} : ${minutes} : ${seconds}`;
   };
 
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
+
+  const handleAuctionTime = () => {
+  //  if (!currentAuction) return;
+  //  const endAuctionTime = parseInt(currentAuction.endTime._hex);
+   const currentTime = getTimestampInSeconds();
+   const remainingTime = auctionEndTime - currentTime;
+   setAuctionTimer(remainingTime); 
+  };
+
+  // Logic to extend time if bid in last ten mins //
+
+  // Auction Timer reset logic //
+  // Once auction reads settled as true, timer will reset to 00:00:00 for next auction //
+  // const settledAuction = async () => {
+  //   const auctionSettled = await AuctionHouseContract.auction(settled);
+  //   if (auctionSettled.settled == true) {
+  //      setAuctionTimer("00:00:00");
+  //   }
+  // };
+  // End of Timer //
 
   return (
     <>
@@ -169,14 +177,15 @@ const IntroPage = () => {
           </div>
           <div className="hidden lg:block max-w-[430px]">
           {isFirst10NFT ? 
-            <p className="text-[#4965D8]">  1/10 LIMITED EDITION  </p> 
-          : <p className="text-[#4965D8]"> {currentAuctionDate} </p> 
+            <p className="text-[#4965D8]" onClick={() => {setIsFirst10NFT(false)}}>  1/10 LIMITED EDITION  </p> 
+          : <p className="text-[#4965D8]" onClick={() => {setIsFirst10NFT(true)}}> {currentAuctionDate} </p> 
           }
             <h2
               className="font-bold my-2 text-5xl font-[all-round-gothic]"
               style={{ fontFamily: "" }}
             >
-              Founderz #{currentBid ? parseInt(currentBid.founderId._hex) : 0}
+              Founderz #
+              {currentAuction ? parseInt(currentAuction.founderId._hex) : 0}
             </h2>
 
             <div className=" bg-gradient-to-b from-[#4965D8] rounded-2xl p-px">
@@ -212,39 +221,32 @@ const IntroPage = () => {
                         <p className="text-[#4965D8] text-sm">Current bid</p>
                         <p className=" text-4xl">
                           Ξ
-                          {/* {currentBid
-                            ? parseFloat(ethers.utils.formatEther(
-                                parseInt(currentBid.amount._hex)
-                              ))
-                            : 0} */}
+                          {currentAuction
+                            ? ethers.utils
+                              .formatEther(currentAuction.amount._hex)
+                              .slice(0, 7)
+                            : 0}
                         </p>
                       </div>
-                      {/* Format time from Unix to current countdown time  */}
                       <div>
                         <p className="text-[#4965D8] text-sm">Action ends in</p>
-                        <p className=" text-4xl">
-                          {/* Change this... */}
-                          {/* {auctionTimer ? parseInt(auctionTimer.endTime._hex) : 0} */}
-                          {auctionTimer}
-                        </p>
+                        <p className=" text-4xl">{formatTime(auctionTimer)}</p>
                       </div>
                     </div>
                     <div>
                       <p className="text-[#4965D8] text-sm">PLACE BID</p>
                       <div className="flex justify-between my-2">
                         <input
-                          // {...setAuctionBid}
+                          onChange={(e) => setBidAmount(e.target.value)}
                           type="text"
                           placeholder="Insert your bid"
-                          className=" text-black rounded-2xl w-8/12"
-                        />
+                          className=" text-black rounded-2xl w-8/12" />
                         <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
                           Place bid{" "}
                           <img
                             className="h-5 ml-1"
                             src="img/icon-arrow.svg"
-                            // onClick={CreateBid(auctionBid)}
-                          />
+                            onClick={() => CreateBid()} />
                         </button>
                       </div>
                     </div>
@@ -259,8 +261,10 @@ const IntroPage = () => {
                               </p>
                               <p className="">
                                 Ξ{" "}
-                                {currentBid
-                                  ? parseFloat(ethers.utils.formatEther(currentBid.amount))
+                                {currentAuction 
+                                  ? ethers.utils
+                                    .formatEther(currentAuction.amount._hex)
+                                    .slice(0, 7)
                                   : 0}
                               </p>
                             </div>
@@ -289,28 +293,31 @@ const IntroPage = () => {
             className="font-bold my-2 text-3xl sm:text-5xl"
             style={{ fontFamily: "" }}
           >
-            Founderz #{currentBid ? parseInt(currentBid.founderId._hex) : 0}
+            Founderz #
+            {currentAuction ? parseInt(currentAuction.founderId._hex) : 0}
           </h2>
           {/* Tools */}
-          {/* {currentBid ? parseInt(currentBid.endTime._hex) : 0}
-          {currentBid ? parseInt(currentBid.startTime._hex) : 0} */}
+          {/* {currentAuction ? parseInt(currentAuction.endTime._hex) : 0}
+          {currentAuction ? parseInt(currentAuction.startTime._hex) : 0} */}
           <div className=" bg-gradient-to-b from-[#4965D8] rounded-2xl p-px">
             <div className="p-3 sm:p-5 rounded-2xl bg-[#F7F9FC] dark:bg-[#160744]">
               <div className="flex justify-between  my-4 w-full">
                 <div>
                   <p className="text-[#4965D8] text-sm">Current bid</p>
                   <p className=" text-2xl sm:text-4xl">
-                    Ξ{" "}
-                    {/* {currentBid
-                      ? parseFloat(ethers.utils.formatEther(
-                        parseInt(currentBid.amount._hex)
-                      ))
-                      : 0} */}
+                    Ξ
+                    {currentAuction
+                      ? ethers.utils
+                          .formatEther(currentAuction.amount._hex)
+                          .slice(0, 7)
+                      : 0}
                   </p>
                 </div>
                 <div>
                   <p className="text-[#4965D8] text-sm">Action ends in</p>
-                  <p className=" text-2xl sm:text-4xl">{auctionTimer}</p>
+                  <p className=" text-2xl sm:text-4xl">
+                    {formatTime(auctionTimer)}
+                  </p>
                 </div>
               </div>
               <div>
@@ -341,9 +348,11 @@ const IntroPage = () => {
                           {truncateEthAddress(i)}
                         </p>
                         <p className="">
-                          Ξ{" "}
-                          {currentBid
-                            ? parseFloat(ethers.utils.formatEther(currentBid.amount))
+                          Ξ
+                          {currentAuction
+                            ? ethers.utils
+                                .formatEther(currentAuction.amount._hex)
+                                .slice(0, 7)
                             : 0}
                         </p>
                       </div>
@@ -351,7 +360,12 @@ const IntroPage = () => {
                     </div>
                   ))}
                 <p className="text-[#4965D8] underline underline-offset-2 mt-5">
-                  <a className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer" onClick={() => {setShowAllBids(true)}}>
+                  <a
+                    className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer"
+                    onClick={() => {
+                      setShowAllBids(true);
+                    }}
+                  >
                     View all bids
                     {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
                   </a>
@@ -361,19 +375,29 @@ const IntroPage = () => {
           </div>
         </div>
       </div>
-      {showAllBids && <div className="fixed top-0 overflow-hidden z-[1000]  h-[100vh] w-[100vw] bg-[#00000020] flex items-center justify-center">
+      {showAllBids && (
+        <div className="fixed top-0 overflow-hidden z-[1000]  h-[100vh] w-[100vw] bg-[#00000020] flex items-center justify-center">
           <div className="bg-[#F7F9FC] border border-[#8094B7] rounded-2xl py-3 px-3 w-[340px] md:w-[450px]">
             <div className="flex  justify-between">
               <div>
-                <p className="text-[#4965D8] text-[10px]"> {currentAuctionDate} </p>
+                <p className="text-[#4965D8] text-[10px]">
+                  {" "}
+                  {currentAuctionDate}{" "}
+                </p>
                 <h2 className="font-bold  text-xl text-[#160744] font-[all-round-gothic]">
-                  Founderz #{currentBid ? parseInt(currentBid.founderId._hex) : 0}
+                  Founderz #
+                  {currentAuction ? parseInt(currentAuction.founderId._hex) : 0}
                 </h2>
               </div>
-              <img src="img/icon-close.svg" className='h-3 mt-2 cursor-pointer' onClick={() => {setShowAllBids(false)}}/>
+              <img
+                src="img/icon-close.svg"
+                className="h-3 mt-2 cursor-pointer"
+                onClick={() => {
+                  setShowAllBids(false);
+                }}
+              />
             </div>
             <div className="w-[100%] p-2 bg-[#E0E5ED] rounded-xl h-[180px] overflow-auto">
-
               {auctionBids &&
                 auctionBids.map((i) => (
                   <div className="w-full bg-white text-[#160744] rounded-lg mb-2 p-1">
@@ -384,22 +408,19 @@ const IntroPage = () => {
                       </p>
                       <p className="">
                         Ξ{" "}
-                        {currentBid
-                          ? parseFloat(ethers.utils.formatEther(currentBid.amount))
+                        {currentAuction
+                          ? parseFloat(
+                              ethers.utils.formatEther(currentAuction.amount)
+                            )
                           : 0}
                       </p>
                     </div>
                   </div>
-              ))}
-
-
-
-
-
-
+                ))}
             </div>
           </div>
-      </div>}
+        </div>
+      )}
     </>
   );
 };
