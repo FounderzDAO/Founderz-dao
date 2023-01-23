@@ -53,15 +53,10 @@ const IntroPage = () => {
   const [auctionBids, setAuctionBids] = useState();
   const [currentAuction, setCurrentAuction] = useState();
   const [showAllBids, setShowAllBids] = useState(false);
+  // const [previousAuctions, setPreviousAuctions] = useState();
   const [bidAmount, setBidAmount] = useState();
   const [auctionEndTime, setAuctionEndTime] = useState();
   // Timer //
-  // We need ref in this, because we are dealing
-  // with JS setInterval to keep track of it and
-  // stop it when needed
-  // test //
-  // const startTimeRef = useRef(Date.now());
-  // test //
   const [auctionTimer, setAuctionTimer] = useState(24 * 60 * 60);
   // Contract interaction //
   const AuctionHouseContract = useContract({
@@ -85,14 +80,14 @@ const IntroPage = () => {
     await bid.wait();
    };
 
-  // Check auction status of bids from auctionhousecontract and display //
+  // Check Auction status of bids from AuctionHouseContract and display //
   const AuctionStatusBids = async (id) => {
     const auctionStatusBids = await AuctionHouseContract.getBiddersList(id);
     console.log(auctionStatusBids);
     setAuctionBids(auctionStatusBids);
   };
 
-  // Fetch Auction status of Nft Id, And Id of bid status, and current bid //
+  // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //
   const FetchAuctionBids = async () => {
     const auction = await AuctionHouseContract.auction();
     console.log(auction.founderId);
@@ -102,17 +97,30 @@ const IntroPage = () => {
     setAuctionEndTime(parseInt(auction.endTime._hex));
   };
 
+  // Past Auction status //
+  // const previousAuction = async () => {
+  //  const prevAuction = await AuctionHouseContract.bidders();
+  //  setPreviousAuctions(prevAuction); 
+  //  console.log(prevAuction);
+  // };
+
   useEffect(() => {
     FetchAuctionBids();
   }, []);
 
+  // To display Winning Bid // 
   // const winningBid = async () => {
   //   const winningBid = await AuctionHouseContract.AuctionSettled();
   //   console.log(winningBid);
   // };
 
-  // Fetch Endtime of auction and format it // 
-  // refresh page every 10 seconds to update time that is being fetched and formatted from endTime //
+  // If winningBid and settled = true = 
+  // settle and createnew
+  // check if endTime is -.... and auction settled = true; Then 
+  // 1. You check if the end time is in the past. 
+// The auction is completed, and it is idle.
+// 2. It is needed to settle the current finished auction in order to proceed with fund transfer to the DAO and transfer of NFT to the winner.
+// So untilthen the boolean auctionSettled will still be false.
 
   // 24h Timer to be displayed on UI //
   useEffect(() => {
@@ -135,24 +143,18 @@ const IntroPage = () => {
   }
 
   const handleAuctionTime = () => {
-  //  if (!currentAuction) return;
-  //  const endAuctionTime = parseInt(currentAuction.endTime._hex);
    const currentTime = getTimestampInSeconds();
    const remainingTime = auctionEndTime - currentTime;
    setAuctionTimer(remainingTime); 
   };
 
-  // Logic to extend time if bid in last ten mins //
+  // Auction reset logic //
 
-  // Auction Timer reset logic //
-  // Once auction reads settled as true, timer will reset to 00:00:00 for next auction //
-  // const settledAuction = async () => {
-  //   const auctionSettled = await AuctionHouseContract.auction(settled);
-  //   if (auctionSettled.settled == true) {
-  //      setAuctionTimer("00:00:00");
-  //   }
+  // const settleAuction = async () => {};
+
+  // const createNewAuction = async () => {
+  //   const createNewAuction = await AuctionHouseContract.();
   // };
-  // End of Timer //
 
   return (
     <>
@@ -190,7 +192,7 @@ const IntroPage = () => {
           </Carousel> */}
             </div>
             <img src="img/icon-arrow-L.svg" />
-            {/* Map this arrow to display past ids and other data (auction call) */}
+            {/* Map this arrow to display past ids and other data ( bidders, getBidderlist? ) */}
             <div className=" w-7/12 sm:w-full flex flex-col items-center">
               <img src="img/founderzpass.png" />
               <img src="img/founderzstand.png" />
@@ -255,6 +257,7 @@ const IntroPage = () => {
                             {truncateEthAddress(i)}
                           </p>
                           <p className="">
+                            {/* fix this ...to display past bids amount n not current amount */}
                             Ξ{" "}
                             {currentAuction
                               ? ethers.utils
@@ -273,7 +276,6 @@ const IntroPage = () => {
                     }}
                   >
                     View all bids
-                    {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
                   </a>
                 </div>
               </div>
