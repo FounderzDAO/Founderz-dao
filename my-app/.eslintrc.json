@@ -1,8 +1,5 @@
 {
-  "extends": ["@next/eslint-config-babel", "plugin:@next/next/recommended"],
-  "settings": {
-    "import/resolver": {
-      "babel-module": {}
-    }
-  }
+  "extends": ["next/babel", "plugin:@next/next/recommended"],
+  "parser": "babel-eslint",
+  "plugins": ["import"]
 }
