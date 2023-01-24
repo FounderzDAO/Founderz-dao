@@ -85,7 +85,9 @@ const MidSection = () => {
           <p className="text-[#4965D8] font-[all-round-gothic]">SUMMARY</p>
           <ul className="grid lg:grid-cols-2 grid-cols-1 gap-2 ">
             {summary.map((i) => (
-              <li className="flex  text-[#8094B7] dark:text-[#F7F9FC] font-[200]">
+              <li 
+              key={i}
+              className="flex  text-[#8094B7] dark:text-[#F7F9FC] font-[200]">
                 <div className="w-4 pt-[10px]"><div className="h-[5px] w-[5px]  rounded-full mr-2 bg-[#4965D8]" /></div> {i}
               </li>
             ))}
