@@ -1,7 +1,7 @@
 {
     "eslint.workingDirectories": [
-        "./hardhat-environment",
-        "./my-app",
+        "../hardhat-environment",
+        "../my-app",
     ],
     "eslint.packageManager": "npm",
 }
