@@ -1,5 +1,3 @@
 {
-  "extends": ["next/babel", "plugin:@next/next/recommended"],
-  "parser": "babel-eslint",
-  "plugins": ["import"]
+  "extends": ["next/babel", "plugin:@next/next/recommended"]
 }
