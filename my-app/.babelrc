@@ -1,6 +1,4 @@
-// {
-//   "presets": ["next/babel"],
-//   "plugins": []
-// }
-
-//   "babel-eslint": "^10.1.0",
+{
+  "presets": ["next/babel"],
+  "plugins": []
+}
