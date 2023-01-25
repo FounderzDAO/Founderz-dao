@@ -4,6 +4,9 @@ module.exports = withMT({
   variants: {
   extend: {
   textOpacity: ['dark'],
+  fontFamily: {
+    'sarabun': ['Sarabun', 'sans-serif'],
+  },
   },
   },
   content: [

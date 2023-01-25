@@ -7,9 +7,10 @@
 const hre = require("hardhat");
 
 async function main() {
-  const lockedAmount = hre.ethers.utils.parseEther("1");
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  await lock.deployed();
+  const AmountToPay = hre.ethers.utils.parseEther("4.2");
+  const NFTMint = await hre.ethers.getContractFactory("FounderzNFT");
+  await NFTMint.deployed();
+  await NFTMint.mint(AmountToPay);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

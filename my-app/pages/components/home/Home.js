@@ -1,12 +1,12 @@
 import CapsuleStatic from "./CapsuleStatic"
-import Intro from "./Intro"
+import IntroPage from "./IntroPage"
 import MidSection from "./MidSection"
 
 
 const Home = () => {
   return (
     <div className="overflow-hidden">
-      <Intro />
+      <IntroPage />
       <CapsuleStatic />
       <MidSection />
     </div>
