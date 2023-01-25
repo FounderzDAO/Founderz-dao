@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-key */
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
