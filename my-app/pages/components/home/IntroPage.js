@@ -60,7 +60,6 @@ const IntroPage = () => {
   const [isPreviousNFT, setIsPreviousNFT] = useState(false);
   // Timer //
   const [auctionTimer, setAuctionTimer] = useState(24 * 60 * 60);
-  // const [isAuctionTimer, setIsAuctionTimer] = useState(false);
   // Contract interaction //
   const AuctionHouseContract = useContract({
     address: Auction_House_CONTRACT_ADDRESS,
