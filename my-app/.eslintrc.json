@@ -7,5 +7,10 @@
 //   }
 // }
 {
-  "extends": "next"
+  "extends": "next",
+  "parser": "babel-eslint",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "react/react-in-jsx-scope": "off"
+  }
 }
