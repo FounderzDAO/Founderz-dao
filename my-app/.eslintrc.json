@@ -1,5 +1,5 @@
 {
-  "extends": ["plugin:@next/next/recommended", "plugin:prettier/recommended", "prettier/react" ],
+  "extends": ["plugin:@next/next/recommended", "prettier/react"],
   "parser": "babel-eslint",
   "rules": {
     "react/no-unescaped-entities": "off",
