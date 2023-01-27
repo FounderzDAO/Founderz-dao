@@ -2,6 +2,5 @@
 //   "extends": ["next/babel", "plugin:@next/next/recommended", "plugin:prettier/recommended"]
 // }
 {
-  "extends": ["next/babel", "next/core-web-vitals","plugin:@next/next/recommended"],
-  "plugins": []
+  "extends": ["next/babel", "next/core-web-vitals","plugin:@next/next/recommended"]
 }
