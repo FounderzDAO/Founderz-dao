@@ -1,6 +1,5 @@
 {
-  "presets": ["next/babel"],
-  "plugins": []
+  "presets": ["next/babel"]
 }
 
 // "babel-eslint": "^10.1.0",
