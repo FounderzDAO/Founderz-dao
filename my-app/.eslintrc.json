@@ -1,6 +1,8 @@
-// {
-//   "extends": ["next/babel", "plugin:@next/next/recommended", "plugin:prettier/recommended"]
-// }
 {
-  "extends": ["plugin:@next/next/recommended"]
+  "extends": ["next/babel", "plugin:@next/next/recommended", "plugin:prettier/recommended"],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
+  }
 }
