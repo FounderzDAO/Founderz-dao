@@ -20,7 +20,7 @@ import {
   Founderz_NFT_ABI,
   Auction_House_ABI,
   Auction_House_CONTRACT_ADDRESS,
-} from "../../constants/index.js";
+} from "../../../constants/index.js";
 import moment from "moment";
 import Carousel from "react-material-ui-carousel";
 import Header from "../Header";
