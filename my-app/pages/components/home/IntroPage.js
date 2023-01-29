@@ -50,10 +50,10 @@ const IntroPage = () => {
   const provider = useProvider();
   const { data: signer } = useSigner();
   const [founderzId, setFounderzId] = useState(0);
-  const [auctionBids, setAuctionBids] = useState();
+  const [auctionBidder, setAuctionBidder] = useState();
   const [currentAuction, setCurrentAuction] = useState();
   const [showAllBids, setShowAllBids] = useState(false);
-  // const [previousAuctions, setPreviousAuctions] = useState();
+  const [previousBids, setPreviousBids] = useState();
   const [bidAmount, setBidAmount] = useState();
   const [auctionEndTime, setAuctionEndTime] = useState();
   const [isFirst10NFT, setIsFirst10NFT] = useState(false);
@@ -78,7 +78,7 @@ const IntroPage = () => {
   // Create Bid //
   const CreateBid = async () => {
     const amountInWei = ethers.utils.parseEther(bidAmount);
-    const bid = await AuctionHouseContract.createBid(founderzId,{value: amountInWei});
+    const bid = await AuctionHouseContract.createBid({value: amountInWei});
     await bid.wait();
    };
 
@@ -88,7 +88,13 @@ const IntroPage = () => {
       auctionId
     );
     // console.log(auctionStatusBids);
-    setAuctionBids(auctionStatusBids);
+    setAuctionBidder(auctionStatusBids);
+  };
+
+  const AuctionPastBids = async () => {
+    const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry([]);
+    console.log(auctionPastBidder);
+    setPreviousBids(auctionPastBidder);
   };
 
   // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //
@@ -283,8 +289,8 @@ const IntroPage = () => {
                             </div>
                           </div>
                           <div className="mt-8 mb-1 flex flex-col items-center">
-                            {auctionBids &&
-                              auctionBids.map((i) => (
+                            {auctionBidder &&
+                              auctionBidder.map((i) => (
                                 <div className="w-full">
                                   <div className="flex justify-between w-full my-2">
                                     <p className="flex items-center">
@@ -374,8 +380,8 @@ const IntroPage = () => {
                 </div>
               </div>
               <div className="my-8 flex flex-col items-center">
-                {auctionBids &&
-                  auctionBids.map((i) => (
+                {auctionBidder &&
+                  auctionBidder.map((i) => (
                     <div className="w-full">
                       <div className="flex justify-between w-full my-2">
                         <p className="flex items-center">
@@ -433,8 +439,8 @@ const IntroPage = () => {
               />
             </div>
             <div className="w-[100%] p-2 bg-[#E0E5ED] rounded-xl h-[180px] overflow-auto">
-              {auctionBids &&
-                auctionBids.map((i) => (
+              {auctionBidder &&
+                auctionBidder.map((i) => (
                   <div className="w-full bg-white text-[#160744] rounded-lg mb-2 p-1">
                     <div className="flex justify-between w-full my-2 text-[14px]">
                       <p className="flex items-center">
