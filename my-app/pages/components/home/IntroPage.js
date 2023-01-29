@@ -94,7 +94,7 @@ const IntroPage = () => {
   const AuctionPastBids = async () => {
     const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry([]);
     console.log(auctionPastBidder);
-    setPreviousBids(auctionPastBidder);
+    setPreviousBids(showAllBids ? auctionPastBidder : auctionPastBidder.slice(0, 10));
   };
 
   // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //
@@ -309,9 +309,8 @@ const IntroPage = () => {
                                   <div className="h-[1px] bg-[#4965D8] w-full" />
                                 </div>
                               ))}
-                            <a className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer" onClick={() => {setShowAllBids(true)}}>
+                            <a className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer" onClick={() => {setShowAllBids(true) }}>
                               View all bids
-                              {/* Add link here to a pop up card with all bids for the current NFT ID/URI being displayed*/}
                             </a>
                           </div>
                         </div>  
