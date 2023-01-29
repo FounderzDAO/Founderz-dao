@@ -83,8 +83,10 @@ const IntroPage = () => {
    };
 
   // Check Auction status of bids from AuctionHouseContract and display //
-  const AuctionStatusBids = async (id) => {
-    const auctionStatusBids = await AuctionHouseContract.getBiddersList(id);
+  const AuctionStatusBids = async (auctionId) => {
+    const auctionStatusBids = await AuctionHouseContract.getBidHIstory(
+      auctionId
+    );
     // console.log(auctionStatusBids);
     setAuctionBids(auctionStatusBids);
   };
@@ -287,7 +289,7 @@ const IntroPage = () => {
                                   <div className="flex justify-between w-full my-2">
                                     <p className="flex items-center">
                                       <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                                      {truncateEthAddress(i)}
+                                      {(i.bidder).substring(0, 6).concat('...')}
                                     </p>
                                     <p className="">
                                       Ξ{" "}
@@ -378,7 +380,7 @@ const IntroPage = () => {
                       <div className="flex justify-between w-full my-2">
                         <p className="flex items-center">
                           <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                          {truncateEthAddress(i)}
+                          {(i && i.bidder).substring(0, 6).concat("...")}
                         </p>
                         <p className="">
                           Ξ
@@ -437,7 +439,7 @@ const IntroPage = () => {
                     <div className="flex justify-between w-full my-2 text-[14px]">
                       <p className="flex items-center">
                         <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                        {truncateEthAddress(i)}
+                        {(i && i.bidder).substring(0, 6).concat("...")}
                       </p>
                       <p className="">
                         Ξ{" "}
