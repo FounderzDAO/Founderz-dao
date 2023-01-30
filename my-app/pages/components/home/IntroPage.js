@@ -94,7 +94,7 @@ const IntroPage = () => {
   const AuctionPastBids = async () => {
     const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry([]);
     console.log(auctionPastBidder);
-    setPreviousBids(showAllBids ? auctionPastBidder : auctionPastBidder.slice(0, 10));
+    setPreviousBids(auctionPastBidder);
   };
 
   // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //

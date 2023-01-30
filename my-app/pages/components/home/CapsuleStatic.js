@@ -75,7 +75,7 @@ export default function CapsuleStatic() {
         </div>
         <div className="flex flex-col items-center my-7 w-10/12 lg:w-7/12 gap-y-24">
           <div className="flex flex-col lg:flex-row lg:justify-between w-full  items-center ">
-            <img className="lg:order-2 w-[300px]" src="/img/1-Cyberpunk.png" />
+            <img className="lg:order-2 w-[300px]" src="./img/bid.png" />
             <div className=" lg:w-6/12 w-10/12">
               <h3 className="text-[#4965D8] text-3xl md:text-[35px] font-bold font-[all-round-gothic]">
                 Daily Mint
@@ -87,7 +87,7 @@ export default function CapsuleStatic() {
             </div>
           </div>
           <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center ">
-            <img className="order-1  w-[300px]" src="/img/22-High-Tech.png" />
+            <img className="order-1  w-[300px]" src="./img/rocket.png" />
             <div className="order-2 lg:w-6/12 w-10/12">
               <h3 className="text-[#4965D8] text-3xl md:text-[35px] font-bold font-[all-round-gothic]">
                 Startups Funding
@@ -101,7 +101,7 @@ export default function CapsuleStatic() {
           <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center ">
             <img
               className="lg:order-2  w-[300px]"
-              src="/img/21-Cyberspace.png"
+              src="./img/treasure.png"
             />
             <div className=" lg:w-6/12 w-10/12">
               <h3 className="text-[#4965D8] text-3xl md:text-[35px] font-bold font-[all-round-gothic]">
