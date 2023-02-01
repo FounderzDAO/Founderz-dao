@@ -82,19 +82,25 @@ const IntroPage = () => {
     await bid.wait();
    };
 
+   const CreatePreAuctionBid = async () => {
+    const amountInWei = ethers.utils.parseEther(bidAmount);
+    const preBid = await AuctionHouseContract.settleCurrentAndCreateNewAuction({
+      value: amountInWei,
+    });
+    await preBid.wait();
+   };
+
   // Check Auction status of bids from AuctionHouseContract and display //
   const AuctionStatusBids = async (auctionId) => {
-    const auctionStatusBids = await AuctionHouseContract.getBidHIstory(
-      auctionId
-    );
+    const auctionStatusBids = await AuctionHouseContract.getBidHIstory(auctionId);
     // console.log(auctionStatusBids);
     setAuctionBidder(auctionStatusBids);
   };
 
   const AuctionPastBids = async () => {
     const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry([]);
-    console.log(auctionPastBidder);
-    setPreviousBids(auctionPastBidder);
+    setPreviousBids(parseInt(auctionPastBidder.bidder._hex));
+    console.log(setPreviousBids);
   };
 
   // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //
@@ -176,21 +182,49 @@ const IntroPage = () => {
         <Header />
         <div className="flex flex-col lg:flex-row  justify-center  items-center gap-9 py-14 w-full">
           <div className="flex items-center justify-center w-full sm:w-[420px]">
-            <div>
-            </div>
-            <img className="cursor-pointer" src="img/icon-arrow-L.svg" onClick={() => {setIsPreviousNFT(true)}}/>
+            <div></div>
+            <img
+              className="cursor-pointer"
+              src="img/icon-arrow-L.svg"
+              onClick={() => {
+                setIsPreviousNFT(true);
+              }}
+            />
             {/* Map this arrow to display past ids and other data (auction call) */}
             <div className=" w-7/12 sm:w-full flex flex-col items-center">
               <img src="img/founderzpass.png" />
               <img src="img/founderzstand.png" />
             </div>
-            <img className="cursor-pointer" src="img/icon-arrow-R.svg" onClick={() => {setIsPreviousNFT(false)}}/>
+            <img
+              className="cursor-pointer"
+              src="img/icon-arrow-R.svg"
+              onClick={() => {
+                setIsPreviousNFT(false);
+              }}
+            />
           </div>
           <div className="hidden lg:block max-w-[430px]">
-          {isFirst10NFT ? 
-            <p className="text-[#4965D8] text-sm" onClick={() => {setIsFirst10NFT(false)}}>  1/10 LIMITED EDITION  </p> 
-          : <p className="text-[#4965D8]" onClick={() => {setIsFirst10NFT(true)}}> {currentAuctionDate} </p> 
-          }
+            {isFirst10NFT ? (
+              <p
+                className="text-[#4965D8] text-sm"
+                onClick={() => {
+                  setIsFirst10NFT(false);
+                }}
+              >
+                {" "}
+                1/10 LIMITED EDITION{" "}
+              </p>
+            ) : (
+              <p
+                className="text-[#4965D8]"
+                onClick={() => {
+                  setIsFirst10NFT(true);
+                }}
+              >
+                {" "}
+                {currentAuctionDate}{" "}
+              </p>
+            )}
             <h2
               className="font-bold my-2 text-5xl font-[all-round-gothic]"
               style={{ fontFamily: "" }}
@@ -201,7 +235,7 @@ const IntroPage = () => {
 
             <div className=" bg-gradient-to-b from-[#4965D8] rounded-2xl p-px">
               <div className="p-5 rounded-2xl min-h-[350px] bg-gradient-to-bl  from-[#e0e6f9] via-[#e0e6f9] to-[#c0caf1]                       dark:from-[#160744] dark:via-[#160744] dark:to-[#2c1b5e]">
-                { isFirst10NFT ?
+                {isFirst10NFT ? (
                   <div>
                     <div className="flex justify-between  my-4 w-[400px]">
                       <div>
@@ -220,105 +254,143 @@ const IntroPage = () => {
                     <div className="mt-10 mb-5">
                       <p className="text-[#4965D8] text-sm">Benefits</p>
                       <ul className="list-decimal px-5 text-[14px]">
-                        <li>Possibility of losing only 10% of your investment</li>
+                        <li>
+                          Possibility of losing only 10% of your investment
+                        </li>
                         <li>Possibility to become part of the "co-founders"</li>
-                        <li>Badge as early backer in the form of SBT (soulbound token)</li> 
+                        <li>
+                          Badge as early backer in the form of SBT (soulbound
+                          token)
+                        </li>
                       </ul>
                     </div>
                   </div>
-                : <div>
-                      <div className="flex justify-between  my-4 w-[400px]">
-                        <div>
-                          <p className="text-[#4965D8] text-sm">{isPreviousNFT ? 'Winning bid' : 'Current bid'}</p>
-                          { isPreviousNFT ? 
-                            <p className=" text-4xl">Ξ 10.89</p>
-                            :<p className=" text-4xl">
-                              Ξ
-                              {currentAuction
-                                ? ethers.utils
+                ) : (
+                  <div>
+                    <div className="flex justify-between  my-4 w-[400px]">
+                      <div>
+                        <p className="text-[#4965D8] text-sm">
+                          {isPreviousNFT ? "Winning bid" : "Current bid"}
+                        </p>
+                        {isPreviousNFT ? (
+                          <p className=" text-4xl">Ξ 10.89</p>
+                        ) : (
+                          <p className=" text-4xl">
+                            Ξ
+                            {currentAuction
+                              ? ethers.utils
                                   .formatEther(currentAuction.amount._hex)
                                   .slice(0, 7)
-                                : 0}
-                            </p>
-                          }
-                        </div>
-                        { isPreviousNFT ? 
-                          <div>
-                            <p className="text-[#4965D8] text-sm">Held by</p>
-                            <p className="flex text-4xl items-center">
-                              <span className="h-6 w-6 mr-2 rounded-full bg-[#4965D8]" />
-                              {('0x2d654654r54689d642144d685654').substring(0, 6).concat('...')}
-                            </p>
-                          </div>
-                          :<div>
-                            <p className="text-[#4965D8] text-sm">Action ends in</p>
-                            <p className=" text-4xl">{formatTime(auctionTimer)}</p>
-                          </div>
-                        }
+                              : 0}
+                          </p>
+                        )}
                       </div>
-                      { isPreviousNFT ? 
-                        <div className="mt-6">
-                          <p className="text-[#4965D8] text-sm">Winner</p>
-                          <div className="flex justify-between">
-                            <button className='rounded-3xl my-2  text-black text-[12px] flex items-center w-fit px-7 py-3 bg-[#1BEDA4] font-[all-round-gothic]'>
-                              BID HISTORY 
-                              <img className='h-5 ml-1' src='img/icon-arrow.svg' />
+                      {isPreviousNFT ? (
+                        <div>
+                          <p className="text-[#4965D8] text-sm">Held by</p>
+                          <p className="flex text-4xl items-center">
+                            <span className="h-6 w-6 mr-2 rounded-full bg-[#4965D8]" />
+                            {"0x2d654654r54689d642144d685654"
+                              .substring(0, 6)
+                              .concat("...")}
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <p className="text-[#4965D8] text-sm">
+                            Action ends in
+                          </p>
+                          <p className=" text-4xl">
+                            {formatTime(auctionTimer)}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    {isPreviousNFT ? (
+                      <div className="mt-6">
+                        <p className="text-[#4965D8] text-sm">Winner</p>
+                        <div className="flex justify-between">
+                          <button className="rounded-3xl my-2  text-black text-[12px] flex items-center w-fit px-7 py-3 bg-[#1BEDA4] font-[all-round-gothic]">
+                            BID HISTORY
+                            <img
+                              className="h-5 ml-1"
+                              src="img/icon-arrow.svg"
+                            />
+                          </button>
+                          <button className="rounded-3xl my-2 text-black text-[12px] flex items-center w-fit px-7 py-3 bg-[#1BEDA4] font-[all-round-gothic]">
+                            ETHERSCAN
+                            <img
+                              className="h-5 ml-1"
+                              src="img/icon-arrow.svg"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div>
+                          <p className="text-[#4965D8] text-sm">PLACE BID</p>
+                          <div className="flex justify-between my-2">
+                            <input
+                              onChange={(e) => setBidAmount(e.target.value)}
+                              type="text"
+                              placeholder="Insert your bid"
+                              className=" text-black rounded-2xl w-8/12"
+                            />
+                            <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
+                              Place bid{" "}
+                              <img
+                                className="h-5 ml-1"
+                                src="img/icon-arrow.svg"
+                                onClick={() => CreateBid()}
+                              />
                             </button>
-                            <button className='rounded-3xl my-2 text-black text-[12px] flex items-center w-fit px-7 py-3 bg-[#1BEDA4] font-[all-round-gothic]'>
-                              ETHERSCAN 
-                              <img className='h-5 ml-1' src='img/icon-arrow.svg' />
+                            <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
+                              Help the Dao{" "}
+                              <img
+                                className="h-5 ml-1"
+                                src="img/icon-arrow.svg"
+                                onClick={() => CreatePreAuctionBid()}
+                              />
                             </button>
                           </div>
                         </div>
-                        :<div>
-                          <div>
-                            <p className="text-[#4965D8] text-sm">PLACE BID</p>
-                            <div className="flex justify-between my-2">
-                              <input
-                                onChange={(e) => setBidAmount(e.target.value)}
-                                type="text"
-                                placeholder="Insert your bid"
-                                className=" text-black rounded-2xl w-8/12" />
-                              <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
-                                Place bid{" "}
-                                <img
-                                  className="h-5 ml-1"
-                                  src="img/icon-arrow.svg"
-                                  onClick={() => CreateBid()} />
-                              </button>
-                            </div>
-                          </div>
-                          <div className="mt-8 mb-1 flex flex-col items-center">
-                            {auctionBidder &&
-                              auctionBidder.map((i) => (
-                                <div className="w-full">
-                                  <div className="flex justify-between w-full my-2">
-                                    <p className="flex items-center">
-                                      <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                                      {(i.bidder).substring(0, 6).concat('...')}
-                                    </p>
-                                    <p className="">
-                                      Ξ{" "}
-                                      {currentAuction 
-                                        ? ethers.utils
-                                          .formatEther(currentAuction.amount._hex)
+                        <div className="mt-8 mb-1 flex flex-col items-center">
+                          {auctionBidder &&
+                            auctionBidder.map((i) => (
+                              <div className="w-full">
+                                <div className="flex justify-between w-full my-2">
+                                  <p className="flex items-center">
+                                    <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
+                                    {i.bidder.substring(0, 6).concat("...")}
+                                  </p>
+                                  <p className="">
+                                    Ξ{" "}
+                                    {currentAuction
+                                      ? ethers.utils
+                                          .formatEther(
+                                            currentAuction.amount._hex
+                                          )
                                           .slice(0, 7)
-                                        : 0}
-                                    </p>
-                                  </div>
-                                  <div className="h-[1px] bg-[#4965D8] w-full" />
+                                      : 0}
+                                  </p>
                                 </div>
-                              ))}
-                            <a className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer" onClick={() => {setShowAllBids(true) }}>
-                              View all bids
-                            </a>
-                          </div>
-                        </div>  
-                      }
-                                                 
+                                <div className="h-[1px] bg-[#4965D8] w-full" />
+                              </div>
+                            ))}
+                          <a
+                            className="text-[#4965D8] underline underline-offset-2 mt-5 cursor-pointer"
+                            onClick={() => {
+                              setShowAllBids(true);
+                            }}
+                          >
+                            View all bids
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                }
-             
+                )}
               </div>
             </div>
           </div>
