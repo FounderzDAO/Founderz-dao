@@ -129,14 +129,6 @@ const IntroPage = () => {
   //   console.log(winningBid);
   // };
 
-  // If winningBid and settled = true = 
-  // settle and createnew
-  // check if endTime is -.... and auction settled = true; Then 
-  // 1. You check if the end time is in the past. 
-// The auction is completed, and it is idle.
-// 2. It is needed to settle the current finished auction in order to proceed with fund transfer to the DAO and transfer of NFT to the winner.
-// So untilthen the boolean auctionSettled will still be false.
-
   // 24h Timer to be displayed on UI //
   useEffect(() => {
     const intervalId = setInterval(() => {
