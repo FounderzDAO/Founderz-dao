@@ -53,7 +53,8 @@ const IntroPage = () => {
   const [auctionBidder, setAuctionBidder] = useState();
   const [currentAuction, setCurrentAuction] = useState();
   const [showAllBids, setShowAllBids] = useState(false);
-  const [previousBids, setPreviousBids] = useState();
+  const [previousBids, setPreviousBids] = useState([]);
+  const [startNewAuction, setStartNewAuction] = useState(true);
   const [bidAmount, setBidAmount] = useState();
   const [auctionEndTime, setAuctionEndTime] = useState();
   const [isFirst10NFT, setIsFirst10NFT] = useState(false);
@@ -84,9 +85,7 @@ const IntroPage = () => {
 
    const CreatePreAuctionBid = async () => {
     const amountInWei = ethers.utils.parseEther(bidAmount);
-    const preBid = await AuctionHouseContract.settleCurrentAndCreateNewAuction({
-      value: amountInWei,
-    });
+    const preBid = await AuctionHouseContract.settleCurrentAndCreateNewAuction({value: amountInWei});
     await preBid.wait();
    };
 
@@ -98,8 +97,8 @@ const IntroPage = () => {
   };
 
   const AuctionPastBids = async () => {
-    const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry([]);
-    setPreviousBids(parseInt(auctionPastBidder.bidder._hex));
+    const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry();
+    setPreviousBids(auctionPastBidder);
     console.log(setPreviousBids);
   };
 
@@ -162,6 +161,12 @@ const IntroPage = () => {
    const currentTime = getTimestampInSeconds();
    const remainingTime = auctionEndTime - currentTime;
    setAuctionTimer(remainingTime); 
+   if (remainingTime <= 0) {
+      setStartNewAuction(false);
+   }
+   else {
+     setStartNewAuction(true);
+   }
   };
 
   // Auction reset logic //
@@ -337,6 +342,7 @@ const IntroPage = () => {
                               placeholder="Insert your bid"
                               className=" text-black rounded-2xl w-8/12"
                             />
+                            { startNewAuction ? 
                             <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
                               Place bid{" "}
                               <img
@@ -345,6 +351,7 @@ const IntroPage = () => {
                                 onClick={() => CreateBid()}
                               />
                             </button>
+                            :
                             <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
                               Help the Dao{" "}
                               <img
@@ -353,6 +360,7 @@ const IntroPage = () => {
                                 onClick={() => CreatePreAuctionBid()}
                               />
                             </button>
+}
                           </div>
                         </div>
                         <div className="mt-8 mb-1 flex flex-col items-center">
