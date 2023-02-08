@@ -65,11 +65,11 @@ function Dao() {
           <h3 className=" text-2xl sm:text-3xl font-[all-round-gothic]">
             Proposal
           </h3>
-          <div>
+          <div className='md:flex gap-4 items-center'>
             <span className="text-[#8094B7]">
               Connect wallet to make a proposal.
             </span>
-            <button className="bordered border-[#8094B7] rounded-xl mx-2 bg-[#8094B766] p-2 text-[#8094B7] mb-8 font-[all-round-gothic]">
+            <button className="bordered border-[#8094B7] rounded-xl bg-[#8094B766] p-2 text-[#8094B7]  font-[all-round-gothic]">
               Submit proposal
             </button>
           </div>

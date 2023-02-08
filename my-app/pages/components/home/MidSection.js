@@ -81,8 +81,8 @@ const MidSection = () => {
       <div className="my-48 lg:mx-52 mx-10 sm:mx-20">
 
         <div className="mb-28">
-          <h2 className="text-center my-5 text-3xl font-bold text-[#160744] dark:text-white font-[all-round-gothic]">FAQ</h2>
-          <p className="text-[#4965D8] font-[all-round-gothic]">SUMMARY</p>
+          <h2 className="text-center my-9 text-3xl font-bold text-[#160744] dark:text-white font-[all-round-gothic]">FAQ</h2>
+          <p className="text-[#4965D8] mb-3 font-[all-round-gothic]">SUMMARY</p>
           <ul className="grid lg:grid-cols-2 grid-cols-1 gap-2 ">
             {summary.map((i) => (
               <li 

@@ -326,7 +326,7 @@ const IntroPage = () => {
                     ) : (
                       <div>
                         <div>
-                          <p className="text-[#4965D8] text-sm">PLACE BID</p>
+                          <p className="text-[#4965D8] text-sm">Place bid</p>
                           <div className="flex justify-between my-2">
                             <input
                               onChange={(e) => setBidAmount(e.target.value)}
@@ -335,8 +335,8 @@ const IntroPage = () => {
                               className=" text-black rounded-2xl w-8/12"
                             />
                             { startNewAuction ? 
-                            <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
-                              Place bid{" "}
+                            <button className="rounded-2xl w-fit text-sm flex items-center px-3 font-[all-round-gothic] bg-[#1BEDA4]">
+                              PLACE BID{" "}
                               <img
                                 className="h-5 ml-1"
                                 src="img/icon-arrow.svg"
@@ -433,15 +433,15 @@ const IntroPage = () => {
                 </div>
               </div>
               <div>
-                <p className="text-[#4965D8] text-sm">PLACE BID</p>
+                <p className="text-[#4965D8] text-sm">Place bid</p>
                 <div className="flex justify-between my-2">
                   <input
                     type="text"
                     placeholder="Insert your bid"
                     className=" text-black rounded-2xl w-7/12 sm:w-8/12"
                   />
-                  <button className="rounded-2xl w-fit text-sm flex text-black items-center px-3 bg-[#1BEDA4]">
-                    Place bid{" "}
+                  <button className="rounded-2xl w-fit text-sm flex text-black items-center  px-3 font-[all-round-gothic] bg-[#1BEDA4]">
+                    PLACE BID{" "}
                     <img
                       className="h-5 ml-1"
                       src="img/icon-arrow.svg"
@@ -489,7 +489,7 @@ const IntroPage = () => {
       </div>
       {showAllBids && (
         <div className="fixed top-0 overflow-hidden z-[1000]  h-[100vh] w-[100vw] bg-[#00000020] flex items-center justify-center">
-          <div className="bg-[#F7F9FC] border border-[#8094B7] rounded-2xl py-3 px-3 w-[340px] md:w-[450px]">
+          <div className="bg-[#F7F9FC] border border-[#8094B7] rounded-2xl p-5 w-[340px] md:w-[450px]">
             <div className="flex  justify-between">
               <div>
                 <p className="text-[#4965D8] text-[10px]">
