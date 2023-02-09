@@ -19,6 +19,7 @@ useAccount} from "wagmi";
 
 function Header() {
   const router = useRouter();
+  const [treasuryBal, setTreasuryBal] = useState();
   const [showMenu, setShowMenu] = useState(false);
   const openMenu = useRef();
   const closeMenu = useRef();
@@ -57,7 +58,8 @@ function Header() {
       treasuryBalance: getBalance,
       formatUnits: "gwei",
       watch: true,
-    });
+      });
+    setTreasuryBal(readBalance);
     console.log(readBalance);
   };
   // End of Treasury Balance //
@@ -85,7 +87,7 @@ function Header() {
           </button>
           <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
             Treasury <i className="ri-bar-chart-horizontal-line bg-inherit"></i>{" "}
-            Ξ {treasuryBalance ? parseInt(treasuryBalance._hex) : 0}
+            Ξ {treasuryBal ? parseInt(treasuryBal._hex) : 0}
           </button>
         </div>
         <script defer src="app.js"></script>
@@ -137,7 +139,7 @@ function Header() {
               <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
                 Treasury{" "}
                 <i className="ri-bar-chart-horizontal-line bg-inherit"></i> Ξ{" "}
-                {treasuryBalance ? parseInt(treasuryBalance.readBalance) : 0}
+                {treasuryBal ? parseInt(treasuryBal._hex) : 0}
               </button>
             </div>
             <div
