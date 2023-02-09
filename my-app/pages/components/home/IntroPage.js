@@ -9,9 +9,7 @@ import {
   useProvider,
   useSigner,
   useContract,
-  useSendTransaction,
-  usePrepareSendTransaction,
-  useContractWrite,
+  useBalance
 } from "wagmi";
 import React, { useEffect, useRef, useState } from "react";
 import truncateEthAddress from "truncate-eth-address";
