@@ -100,6 +100,8 @@ const IntroPage = () => {
     console.log(setPreviousBids);
   };
 
+  // Formatting to [ {bidder: "0x123", amount: "0.1"}, {bidder: "0x123", amount: "0.1"}]
+
   // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //
   const FetchAuctionBids = async () => {
     const auction = await AuctionHouseContract.auction();

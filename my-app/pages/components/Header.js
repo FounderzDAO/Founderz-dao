@@ -54,6 +54,7 @@ function Header() {
   // Treasury Balance //
   const treasuryBalance = async () => {
     const getBalance = await AuctionHouseContractV1.treasury();
+    // useAddress
     const readBalance = useBalance({
       treasuryBalance: getBalance,
       formatUnits: "gwei",
@@ -139,7 +140,7 @@ function Header() {
               <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
                 Treasury{" "}
                 <i className="ri-bar-chart-horizontal-line bg-inherit"></i> Ξ{" "}
-                {treasuryBal ? parseInt(treasuryBal._hex) : 0}
+               {treasuryBal ? parseInt(treasuryBal._hex) : 0}
               </button>
             </div>
             <div
