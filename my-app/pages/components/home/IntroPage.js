@@ -101,6 +101,12 @@ const IntroPage = () => {
   };
 
   // Formatting to [ {bidder: "0x123", amount: "0.1"}, {bidder: "0x123", amount: "0.1"}]
+  // const formatBids = (bids) => {
+  //   const formattedBids = bids.map((bid) => {
+  //     return {
+  //       bidder: bid.bidder,
+  //       amount: ethers.utils.formatEther(bid.amount),
+  //     };
 
   // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //
   const FetchAuctionBids = async () => {
