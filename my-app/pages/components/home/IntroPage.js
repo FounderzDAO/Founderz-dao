@@ -9,7 +9,7 @@ import {
   useProvider,
   useSigner,
   useContract,
-  useBalance
+  useBalance,
 } from "wagmi";
 import React, { useEffect, useRef, useState } from "react";
 import truncateEthAddress from "truncate-eth-address";
@@ -77,30 +77,35 @@ const IntroPage = () => {
   // Create Bid //
   const CreateBid = async () => {
     const amountInWei = ethers.utils.parseEther(bidAmount);
-    const bid = await AuctionHouseContract.createBid({value: amountInWei});
+    const bid = await AuctionHouseContract.createBid({ value: amountInWei });
     await bid.wait();
-   };
+  };
 
-   const CreatePreAuctionBid = async () => {
+  const CreatePreAuctionBid = async () => {
     const amountInWei = ethers.utils.parseEther(bidAmount);
-    const preBid = await AuctionHouseContract.settleCurrentAndCreateNewAuction({value: amountInWei});
+    const preBid = await AuctionHouseContract.settleCurrentAndCreateNewAuction({
+      value: amountInWei,
+    });
     await preBid.wait();
-   };
+  };
 
   // Check Auction status of bids from AuctionHouseContract and display //
   const AuctionStatusBids = async (auctionId) => {
-    const auctionStatusBids = await AuctionHouseContract.getBidHIstory(auctionId);
+    const auctionStatusBids = await AuctionHouseContract.getBidHIstory(
+      auctionId
+    );
     // console.log(auctionStatusBids);
     setAuctionBidder(auctionStatusBids);
   };
 
   const AuctionPastBids = async () => {
     const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry();
-    setPreviousBids(auctionPastBidder);
-    console.log(setPreviousBids);
+    auctionPastBidder.map(function (bid) {
+      return (bid = bid._hex);
+    });
+    setPreviousBids(AuctionPastBids);
   };
 
-  // Formatting to [ {bidder: "0x123", amount: "0.1"}, {bidder: "0x123", amount: "0.1"}]
   // const formatBids = (bids) => {
   //   const formattedBids = bids.map((bid) => {
   //     return {
@@ -118,18 +123,11 @@ const IntroPage = () => {
     setAuctionEndTime(parseInt(auction.endTime._hex));
   };
 
-  // Past Auction status //
-  // const previousAuction = async () => {
-  //  const prevAuction = await AuctionHouseContract.bidders();
-  //  setPreviousAuctions(prevAuction); 
-  //  console.log(prevAuction);
-  // };
-
   useEffect(() => {
     FetchAuctionBids();
   }, []);
 
-  // To display Winning Bid // 
+  // To display Winning Bid //
   // const winningBid = async () => {
   //   const winningBid = await AuctionHouseContract.AuctionSettled();
   //   console.log(winningBid);
@@ -156,15 +154,14 @@ const IntroPage = () => {
   }
 
   const handleAuctionTime = () => {
-   const currentTime = getTimestampInSeconds();
-   const remainingTime = auctionEndTime - currentTime;
-   setAuctionTimer(remainingTime); 
-   if (remainingTime <= 0) {
+    const currentTime = getTimestampInSeconds();
+    const remainingTime = auctionEndTime - currentTime;
+    setAuctionTimer(remainingTime);
+    if (remainingTime <= 0) {
       setStartNewAuction(false);
-   }
-   else {
-     setStartNewAuction(true);
-   }
+    } else {
+      setStartNewAuction(true);
+    }
   };
 
   // Auction reset logic //
@@ -340,25 +337,25 @@ const IntroPage = () => {
                               placeholder="Insert your bid"
                               className=" text-black rounded-2xl w-8/12"
                             />
-                            { startNewAuction ? 
-                            <button className="rounded-2xl w-fit text-sm flex items-center px-3 font-[all-round-gothic] bg-[#1BEDA4]">
-                              PLACE BID{" "}
-                              <img
-                                className="h-5 ml-1"
-                                src="img/icon-arrow.svg"
-                                onClick={() => CreateBid()}
-                              />
-                            </button>
-                            :
-                            <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
-                              Help the Dao{" "}
-                              <img
-                                className="h-5 ml-1"
-                                src="img/icon-arrow.svg"
-                                onClick={() => CreatePreAuctionBid()}
-                              />
-                            </button>
-}
+                            {startNewAuction ? (
+                              <button className="rounded-2xl w-fit text-sm flex items-center px-3 font-[all-round-gothic] bg-[#1BEDA4]">
+                                PLACE BID{" "}
+                                <img
+                                  className="h-5 ml-1"
+                                  src="img/icon-arrow.svg"
+                                  onClick={() => CreateBid()}
+                                />
+                              </button>
+                            ) : (
+                              <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4]">
+                                Help the Dao{" "}
+                                <img
+                                  className="h-5 ml-1"
+                                  src="img/icon-arrow.svg"
+                                  onClick={() => CreatePreAuctionBid()}
+                                />
+                              </button>
+                            )}
                           </div>
                         </div>
                         <div className="mt-8 mb-1 flex flex-col items-center">
