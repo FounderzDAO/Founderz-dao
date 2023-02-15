@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import {useState, useRef} from "react"
+import {useState, useRef, useEffect} from "react"
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
 import ThemeToggler from "../../src/ThemeToggler";
@@ -14,6 +14,7 @@ useContract,
 useProvider,
 useSigner,
 useAccount} from "wagmi";
+import { ethers } from "ethers";
 
 
 
@@ -53,17 +54,18 @@ function Header() {
 
   // Treasury Balance //
   const treasuryBalance = async () => {
-    const getBalance = await AuctionHouseContractV1.treasury();
+    const address = await AuctionHouseContractV1.treasury();
+      const balance = await provider.getBalance(address);
     // useAddress
-    const readBalance = useBalance({
-      treasuryBalance: getBalance,
-      formatUnits: "gwei",
-      watch: true,
-      });
-    setTreasuryBal(readBalance);
-    console.log(readBalance);
+    setTreasuryBal(balance);
+    console.log(address);
+    console.log(balance);
   };
   // End of Treasury Balance //
+
+  useEffect (() => {
+  treasuryBalance();
+  }, []);
 
   return (
     <>
@@ -88,7 +90,10 @@ function Header() {
           </button>
           <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
             Treasury <i className="ri-bar-chart-horizontal-line bg-inherit"></i>{" "}
-            Ξ {treasuryBal ? parseInt(treasuryBal._hex) : 0}
+            Ξ{" "}
+            {treasuryBal
+              ? ethers.utils.formatEther(treasuryBal._hex).slice(0, 4)
+              : 0}
           </button>
         </div>
         <script defer src="app.js"></script>
@@ -140,7 +145,7 @@ function Header() {
               <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
                 Treasury{" "}
                 <i className="ri-bar-chart-horizontal-line bg-inherit"></i> Ξ{" "}
-               {treasuryBal ? parseInt(treasuryBal._hex) : 0}
+                {treasuryBal ? parseInt(treasuryBal._hex) : 0}
               </button>
             </div>
             <div

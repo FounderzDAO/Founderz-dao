@@ -94,24 +94,10 @@ const IntroPage = () => {
     const auctionStatusBids = await AuctionHouseContract.getBidHIstory(
       auctionId
     );
-    // console.log(auctionStatusBids);
+    console.log(auctionStatusBids);
     setAuctionBidder(auctionStatusBids);
   };
 
-  const AuctionPastBids = async () => {
-    const auctionPastBidder = await AuctionHouseContract.getBidderHIsotry();
-    auctionPastBidder.map(function (bid) {
-      return (bid = bid._hex);
-    });
-    setPreviousBids(AuctionPastBids);
-  };
-
-  // const formatBids = (bids) => {
-  //   const formattedBids = bids.map((bid) => {
-  //     return {
-  //       bidder: bid.bidder,
-  //       amount: ethers.utils.formatEther(bid.amount),
-  //     };
 
   // Fetch current Auction status of Nft Id, And Id of bid status, and current bid //
   const FetchAuctionBids = async () => {
@@ -164,13 +150,6 @@ const IntroPage = () => {
     }
   };
 
-  // Auction reset logic //
-
-  // const settleAuction = async () => {};
-
-  // const createNewAuction = async () => {
-  //   const createNewAuction = await AuctionHouseContract.();
-  // };
 
   return (
     <>
@@ -360,19 +339,19 @@ const IntroPage = () => {
                         </div>
                         <div className="mt-8 mb-1 flex flex-col items-center">
                           {auctionBidder &&
-                            auctionBidder.map((i) => (
+                            auctionBidder.map((auctionBid) => (
                               <div className="w-full">
                                 <div className="flex justify-between w-full my-2">
                                   <p className="flex items-center">
                                     <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                                    {i.bidder.substring(0, 6).concat("...")}
+                                    {auctionBid.bidder.substring(0, 6).concat("...")}
                                   </p>
                                   <p className="">
                                     Ξ{" "}
-                                    {currentAuction
+                                    {auctionBid
                                       ? ethers.utils
                                           .formatEther(
-                                            currentAuction.amount._hex
+                                            auctionBid.amount._hex
                                           )
                                           .slice(0, 7)
                                       : 0}
@@ -455,18 +434,18 @@ const IntroPage = () => {
               </div>
               <div className="my-8 flex flex-col items-center">
                 {auctionBidder &&
-                  auctionBidder.map((i) => (
+                  auctionBidder.map((auctionBid) => (
                     <div className="w-full">
                       <div className="flex justify-between w-full my-2">
                         <p className="flex items-center">
                           <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                          {(i && i.bidder).substring(0, 6).concat("...")}
+                          {(auctionBid && auctionBid.bidder).substring(0, 6).concat("...")}
                         </p>
                         <p className="">
                           Ξ
-                          {currentAuction
+                          {auctionBid
                             ? ethers.utils
-                                .formatEther(currentAuction.amount._hex)
+                                .formatEther(auctionBid.amount._hex)
                                 .slice(0, 7)
                             : 0}
                         </p>
@@ -514,18 +493,18 @@ const IntroPage = () => {
             </div>
             <div className="w-[100%] p-2 bg-[#E0E5ED] rounded-xl h-[180px] overflow-auto">
               {auctionBidder &&
-                auctionBidder.map((i) => (
+                auctionBidder.map((auctionBid) => (
                   <div className="w-full bg-white text-[#160744] rounded-lg mb-2 p-1">
                     <div className="flex justify-between w-full my-2 text-[14px]">
                       <p className="flex items-center">
                         <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                        {(i && i.bidder).substring(0, 6).concat("...")}
+                        {(auctionBid && auctionBid.bidder).substring(0, 6).concat("...")}
                       </p>
                       <p className="">
                         Ξ{" "}
-                        {currentAuction
+                        {auctionBid
                           ? parseFloat(
-                              ethers.utils.formatEther(currentAuction.amount)
+                              ethers.utils.formatEther(auctionBid.amount._hex)
                             )
                           : 0}
                       </p>
