@@ -56,10 +56,7 @@ function Header() {
   const treasuryBalance = async () => {
     const address = await AuctionHouseContractV1.treasury();
       const balance = await provider.getBalance(address);
-    // useAddress
-    setTreasuryBal(balance);
-    console.log(address);
-    console.log(balance);
+      setTreasuryBal(balance);
   };
   // End of Treasury Balance //
 
@@ -145,7 +142,9 @@ function Header() {
               <button className="border  dark:text-white dark:border-gray-200 text-[11px] sm:text-[15px]  rounded-full px-3 py-1">
                 Treasury{" "}
                 <i className="ri-bar-chart-horizontal-line bg-inherit"></i> Ξ{" "}
-                {treasuryBal ? parseInt(treasuryBal._hex) : 0}
+                {treasuryBal
+                  ? ethers.utils.formatEther(treasuryBal._hex).slice(0, 4)
+                  : 0}
               </button>
             </div>
             <div

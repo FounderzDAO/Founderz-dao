@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at BscScan.com on 2022-12-19
+ *Submitted for verification at BscScan.com on 2023-01-29
 */
 
 // SPDX-License-Identifier: GPL-3.0
@@ -416,13 +416,10 @@ interface IFounderzNFTAuctionHouse {
         uint256 endTime;
         // The address of the current highest bid
         address payable bidder;
+
+        address payable firstBidder;
         // Whether or not the auction has been settled
         bool settled;
-    }
-
-    struct Bid {
-        uint256 amount;
-        uint256 timestamp;
     }
 
     event AuctionCreated(uint256 indexed founderId, uint256 startTime, uint256 endTime);
@@ -443,7 +440,7 @@ interface IFounderzNFTAuctionHouse {
 
     function settleCurrentAndCreateNewAuction() external payable;
 
-    function createBid(uint256 founderId) external payable;
+    function createBid() external payable;
 
     function pause() external;
 
@@ -492,7 +489,7 @@ abstract contract Ownable is Context {
     /**
      * @dev Returns the address of the current owner.
      */
-    function owner() public view virtual returns (address) {
+    function treasury() public view virtual returns (address) {
         return _owner;
     }
 
@@ -500,7 +497,7 @@ abstract contract Ownable is Context {
      * @dev Throws if the sender is not the owner.
      */
     function _checkOwner() internal view virtual {
-        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        require(treasury() == _msgSender(), "Ownable: caller is not the owner");
     }
 
     /**
@@ -634,6 +631,7 @@ abstract contract Pausable is Context {
 }
 
 contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Pausable, ReentrancyGuard, Ownable {
+    
     // The FounderzNFT ERC721 token contract
     IFounderzToken public founders;
 
@@ -655,17 +653,48 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
     // The duration of a single auction
     uint256 public duration;
 
+    uint public denumReward = 20;
+
     // The active auction
     IFounderzNFTAuctionHouse.Auction public auction;
 
     // Seed Sale Treshold
     uint256 public seedSaleTreshold = 10;
 
-    // Get bid history for all auctions
-    mapping(uint => address[]) private biddersList;
+    //
+    mapping (uint => mapping (uint => Bid)) private historyId;
 
-    // Get bid amounts for bidders
-    mapping(address => mapping(uint256 => IFounderzNFTAuctionHouse.Bid)) public bidders;
+    mapping (address => mapping (uint => UserBid)) private historyAddress;
+
+    mapping (address => uint) private biddersBids;
+
+    mapping (uint => uint) private bidsNum;
+
+    struct Bid {
+        uint amount;
+        address bidder;
+        uint timestamp;
+    }
+
+    struct UserBid {
+        uint foundersId;
+        uint amount;
+        uint timestamp; 
+    }
+
+    // ... set some values in the mapping
+
+    /*// get an array of all the keys in the mapping
+    uint[] memory keys = historyId.keys();
+
+    // loop through the keys
+    for (uint i = 0; i < keys.length; i++) {
+    // access the value for the current key
+    MyStruct memory s = historyId[keys[i]];
+    // use the value, for example, print the values of the struct
+    // you can use "s" to access variables a,b and c
+    //  s.a, s.b and s.c
+    }*/
 
     // Founderz mint counter 
     uint256 private auctionsCounter = 0;
@@ -684,9 +713,6 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         uint8 _minBidIncrementPercentage,
         uint256 _duration
     ) external onlyOwner {
-
-        _pause();
-
         founders = _founders;
         weth = _weth;
         timeBuffer = _timeBuffer;
@@ -694,16 +720,19 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         minBidIncrementPercentage = _minBidIncrementPercentage;
         duration = _duration;
         team = _team;
+        _createAuction();
     }
 
     /**
      * @notice Settle the current auction, mint a new Founders, and put it up for auction.
      */
-    function settleCurrentAndCreateNewAuction() external payable override nonReentrant whenNotPaused {
+    function settleCurrentAndCreateNewAuction() external payable override whenNotPaused {
         require(msg.value >= reservePrice, 'Must send at least reservePrice');
-        _settleAuction();
+        if (!auction.settled) {
+            _settleAuction();
+        }
         _createAuction();
-        createBid(auction.founderId);
+        createBid();
     }
 
     /**
@@ -718,10 +747,9 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
      * @notice Create a bid for a Founders, with a given amount.
      * @dev This contract only accepts payment in ETH.
      */
-    function createBid(uint256 foundersId) public payable override nonReentrant {
+    function createBid() public payable override nonReentrant {
         IFounderzNFTAuctionHouse.Auction memory _auction = auction;
 
-        require(_auction.founderId == foundersId, 'Founders not up for auction');
         require(block.timestamp < _auction.endTime, 'Auction expired');
         require(msg.value >= reservePrice, 'Must send at least reservePrice');
         require(
@@ -729,8 +757,20 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
             'Must send more than last bid by minBidIncrementPercentage amount'
         );
 
-        biddersList[foundersId].push(msg.sender);
-        bidders[msg.sender][foundersId] = IFounderzNFTAuctionHouse.Bid(msg.value, block.timestamp);
+        historyId[_auction.founderId][bidsNum[_auction.founderId]].amount = msg.value;
+        historyId[_auction.founderId][bidsNum[_auction.founderId]].bidder = msg.sender;
+        historyId[_auction.founderId][bidsNum[_auction.founderId]].timestamp = block.timestamp;
+
+        historyAddress[msg.sender][biddersBids[msg.sender]].foundersId = _auction.founderId;
+        historyAddress[msg.sender][biddersBids[msg.sender]].amount = msg.value;
+        historyAddress[msg.sender][biddersBids[msg.sender]].timestamp = block.timestamp;
+
+        if (bidsNum[_auction.founderId] == 0) {
+            auction.firstBidder = payable(msg.sender);
+        }
+
+        biddersBids[msg.sender] ++;
+        bidsNum[_auction.founderId] ++;
 
         address payable lastBidder = _auction.bidder;
 
@@ -753,10 +793,6 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         if (extended) {
             emit AuctionExtended(_auction.founderId, _auction.endTime);
         }
-    }
-
-    function getBiddersList(uint id) public view returns (address[] memory) {
-        return biddersList[id];
     }
 
     /**
@@ -815,7 +851,8 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
      * If the mint reverts, the minter was updated without pausing this contract first. To remedy this,
      * catch the revert and pause this contract.
      */
-    function _createAuction() public {
+    function _createAuction() internal {
+        require(block.timestamp >= auction.endTime, "Auction hasn't completed");
         if (auction.startTime == 0 || auction.settled == true) {
             if (auctionsCounter == 6) {
                 founders.mint(team);
@@ -824,6 +861,8 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
             founders.mint(address(this));
             uint256 startTime = block.timestamp;
             uint256 endTime = startTime + duration;
+            uint newPrice = auction.amount / 2;
+            reservePrice = newPrice;
             auctionsCounter ++;
 
             auction = Auction({
@@ -832,6 +871,7 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
                 startTime: startTime,
                 endTime: endTime,
                 bidder: payable(0),
+                firstBidder: payable(0),
                 settled: false
             });
 
@@ -847,7 +887,7 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         IFounderzNFTAuctionHouse.Auction memory _auction = auction;
 
         require(_auction.startTime != 0, "Auction hasn't begun");
-        require(!_auction.settled, 'Auction has already been settled');
+        require(!_auction.settled, "Auction has already been settled");
         require(block.timestamp >= _auction.endTime, "Auction hasn't completed");
 
         auction.settled = true;
@@ -859,10 +899,28 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         }
 
         if (_auction.amount > 0) {
-            _safeTransferETHWithFallback(owner(), _auction.amount);
+            uint firstBidderReward = _auction.amount / denumReward * 1;
+            _safeTransferETHWithFallback(address(this), firstBidderReward);
+            _auction.amount -= firstBidderReward;
+            _safeTransferETHWithFallback(address(this), _auction.amount);
         }
-
         emit AuctionSettled(_auction.founderId, _auction.bidder, _auction.amount);
+    }
+
+    function getBidHIstory(uint auctionId) public view returns (Bid[] memory) {
+        Bid[] memory result = new Bid[](bidsNum[auctionId]);
+        for (uint i = 0; i < bidsNum[auctionId]; i++) {
+            result[i] = historyId[auctionId][i];
+        }
+        return result;
+    }
+
+    function getBidderHIstory(address bidder) public view returns (UserBid[] memory) {
+        UserBid[] memory result = new UserBid[](biddersBids[bidder]);
+        for (uint i = 0; i < biddersBids[bidder]; i++) {
+            result[i] = historyAddress[bidder][i];
+        }
+        return result;
     }
 
     /**
