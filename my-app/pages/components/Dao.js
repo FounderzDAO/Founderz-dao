@@ -1,12 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import Header from './Header'
-import { Contract, providers } from "ethers";
+import { ethers } from "ethers";
 import { formatEther } from "ethers/lib/utils";
+import {
+  useAccount,
+  useProvider,
+  useSigner,
+  useContract,
+  useBalance,
+} from "wagmi";
 // import {
 //   DAO_Executor_CONTRACT_ADDRESS,
-//   // (abis also)
+//   DAO_Executor_ABI,
 //   Founderz_DAO_Logic_CONTRACT_ADDRESS,
+//   Founderz_DAO_Logic_ABI,
 // } from "../constants";
 import { useRouter } from "next/router";
 import Footer from './Footer';
