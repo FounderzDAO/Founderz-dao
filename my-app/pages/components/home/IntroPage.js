@@ -84,7 +84,7 @@ const IntroPage = () => {
   const CreatePreAuctionBid = async () => {
     const amountInWei = ethers.utils.parseEther(bidAmount);
     const preBid = await AuctionHouseContract.settleCurrentAndCreateNewAuction({
-      value: amountInWei,
+      value: amountInWei
     });
     await preBid.wait();
   };
@@ -112,6 +112,14 @@ const IntroPage = () => {
   useEffect(() => {
     FetchAuctionBids();
   }, []);
+
+    // Presale Auction functions // 
+  const PresaleBids = async () => {
+    const amountInWei = ethers.utils.parseEther(bidAmount);
+    const preSaleBid = await FounderzNft.buyPresale({ value: amountInWei });
+    await preSaleBid.wait();
+    console.log(PresaleBids);
+  };
 
   // To display Winning Bid //
   // const winningBid = async () => {
@@ -221,12 +229,18 @@ const IntroPage = () => {
                         <p className="text-[#4965D8] text-sm">Amount</p>
                         <p className=" text-4xl">Ξ 4.76</p>
                       </div>
+                      <input
+                        onChange={(e) => setBidAmount(e.target.value)}
+                        type="text"
+                        placeholder="Insert your bid"
+                        className=" text-black rounded-2xl w-8/12"
+                      />
                       <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4] font-[all-round-gothic]">
                         PURCHASE NOW
                         <img
                           className="h-5 ml-1"
                           src="img/icon-arrow.svg"
-                          // onClick={CreateBid(auctionBid)}
+                          onClick={PresaleBids()}
                         />
                       </button>
                     </div>
@@ -344,15 +358,15 @@ const IntroPage = () => {
                                 <div className="flex justify-between w-full my-2">
                                   <p className="flex items-center">
                                     <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                                    {auctionBid.bidder.substring(0, 6).concat("...")}
+                                    {auctionBid.bidder
+                                      .substring(0, 6)
+                                      .concat("...")}
                                   </p>
                                   <p className="">
                                     Ξ{" "}
                                     {auctionBid
                                       ? ethers.utils
-                                          .formatEther(
-                                            auctionBid.amount._hex
-                                          )
+                                          .formatEther(auctionBid.amount._hex)
                                           .slice(0, 7)
                                       : 0}
                                   </p>
@@ -439,7 +453,9 @@ const IntroPage = () => {
                       <div className="flex justify-between w-full my-2">
                         <p className="flex items-center">
                           <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                          {(auctionBid && auctionBid.bidder).substring(0, 6).concat("...")}
+                          {(auctionBid && auctionBid.bidder)
+                            .substring(0, 6)
+                            .concat("...")}
                         </p>
                         <p className="">
                           Ξ
@@ -498,7 +514,9 @@ const IntroPage = () => {
                     <div className="flex justify-between w-full my-2 text-[14px]">
                       <p className="flex items-center">
                         <span className="h-4 w-4 mr-2 rounded-full bg-[#4965D8]" />
-                        {(auctionBid && auctionBid.bidder).substring(0, 6).concat("...")}
+                        {(auctionBid && auctionBid.bidder)
+                          .substring(0, 6)
+                          .concat("...")}
                       </p>
                       <p className="">
                         Ξ{" "}
