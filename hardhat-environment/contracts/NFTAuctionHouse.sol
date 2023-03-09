@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at BscScan.com on 2023-01-29
+ *Submitted for verification at BscScan.com on 2023-03-04
 */
 
 // SPDX-License-Identifier: GPL-3.0
@@ -13,7 +13,7 @@
 // AuctionHouse.sol source code Copyright Zora licensed under the GPL-3.0 license.
 // With modifications by Founderz DAO.
 
-pragma solidity 0.8.17;
+pragma solidity 0.8.19;
 
 /**
  * @dev Provides information about the current execution context, including the
@@ -647,6 +647,9 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
     // The minimum price accepted in an auction
     uint256 public reservePrice;
 
+    // Floor Price
+    uint256 public floorPrice;
+
     // The minimum percentage difference between the last bid amount and the current bid
     uint8 public minBidIncrementPercentage;
 
@@ -710,6 +713,7 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         address _team,
         uint256 _timeBuffer,
         uint256 _reservePrice,
+        uint256 _floorPrice,
         uint8 _minBidIncrementPercentage,
         uint256 _duration
     ) external onlyOwner {
@@ -717,6 +721,7 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         weth = _weth;
         timeBuffer = _timeBuffer;
         reservePrice = _reservePrice;
+        floorPrice = _floorPrice;
         minBidIncrementPercentage = _minBidIncrementPercentage;
         duration = _duration;
         team = _team;
@@ -729,7 +734,7 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
     function settleCurrentAndCreateNewAuction() external payable override whenNotPaused {
         require(msg.value >= reservePrice, 'Must send at least reservePrice');
         if (!auction.settled) {
-            _settleAuction();
+            settleAuction();
         }
         _createAuction();
         createBid();
@@ -739,7 +744,7 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
      * @notice Settle the current auction.
      * @dev This function can only be called when the contract is paused.
      */
-    function settleAuction() external override nonReentrant {
+    function settleAuction() public override nonReentrant {
         _settleAuction();
     }
 
@@ -862,7 +867,11 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
             uint256 startTime = block.timestamp;
             uint256 endTime = startTime + duration;
             uint newPrice = auction.amount / 2;
-            reservePrice = newPrice;
+            if (newPrice <= floorPrice) {
+              reservePrice = floorPrice;
+            } else {
+              reservePrice = newPrice;
+            }
             auctionsCounter ++;
 
             auction = Auction({
@@ -899,10 +908,12 @@ contract FounderzNFTAuctionHouse is IFounderzNFTAuctionHouse, ERC721Holder, Paus
         }
 
         if (_auction.amount > 0) {
-            uint firstBidderReward = _auction.amount / denumReward * 1;
-            _safeTransferETHWithFallback(address(this), firstBidderReward);
+            uint firstBidderReward = _auction.amount / denumReward;
+            if (firstBidderReward > 0) {
+                _safeTransferETHWithFallback(_auction.firstBidder, firstBidderReward);
+            }
             _auction.amount -= firstBidderReward;
-            _safeTransferETHWithFallback(address(this), _auction.amount);
+            _safeTransferETHWithFallback(treasury(), _auction.amount);
         }
         emit AuctionSettled(_auction.founderId, _auction.bidder, _auction.amount);
     }

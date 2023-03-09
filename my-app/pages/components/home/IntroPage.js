@@ -227,20 +227,14 @@ const IntroPage = () => {
                     <div className="flex justify-between  my-4 w-[400px]">
                       <div>
                         <p className="text-[#4965D8] text-sm">Amount</p>
-                        <p className=" text-4xl">Ξ 4.76</p>
+                        <p className=" text-4xl">Ξ 10</p>
                       </div>
-                      <input
-                        onChange={(e) => setBidAmount(e.target.value)}
-                        type="text"
-                        placeholder="Insert your bid"
-                        className=" text-black rounded-2xl w-8/12"
-                      />
                       <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4] font-[all-round-gothic]">
                         PURCHASE NOW
                         <img
                           className="h-5 ml-1"
                           src="img/icon-arrow.svg"
-                          onClick={PresaleBids()}
+                          // onClick={PresaleBids()}
                         />
                       </button>
                     </div>
