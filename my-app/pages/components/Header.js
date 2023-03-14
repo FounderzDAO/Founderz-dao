@@ -104,6 +104,9 @@ function Header() {
           <button onClick={() => router.push("/components/Proposal", "/p")}>
             Capsule
           </button>
+          <a target="blank" href="https://www.founderz.wtf/">
+            Hub
+          </a>
         </div>
         <div className="flex gap-4">
           <ThemeToggler />
