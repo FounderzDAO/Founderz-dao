@@ -327,7 +327,7 @@ const IntroPage = () => {
                       <div>
                         <div>
                           <p className="text-[#4965D8] text-sm font-[all-round-gothic]">Place bid</p>
-                          <div className="flex justify-between my-2">
+                          <div className="flex justify-between my-2 gap-2">
                             <input
                               onChange={(e) => setBidAmount(e.target.value)}
                               type="text"
@@ -434,7 +434,7 @@ const IntroPage = () => {
               </div>
               <div>
                 <p className="text-[#4965D8] text-sm">Place bid</p>
-                <div className="flex justify-between my-2">
+                <div className="flex justify-between my-2 gap-2">
                   <input
                     type="text"
                     placeholder="Insert your bid"
