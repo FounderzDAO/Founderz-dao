@@ -15,6 +15,7 @@ const MidSection = () => {
 
   const [open, setOpen] = useState(0);
   const [showBanner, setShowBanner] = useState(true)
+  const [showDiscover, setShowDiscover] = useState(false)
  
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -37,15 +38,15 @@ const MidSection = () => {
   ]
 
   return (
-    <div className="flex flex-col  items-center pt-14 bg-[#F7F9FC] dark:bg-[#160744] w-full" >
+    <div className="flex flex-col  items-center pt-14 bg-[#F7F9FC] dark:bg-[#160744] w-full " >
       {/* <div className="h-[450px]   bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8]  rotate-[-3deg] w-[130%] mt-8 mx-[-100px] overflow-hidden absolute" /> */}
       {/* <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6D87F2] via-[#4965D8] to-[#4965D8] "> */}
-      <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[900px]  ">
+      <div className=" flex flex-col items-center mb-[100px] py-10 rounded-3xl justify-center  w-10/12 sm:w-9/12 lg:w-11/12 max-w-[1140px]  ">
         <h2 className=" font-bold text-center text-[30px] mx-2  font-[all-round-gothic]">How it works in <spam className='text-[#4965D8] font-[500]' >3 steps</spam></h2>
         <button className="my-5 text-[12px] font-[all-round-gothic] text-[#4965D8] flex items-center gap-1">FIND HOW<img src="img/icon-arrow-R.svg" className="h-4" /></button>
         <div className="flex lg:flex-row flex-col gap-3 mt-5">
 
-          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8] ">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-evenly  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8] ">
             <img className="h-[70px]" src="img/icon-get-your-pass.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">1</p>
@@ -54,7 +55,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Win the daily auction to receive the Founderz pass and have access to the capsule.</p>
           </div>
 
-          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-evenly  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-create-your-nft.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">2</p>
@@ -63,7 +64,7 @@ const MidSection = () => {
             <p className="text-[12px] text-center font-[200]">Access the capsule, the restricted area where you can customize your 2D avatar NFT.</p>
           </div>
 
-          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-between  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
+          <div className="border h-[260px] rounded-3xl p-5 max-w-[300px] flex flex-col items-center justify-evenly  text-[#F7F9FC] bg-[#4965D8] border-[#4965D8]">
             <img className="h-[70px]" src="img/icon-become-a-founderz.png" />
             <div className="flex gap-4 items-center">
               <p className="bg-[#F7F9FC] text-[12px] text-[#4965D8] py-[2px] px-2 rounded-lg">3</p>
@@ -78,7 +79,7 @@ const MidSection = () => {
 
 
 
-      <div className="my-48 lg:mx-52 mx-10 sm:mx-20">
+      <div className="my-48 lg:mx-52 mx-10 sm:mx-20 max-w-[1140px]">
 
         <div className="mb-28">
           <h2 className="text-center my-9 text-3xl font-bold text-[#160744] dark:text-white font-[all-round-gothic]">FAQ</h2>
@@ -249,7 +250,7 @@ const MidSection = () => {
         </Accordion>
       </div>
 
-      <div className="sm:mb-36 mb-12 w-full max-w-[1000px] flex justify-center font-[all-round-gothic]">
+      { showDiscover && <div className="sm:mb-36 mb-12 w-full max-w-[1000px] flex justify-center font-[all-round-gothic]">
         <div className="border flex flex-col  sm:flex-row justify-between overflow-hidden relative bg-[#4966d8e2]   border-[#4965D8] rounded-2xl w-10/12  lg:w-full  h-fit sm:h-[400px] lg:h-[510px]">
           <div className=" w-full sm:w-5/12 lg:w-7/12 sm:h-full bg-gradient-to-r z-20 flex flex-col justify-center  from-[#4965D8]  via-[#4966d8]">
             <div className="ml-8 my-4">
@@ -260,7 +261,7 @@ const MidSection = () => {
           </div>
           <img className="sm:h-full   sm:absolute right-0 animate-pulse" src="img/capsulereal.png" />
         </div>
-      </div>
+      </div>}
 
       <Footer />
       {showBanner && <div className="w-11/12 p-2 hidden  max-w-[1200px] gap-8 font-[all-round-gothic] items-center h-20 bg-gradient-to-r md:flex justify-center from-[#4965D8] via-[#F7F9FC] to-[#4965D8] fixed bottom-4 z-[100] rounded-2xl">
