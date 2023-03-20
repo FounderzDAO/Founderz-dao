@@ -8,7 +8,7 @@ export const Founderz_NFT_CONTRACT_ADDRESS =
   "0x5636469841D062C1cC0e8cE8B5BA3548B7dCcE56";
 // This Address is from the BSC testnet contract // 
 export const Auction_House_CONTRACT_ADDRESS =
-  "0x6190312EE9D00032a7e53c189Ea14B64a2F4AA92";
+  "0x216aD567AE87Ad436c5D737c3Ee9cAa794DAFbcd";
 // This ABI is from the Mumbai testnet contract //
 export const Founderz_NFT_ABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
