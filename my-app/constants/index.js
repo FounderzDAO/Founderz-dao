@@ -5,7 +5,7 @@
 
 // This Address is from the Mumbai testnet contract //
 export const Founderz_NFT_CONTRACT_ADDRESS =
-  "0x5636469841D062C1cC0e8cE8B5BA3548B7dCcE56";
+  "0x9B4aA97025447763c937E5175d7F3933bA24A918";
 // This Address is from the BSC testnet contract // 
 export const Auction_House_CONTRACT_ADDRESS =
   "0x216aD567AE87Ad436c5D737c3Ee9cAa794DAFbcd";
