@@ -386,7 +386,7 @@ interface IFounderzToken is IERC721 {
     function mint(address _to) external;
 
     function burn(uint256 tokenId) external;
-
+    // @K42: Rolez freedom check
     function setFounderzNFTDAO(address FounderzNFTDAO) external;
 
     function setMinter(address minter) external;
