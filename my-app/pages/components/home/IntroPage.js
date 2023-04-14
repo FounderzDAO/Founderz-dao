@@ -203,7 +203,7 @@ const IntroPage = () => {
               </p>
             ) : (
               <p
-                className="text-[#4965D8]"
+                className="text-[#4965D8] font-[all-round-gothic]"
                 onClick={() => {
                   setIsFirst10NFT(true);
                 }}
@@ -229,7 +229,7 @@ const IntroPage = () => {
                         <p className="text-[#4965D8] text-sm">Amount</p>
                         <p className=" text-4xl">Ξ 10</p>
                       </div>
-                      <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4] font-[all-round-gothic]">
+                      <button className="rounded-2xl w-fit flex items-center px-3 bg-[#1BEDA4] text-black font-[all-round-gothic]">
                         PURCHASE NOW
                         <img
                           className="h-5 ml-1"
@@ -256,7 +256,7 @@ const IntroPage = () => {
                   <div>
                     <div className="flex justify-between  my-4 w-[400px]">
                       <div>
-                        <p className="text-[#4965D8] text-sm">
+                        <p className="text-[#4965D8] text-sm font-[all-round-gothic]">
                           {isPreviousNFT ? "Winning bid" : "Current bid"}
                         </p>
                         {isPreviousNFT ? (
@@ -284,7 +284,7 @@ const IntroPage = () => {
                         </div>
                       ) : (
                         <div>
-                          <p className="text-[#4965D8] text-sm">
+                          <p className="text-[#4965D8] text-sm font-[all-round-gothic]">
                             Action ends in
                           </p>
                           <p className=" text-4xl">
@@ -316,7 +316,7 @@ const IntroPage = () => {
                     ) : (
                       <div>
                         <div>
-                          <p className="text-[#4965D8] text-sm">Place bid</p>
+                          <p className="text-[#4965D8] text-sm font-[all-round-gothic]">Place bid</p>
                           <div className="flex justify-between my-2 gap-2">
                             <input
                               onChange={(e) => setBidAmount(e.target.value)}
@@ -390,7 +390,7 @@ const IntroPage = () => {
 
       <div className=" lg:hidden bg-[#F7F9FC] dark:bg-[#160744] w-full flex justify-center pt-10">
         <div className="w-11/12 max-w-[430px]">
-          <p className="text-[#4965D8]"> {currentAuctionDate} </p>
+          <p className="text-[#4965D8] font-[all-round-gothic]"> {currentAuctionDate} </p>
           <h2
             className="font-bold my-2 text-3xl sm:text-5xl"
             style={{ fontFamily: "" }}
@@ -405,7 +405,7 @@ const IntroPage = () => {
             <div className="p-3 sm:p-5 rounded-2xl bg-[#F7F9FC] dark:bg-[#160744]">
               <div className="flex justify-between  my-4 w-full">
                 <div>
-                  <p className="text-[#4965D8] text-sm">Current bid</p>
+                  <p className="text-[#4965D8] text-sm font-[all-round-gothic]">Current bid</p>
                   <p className=" text-2xl sm:text-4xl">
                     Ξ
                     {currentAuction
@@ -416,8 +416,8 @@ const IntroPage = () => {
                   </p>
                 </div>
                 <div>
-                  <p className="text-[#4965D8] text-sm">Action ends in</p>
-                  <p className=" text-2xl sm:text-4xl">
+                  <p className="text-[#4965D8] text-sm font-[all-round-gothic]">Action ends in</p>
+                  <p className=" text-2xl sm:text-4xl ">
                     {formatTime(auctionTimer)}
                   </p>
                 </div>
@@ -484,7 +484,7 @@ const IntroPage = () => {
           <div className="bg-[#F7F9FC] border border-[#8094B7] rounded-2xl p-5 w-[340px] md:w-[450px]">
             <div className="flex  justify-between">
               <div>
-                <p className="text-[#4965D8] text-[10px]">
+                <p className="text-[#4965D8] text-[10px] font-[all-round-gothic]">
                   {" "}
                   {currentAuctionDate}{" "}
                 </p>

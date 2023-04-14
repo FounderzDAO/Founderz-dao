@@ -35,6 +35,7 @@ export default function CapsuleStatic() {
             </button>
           </div>
         </div>
+        
       </div>
 
       <div className="w-full h-px bg-gradient-to-r from-[#16074401]  via-[#4966d860] to-[#16074401] dark:from-[#160744]  dark:via-[#4965D8] dark:to-[#160744]" />
@@ -116,6 +117,7 @@ export default function CapsuleStatic() {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );
