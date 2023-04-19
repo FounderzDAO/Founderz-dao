@@ -93,7 +93,7 @@ function Dao() {
               <div className="flex">
                 <p className=" text-[#8094B7] dark:text-[#4965D8] mr-2">141</p>
                 <p className="text-[#160744] dark:text-white">
-                  Nounish Friends - Stage 2
+                  Founderz Proposal - Stage 2
                 </p>
               </div>
               <div className="flex flex-col items-end  sm:flex-row ">

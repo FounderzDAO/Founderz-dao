@@ -71,7 +71,7 @@ const IntroPage = () => {
     abi: Founderz_NFT_ABI,
     signerOrProvider: signer || provider,
   });
-
+  
   // Auction Interaction //
 
   // Create Bid //
