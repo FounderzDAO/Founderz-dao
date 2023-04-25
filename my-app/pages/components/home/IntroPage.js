@@ -178,7 +178,7 @@ const IntroPage = () => {
               }}
             />
             {/* Map this arrow to display past ids and other data (auction call) */}
-            <div className=" w-7/12 sm:w-full flex flex-col items-center animate-pulse">
+            <div className=" w-7/12 sm:w-full flex flex-col items-center">
               <img src="img/fdpass-1.png" />
               <img src="img/founderzstand.png" />
             </div>
