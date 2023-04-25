@@ -178,6 +178,7 @@ const IntroPage = () => {
               }}
             />
             {/* Map this arrow to display past ids and other data (auction call) */}
+            {/* Layered images likes conveyer belt type thing */}
             <div className=" w-7/12 sm:w-full flex flex-col items-center">
               <img src="img/fdpass-1.png" />
               <img src="img/founderzstand.png" />

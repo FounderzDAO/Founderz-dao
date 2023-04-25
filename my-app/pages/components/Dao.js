@@ -57,14 +57,16 @@ function Dao() {
         <div className="rounded-2xl bg-white dark:bg-[#17055E] sm:flex items-center justify-between p-5 mb-11">
           <div className="">
             <p className="text-[#160744] dark:text-white font-bold text-2xl font-[all-round-gothic]">
-              Join our discourse to meet other founderz.
+              Join our discord to meet other founderz.
             </p>
             <p className="text-[#8094B7]">
               You will be able to discuss all the ideas proposed by users.
             </p>
           </div>
           <button className="text-[#4965D8] flex items-center gap-1 underline underline-offset-2">
-            Discover our forum{" "}
+            Join our Discord here{" "}
+            <a href="https://discord.gg/FWJ32yHckd" target="blank">
+            </a>
             <img src="img/icon-arrow-R.svg" className="h-6" />
           </button>
         </div>
@@ -73,7 +75,7 @@ function Dao() {
           <h3 className=" text-2xl sm:text-3xl font-[all-round-gothic]">
             Proposal
           </h3>
-          <div className='md:flex gap-4 items-center'>
+          <div className="md:flex gap-4 items-center">
             <span className="text-[#8094B7]">
               Connect wallet to make a proposal.
             </span>
