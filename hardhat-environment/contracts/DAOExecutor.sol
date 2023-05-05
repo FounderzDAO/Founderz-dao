@@ -19,7 +19,7 @@
 // FounderzDAOExecutor.sol modifies Timelock to use Solidity 0.8.x receive(), fallback(), and built-in over/underflow protection
 // This contract acts as executor of Founderz DAO governance and its treasury, so it has been modified to accept ETH.
 
-pragma solidity 0.8.16;
+pragma solidity 0.8.19;
 
 contract FounderzDAOExecutor {
     event NewAdmin(address indexed newAdmin);
