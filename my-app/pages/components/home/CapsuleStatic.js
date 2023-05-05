@@ -19,7 +19,7 @@ export default function CapsuleStatic() {
             />
             <img
               className=" h-[340px] sm:h-[370px] lg:h-[430px] mt-[-60px] ml-[-230px] sm:ml-[-250px] lg:ml-[-300px] rotate-[-78deg]"
-              src="/img/founderzpass.png"
+              src="img/founderzpass.png"
             />
           </div>
           <div className="w-10/12 lg:w-4/12 lg:order-1">
