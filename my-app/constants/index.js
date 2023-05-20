@@ -3,14 +3,15 @@
 // export const Founderz_DAO_Logic_CONTRACT_ADDRESS = "";
 // export const Founderz_DAO_Logic_ABI = [];
 
-// This Address is from the Mumbai testnet contract //
+// Goerili
 export const Founderz_NFT_CONTRACT_ADDRESS =
-  "0x9B4aA97025447763c937E5175d7F3933bA24A918";
-// This Address is from the goerli testnet contract // 
+  // "0x9B4aA97025447763c937E5175d7F3933bA24A918";
+  "0x158C93709f2f93aBDf949AB61EceB0b60Eb6f56c";
+// Goerli
 export const Auction_House_CONTRACT_ADDRESS =
   // "0x216aD567AE87Ad436c5D737c3Ee9cAa794DAFbcd";
   "0xf542D9a8b340e0965346A84e513309b0fff47892";
-// This ABI is from the Mumbai testnet contract //
+// Goerli //
 export const Founderz_NFT_ABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
@@ -584,7 +585,7 @@ export const Founderz_NFT_ABI = [
     type: "function",
   },
 ];
-// This ABI is from goerli
+// Goerli
 export const Auction_House_ABI = [
   {
     anonymous: false,
