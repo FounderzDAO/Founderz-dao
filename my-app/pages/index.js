@@ -1,15 +1,12 @@
 //import Footer from './Footer';
-import Intro from "./components/Intro";
-import CapsuleStatic from "./components/CapsuleStatic";
-// import CapsulePage from "./capsule/CapsulePage";
-import MidSection from "./components/MidSection";
+
+import Home from "./components/home/Home";
+
 
 const index = () => {
   return (
-    <div>
-      <Intro />
-      <CapsuleStatic />
-      <MidSection />
+    <div className="font-sarabun">
+      <Home />
     </div>
   );
 };

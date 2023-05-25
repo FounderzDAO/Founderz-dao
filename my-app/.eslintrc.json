@@ -1,3 +1,17 @@
+// {
+//   "extends": ["plugin:@next/next/recommended", "prettier/react"],
+//   "parser": "babel-eslint",
+//   "rules": {
+//     "react/no-unescaped-entities": "off",
+//     "react/react-in-jsx-scope": "off"
+//   }
+// }
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
+    
+  }
 }

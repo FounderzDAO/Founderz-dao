@@ -1,0 +1,8 @@
+{
+    "eslint.workingDirectories": [
+        "../hardhat-environment",
+        "../my-app",
+    ],
+    "eslint.packageManager": "npm",
+    "solidity-va.parser.parseImports": false,
+}

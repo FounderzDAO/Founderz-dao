@@ -1,31 +1,57 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
-const hre = require("hardhat");
+const { ethers, upgrades } = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const [deployer, admin] = await ethers.getSigners();
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
+// FounderzDAO Deployment tree
+// ├── Contract A
+// │   ├── Contract B (deployed by Contract A)
+// │   │   ├── Contract C (deployed by Contract B)
+// │   │   └── Contract D (deployed by Contract B)
+// │   └── Contract E (deployed by Contract A)
+// └── Contract F
+//     ├── Contract G (deployed by Contract F)
+//     └── Contract H (deployed by Contract F)
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // Deploy .....
+  const DAOExecutor = await ethers.getContractFactory("DAOExecutor");
+  const daoExecutor = await upgrades.deployProxy(DAOExecutor, [], { deployer });
+  await daoExecutor.deployed();
+  console.log("DAOExecutor deployed at:", daoExecutor.address);
 
-  await lock.deployed();
+  // Deploy .....
+  const DAO = await ethers.getContractFactory("DAO");
+  const dao = await upgrades.deployProxy(DAO, [daoExecutor.address], {
+    deployer,
+  });
+  await dao.deployed();
+  console.log("DAO deployed at:", dao.address);
 
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  // Deploy .....
+  const FounderzAuctionHouse = await ethers.getContractFactory("....");
+  const auctionHouse = await upgrades.deployProxy(auctionHouse, [], {
+    deployer,
+  });
+  await auctionHouse.deployed();
+  console.log("FounderzAuctionHouse deployed at:", auctionHouse.address);
+
+  // Deploy .....
+  const FounderzNFT = await ethers.getContractFactory("...");
+  const founderzNft = await upgrades.deployProxy(founderzNft, [], { deployer });
+  await founderzNft.deployed();
+  console.log("FounderzNFTz deployed at:", founderzNft.address);
+
+//   // Deploy .....
+//   const ... = await ethers.getContractFactory("...");
+//   const ... = await upgrades.deployProxy(..., [], { deployer });
+//   await token.deployed();
+//   console.log("... deployed at:", ....address);
+// 
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
