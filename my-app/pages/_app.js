@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, bscTestnet } from "wagmi/chains";
+import { mainnet, polygon, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { ThemeProvider } from 'next-themes';
@@ -13,7 +13,7 @@ import Head from 'next/head'
 import founderzpass from './assets/founderzpass.png';
 
 const { chains, provider } = configureChains(
-  [bscTestnet],
+  [goerli],
   [
     alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider()

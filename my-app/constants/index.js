@@ -3,13 +3,15 @@
 // export const Founderz_DAO_Logic_CONTRACT_ADDRESS = "";
 // export const Founderz_DAO_Logic_ABI = [];
 
-// This Address is from the Mumbai testnet contract //
+// Goerili
 export const Founderz_NFT_CONTRACT_ADDRESS =
-  "0x9B4aA97025447763c937E5175d7F3933bA24A918";
-// This Address is from the BSC testnet contract // 
+  // "0x9B4aA97025447763c937E5175d7F3933bA24A918";
+  "0x158C93709f2f93aBDf949AB61EceB0b60Eb6f56c";
+// Goerli
 export const Auction_House_CONTRACT_ADDRESS =
-  "0x216aD567AE87Ad436c5D737c3Ee9cAa794DAFbcd";
-// This ABI is from the Mumbai testnet contract //
+  // "0x216aD567AE87Ad436c5D737c3Ee9cAa794DAFbcd";
+  "0xf542D9a8b340e0965346A84e513309b0fff47892";
+// Goerli //
 export const Founderz_NFT_ABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
@@ -583,7 +585,7 @@ export const Founderz_NFT_ABI = [
     type: "function",
   },
 ];
-// This ABI is from the BSC testnet contract //
+// Goerli
 export const Auction_House_ABI = [
   {
     anonymous: false,
@@ -606,7 +608,12 @@ export const Auction_House_ABI = [
         name: "value",
         type: "uint256",
       },
-      { indexed: false, internalType: "bool", name: "extended", type: "bool" },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "extended",
+        type: "bool",
+      },
     ],
     name: "AuctionBid",
     type: "event",
@@ -720,6 +727,95 @@ export const Auction_House_ABI = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "createBid",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IFounderzToken",
+        name: "_founders",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_weth",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_team",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_timeBuffer",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_reservePrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_floorPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint8",
+        name: "_minBidIncrementPercentage",
+        type: "uint8",
+      },
+      {
+        internalType: "uint256",
+        name: "_duration",
+        type: "uint256",
+      },
+    ],
+    name: "initialize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
+      },
+    ],
+    name: "onERC721Received",
+    outputs: [
+      {
+        internalType: "bytes4",
+        name: "",
+        type: "bytes4",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -739,6 +835,13 @@ export const Auction_House_ABI = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "pause",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -752,182 +855,10 @@ export const Auction_House_ABI = [
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "Unpaused",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "auction",
-    outputs: [
-      { internalType: "uint256", name: "founderId", type: "uint256" },
-      { internalType: "uint256", name: "amount", type: "uint256" },
-      { internalType: "uint256", name: "startTime", type: "uint256" },
-      { internalType: "uint256", name: "endTime", type: "uint256" },
-      { internalType: "address payable", name: "bidder", type: "address" },
-      { internalType: "address payable", name: "firstBidder", type: "address" },
-      { internalType: "bool", name: "settled", type: "bool" },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "createBid",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "denumReward",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "duration",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "floorPrice",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "founders",
-    outputs: [
-      { internalType: "contract IFounderzToken", name: "", type: "address" },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "auctionId", type: "uint256" }],
-    name: "getBidHIstory",
-    outputs: [
-      {
-        components: [
-          { internalType: "uint256", name: "amount", type: "uint256" },
-          { internalType: "address", name: "bidder", type: "address" },
-          { internalType: "uint256", name: "timestamp", type: "uint256" },
-        ],
-        internalType: "struct FounderzNFTAuctionHouse.Bid[]",
-        name: "",
-        type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "bidder", type: "address" }],
-    name: "getBidderHIstory",
-    outputs: [
-      {
-        components: [
-          { internalType: "uint256", name: "foundersId", type: "uint256" },
-          { internalType: "uint256", name: "amount", type: "uint256" },
-          { internalType: "uint256", name: "timestamp", type: "uint256" },
-        ],
-        internalType: "struct FounderzNFTAuctionHouse.UserBid[]",
-        name: "",
-        type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IFounderzToken",
-        name: "_founders",
-        type: "address",
-      },
-      { internalType: "address", name: "_weth", type: "address" },
-      { internalType: "address", name: "_team", type: "address" },
-      { internalType: "uint256", name: "_timeBuffer", type: "uint256" },
-      { internalType: "uint256", name: "_reservePrice", type: "uint256" },
-      { internalType: "uint256", name: "_floorPrice", type: "uint256" },
-      {
-        internalType: "uint8",
-        name: "_minBidIncrementPercentage",
-        type: "uint8",
-      },
-      { internalType: "uint256", name: "_duration", type: "uint256" },
-    ],
-    name: "initialize",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "minBidIncrementPercentage",
-    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "address", name: "", type: "address" },
-      { internalType: "address", name: "", type: "address" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "bytes", name: "", type: "bytes" },
-    ],
-    name: "onERC721Received",
-    outputs: [{ internalType: "bytes4", name: "", type: "bytes4" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "pause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "paused",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "renounceOwnership",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "reservePrice",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "seedSaleTreshold",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -945,7 +876,11 @@ export const Auction_House_ABI = [
   },
   {
     inputs: [
-      { internalType: "uint256", name: "_reservePrice", type: "uint256" },
+      {
+        internalType: "uint256",
+        name: "_reservePrice",
+        type: "uint256",
+      },
     ],
     name: "setReservePrice",
     outputs: [],
@@ -953,7 +888,13 @@ export const Auction_House_ABI = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "uint256", name: "_timeBuffer", type: "uint256" }],
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_timeBuffer",
+        type: "uint256",
+      },
+    ],
     name: "setTimeBuffer",
     outputs: [],
     stateMutability: "nonpayable",
@@ -974,31 +915,16 @@ export const Auction_House_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "team",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "timeBuffer",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
+    inputs: [
+      {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
     name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "treasury",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -1009,9 +935,286 @@ export const Auction_House_ABI = [
     type: "function",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "Unpaused",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "auction",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "founderId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "startTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "endTime",
+        type: "uint256",
+      },
+      {
+        internalType: "address payable",
+        name: "bidder",
+        type: "address",
+      },
+      {
+        internalType: "address payable",
+        name: "firstBidder",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "settled",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "denumReward",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "duration",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "floorPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "founders",
+    outputs: [
+      {
+        internalType: "contract IFounderzToken",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "bidder",
+        type: "address",
+      },
+    ],
+    name: "getBidderHIstory",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "foundersId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "timestamp",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct FounderzNFTAuctionHouse.UserBid[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "auctionId",
+        type: "uint256",
+      },
+    ],
+    name: "getBidHIstory",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "bidder",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "timestamp",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct FounderzNFTAuctionHouse.Bid[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "minBidIncrementPercentage",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "paused",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "reservePrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "seedSaleTreshold",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "team",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "timeBuffer",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "treasury",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "weth",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
