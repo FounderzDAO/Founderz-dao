@@ -13,7 +13,7 @@
 // AuctionHouse.sol source code Copyright Zora licensed under the GPL-3.0 license.
 // With modifications by Founderz DAO.
 
-pragma solidity 0.8.19;
+pragma solidity 0.8.20;
 
 /**
  * @dev Provides information about the current execution context, including the
