@@ -213,6 +213,8 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
 // }
 
 /// @notice Momentary Access control contract for Founderz DAO
+/// @title Founderz DAO Access Control: Replace with OpenZepplin AccessControl
+/// @author K42 
 contract FounderzDAOProxystorage {
     /// @notice Administrator for this contract
     address public admin;
