@@ -109,6 +109,36 @@ contract MyGovernor is Governor, GovernorSettings, GovernorCompatibilityBravo, G
         return super.supportsInterface(interfaceId);
     }
 }
+// Interface for FounderzNFT: Used to check if a user has a FounderzNFT
+//   interface IFounderzNFT {
+//     function balanceOf(address owner) external view returns (uint256);
+//     }
+   
+//     // mapping to track votes 
+//     mapping(address => uint256) private _votes;
+
+
+//     // propsal vars
+//     struct Proposal {
+//     address proposer;
+//     string description;
+//     uint256 voteCount;
+//     // additional fields as needed
+// }
+
+
+// // Key Functions
+// function submitProposal(string memory description) public {
+//     require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 NFT to propose");
+//     // logic to create and store the proposal
+// }
+// function vote(uint256 proposalId, bool approve) public {
+//     uint256 votes = IFounderzNFT(nftAddress).balanceOf(msg.sender);
+//     require(votes > 0, "Must hold at least 1 NFT to vote");
+//     // logic to record the vote
+// }
+
+
 /// Momentary event based contract: Used to emit events for the FounderzDAO.
 contract FounderzDAOEvents {
     /// @notice An event emitted when a new proposal is created
