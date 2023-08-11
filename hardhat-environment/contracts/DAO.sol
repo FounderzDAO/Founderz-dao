@@ -12,7 +12,81 @@ import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
 /// @notice OpenZeppelin governor contract with modifications for Founderz DAO
-contract MyGovernor is Governor, GovernorSettings, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
+contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
+    
+    // DaoEvents
+     /// @notice An event emitted when a new proposal is created
+    event ProposalCreated(
+        uint256 id,
+        address proposer,
+        address[] targets,
+        uint256[] values,
+        string[] signatures,
+        bytes[] calldatas,
+        uint256 startBlock,
+        uint256 endBlock,
+        string description
+    );
+
+    event ProposalCreatedWithRequirements(
+        uint256 id,
+        address proposer,
+        address[] targets,
+        uint256[] values,
+        string[] signatures,
+        bytes[] calldatas,
+        uint256 startBlock,
+        uint256 endBlock,
+        uint256 proposalThreshold,
+        uint256 quorumVotes,
+        string description
+    );
+
+    /// @notice An event emitted when a vote has been cast on a proposal
+    /// @param voter The address which casted a vote
+    /// @param proposalId The proposal id which was voted on
+    /// @param support Support value for the vote. 0=against, 1=for, 2=abstain
+    /// @param votes Number of votes which were cast by the voter
+    /// @param reason The reason given for the vote by the voter
+    event VoteCast(address indexed voter, uint256 proposalId, uint8 support, uint256 votes, string reason);
+
+    /// @notice An event emitted when a proposal has been canceled
+    event ProposalCanceled(uint256 id);
+
+    /// @notice An event emitted when a proposal has been queued in the FounderzDAOExecutor
+    event ProposalQueued(uint256 id, uint256 eta);
+
+    /// @notice An event emitted when a proposal has been executed in the FounderzDAOExecutor
+    event ProposalExecuted(uint256 id);
+
+    /// @notice An event emitted when a proposal has been vetoed by vetoAddress
+    event ProposalVetoed(uint256 id);
+
+    /// @notice An event emitted when the voting delay is set
+    event VotingDelaySet(uint256 oldVotingDelay, uint256 newVotingDelay);
+
+    /// @notice An event emitted when the voting period is set
+    event VotingPeriodSet(uint256 oldVotingPeriod, uint256 newVotingPeriod);
+
+    /// @notice Emitted when implementation is changed
+    event NewImplementation(address oldImplementation, address newImplementation);
+
+    /// @notice Emitted when proposal threshold basis points is set
+    event ProposalThresholdBPSSet(uint256 oldProposalThresholdBPS, uint256 newProposalThresholdBPS);
+
+    /// @notice Emitted when quorum votes basis points is set
+    event QuorumVotesBPSSet(uint256 oldQuorumVotesBPS, uint256 newQuorumVotesBPS);
+
+    /// @notice Emitted when pendingAdmin is changed
+    event NewPendingAdmin(address oldPendingAdmin, address newPendingAdmin);
+
+    /// @notice Emitted when pendingAdmin is accepted, which means admin is updated
+    event NewAdmin(address oldAdmin, address newAdmin);
+
+    /// @notice Emitted when vetoer is changed
+    event NewVetoer(address oldVetoer, address newVetoer);
+    
+    // Constructor for FounderzDaoGovernor, current: v1
     constructor(IVotes _token, TimelockController _timelock)
         Governor("MyGovernor")
         GovernorSettings(1 /* 1 block */, 300 /* 1 hour */, 0)
@@ -132,86 +206,12 @@ contract MyGovernor is Governor, GovernorSettings, GovernorCompatibilityBravo, G
 //     require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 NFT to propose");
 //     // logic to create and store the proposal
 // }
-// function vote(uint256 proposalId, bool approve) public {
+// function founderzVote(uint256 proposalId, bool approve) public {
 //     uint256 votes = IFounderzNFT(nftAddress).balanceOf(msg.sender);
 //     require(votes > 0, "Must hold at least 1 NFT to vote");
 //     // logic to record the vote
 // }
 
-
-/// Momentary event based contract: Used to emit events for the FounderzDAO.
-contract FounderzDAOEvents {
-    /// @notice An event emitted when a new proposal is created
-    event ProposalCreated(
-        uint256 id,
-        address proposer,
-        address[] targets,
-        uint256[] values,
-        string[] signatures,
-        bytes[] calldatas,
-        uint256 startBlock,
-        uint256 endBlock,
-        string description
-    );
-
-    event ProposalCreatedWithRequirements(
-        uint256 id,
-        address proposer,
-        address[] targets,
-        uint256[] values,
-        string[] signatures,
-        bytes[] calldatas,
-        uint256 startBlock,
-        uint256 endBlock,
-        uint256 proposalThreshold,
-        uint256 quorumVotes,
-        string description
-    );
-
-    /// @notice An event emitted when a vote has been cast on a proposal
-    /// @param voter The address which casted a vote
-    /// @param proposalId The proposal id which was voted on
-    /// @param support Support value for the vote. 0=against, 1=for, 2=abstain
-    /// @param votes Number of votes which were cast by the voter
-    /// @param reason The reason given for the vote by the voter
-    event VoteCast(address indexed voter, uint256 proposalId, uint8 support, uint256 votes, string reason);
-
-    /// @notice An event emitted when a proposal has been canceled
-    event ProposalCanceled(uint256 id);
-
-    /// @notice An event emitted when a proposal has been queued in the FounderzDAOExecutor
-    event ProposalQueued(uint256 id, uint256 eta);
-
-    /// @notice An event emitted when a proposal has been executed in the FounderzDAOExecutor
-    event ProposalExecuted(uint256 id);
-
-    /// @notice An event emitted when a proposal has been vetoed by vetoAddress
-    event ProposalVetoed(uint256 id);
-
-    /// @notice An event emitted when the voting delay is set
-    event VotingDelaySet(uint256 oldVotingDelay, uint256 newVotingDelay);
-
-    /// @notice An event emitted when the voting period is set
-    event VotingPeriodSet(uint256 oldVotingPeriod, uint256 newVotingPeriod);
-
-    /// @notice Emitted when implementation is changed
-    event NewImplementation(address oldImplementation, address newImplementation);
-
-    /// @notice Emitted when proposal threshold basis points is set
-    event ProposalThresholdBPSSet(uint256 oldProposalThresholdBPS, uint256 newProposalThresholdBPS);
-
-    /// @notice Emitted when quorum votes basis points is set
-    event QuorumVotesBPSSet(uint256 oldQuorumVotesBPS, uint256 newQuorumVotesBPS);
-
-    /// @notice Emitted when pendingAdmin is changed
-    event NewPendingAdmin(address oldPendingAdmin, address newPendingAdmin);
-
-    /// @notice Emitted when pendingAdmin is accepted, which means admin is updated
-    event NewAdmin(address oldAdmin, address newAdmin);
-
-    /// @notice Emitted when vetoer is changed
-    event NewVetoer(address oldVetoer, address newVetoer);
-}
 /// @notice Momentary Access control contract for Founderz DAO
 contract FounderzDAOProxystorage {
     /// @notice Administrator for this contract
@@ -358,7 +358,6 @@ interface IFounderzDAOExecutor {
         uint256 eta
     ) external payable returns (bytes memory);
 }
-
 interface FoundersTokenLike {
     function getPriorVotes(address account, uint256 blockNumber) external view returns (uint96);
 
@@ -366,7 +365,7 @@ interface FoundersTokenLike {
 }
 
 /// @notice Founderz DAO executor
-contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDAOEvents, MyGovernor, accessControl, reetrancyGuard {
+contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDAOEvents, FounderzDaoGovernor, accessControl, reetrancyGuard {
     /// @notice The name of this contract
     string public constant name = 'Founderz DAO';
 
@@ -985,20 +984,9 @@ contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDAOEvents, MyGovernor, a
         return chainId;
     }
 }
-/// 
-
-
 /// @title The Founderz DAO logic version 1
 
 // LICENSE
-// FounderzDAOLogicV1.sol is a modified version of Compound Lab's GovernorBravoDelegate.sol:
-// https://github.com/compound-finance/compound-protocol/blob/b9b14038612d846b83f8a009a82c38974ff2dcfe/contracts/Governance/GovernorBravoDelegate.sol
-//
-// GovernorBravoDelegate.sol source code Copyright 2020 Compound Labs, Inc. licensed under the BSD-3-Clause license.
-// With modifications by Founderz DAO.
-//
-// Additional conditions of BSD-3-Clause can be found here: https://opensource.org/licenses/BSD-3-Clause
-//
 // MODIFICATIONS
 // FounderzDAOLogicV1 adds:
 // - Proposal Threshold basis points instead of fixed number
