@@ -11,7 +11,9 @@ import "@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol
 import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
-/// @notice OpenZeppelin governor contract with modifications for Founderz DAO
+import "@openzeppelin/contracts/access/AccessControl.sol";
+// @notice: Use https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable2Step.sol for os trfer to treas
+// @notice OpenZeppelin governor contract with modifications for Founderz DAO
 contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
     
     // DaoEvents
