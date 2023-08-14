@@ -193,9 +193,16 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
 // // Key Functions
 // function submitProposal(string memory description) public {
 //     require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 NFT to propose");
+//     require(FounderzDaoGovernor.state(proposalId) == ProposalState.Pending, "Proposal must be pending to submit");
+//     require(FounderzDaoGovernor.proposalThreshold() > 0, "Proposal threshold must be greater than 0");
+// 
+//     uint256 proposalId = FounderzDaoGovernor.propose(targets, values, calldatas, description);
 //     // logic to create and store the proposal
 // }
+
 // function founderzVote(uint256 proposalId, bool approve) public {
+//     // Re-order
+//     require(FounderzDaoGovernor.state(proposalId) == ProposalState.Active, "Proposal must be active to vote");
 //     uint256 votes = IFounderzNFT(nftAddress).balanceOf(msg.sender);
 //     require(votes > 0, "Must hold at least 1 NFT to vote");
 //     // logic to record the vote
