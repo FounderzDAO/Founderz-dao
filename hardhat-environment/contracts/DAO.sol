@@ -190,17 +190,27 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
 //     function balanceOf(address owner) external view returns (uint256);
 //     }
 
+// // Modifiers
+// modifier onlyFounderz() {
+//   require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 NFT to propose");    
+//   _;
+// } 
+// Temporary v1 modifier: will be modified to allow for vetoing by founderz multisig
+// modifier onlyVetoer() {
+//   require(msg.sender == vetoAddress, "Must be vetoer to veto");
+//    _;
+// }    
+
 // // Key Functions
-// function submitProposal(string memory description) public {
-//     require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 NFT to propose");
+// function submitProposal(string memory description) public onlyFounderz {
 //     require(FounderzDaoGovernor.state(proposalId) == ProposalState.Pending, "Proposal must be pending to submit");
 //     require(FounderzDaoGovernor.proposalThreshold() > 0, "Proposal threshold must be greater than 0");
-// 
+//     
 //     uint256 proposalId = FounderzDaoGovernor.propose(targets, values, calldatas, description);
 //     // logic to create and store the proposal
 // }
 
-// function founderzVote(uint256 proposalId, bool approve) public {
+// function founderzVote(uint256 proposalId, bool approve) public onlyFounderz {
 //     // Re-order
 //     require(FounderzDaoGovernor.state(proposalId) == ProposalState.Active, "Proposal must be active to vote");
 //     uint256 votes = IFounderzNFT(nftAddress).balanceOf(msg.sender);
