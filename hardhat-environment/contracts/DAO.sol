@@ -90,7 +90,7 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
     
     // Constructor for FounderzDaoGovernor, current: v1
     constructor(IVotes _token, TimelockController _timelock)
-        Governor("MyGovernor")
+        Governor("FounderzDaoGovernor")
         GovernorSettings(1 /* 1 block */, 300 /* 1 hour */, 0)
         GovernorVotes(_token)
         GovernorVotesQuorumFraction(4)
@@ -189,19 +189,6 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
 //   interface IFounderzNFT {
 //     function balanceOf(address owner) external view returns (uint256);
 //     }
-   
-//     // mapping to track votes 
-//     mapping(address => uint256) private _votes;
-
-
-//     // propsal vars
-//     struct Proposal {
-//     address proposer;
-//     string description;
-//     uint256 voteCount;
-//     // additional fields as needed
-// }
-
 
 // // Key Functions
 // function submitProposal(string memory description) public {
@@ -369,7 +356,7 @@ interface FoundersTokenLike {
 }
 
 /// @notice Founderz DAO executor
-contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDAOEvents, FounderzDaoGovernor, accessControl, reetrancyGuard {
+contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDaoGovernor, accessControl, reetrancyGuard {
     /// @notice The name of this contract
     string public constant name = 'Founderz DAO';
 
