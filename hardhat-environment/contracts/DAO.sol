@@ -192,12 +192,12 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
 
 // // Modifiers
 // modifier onlyFounderz() {
-//   require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 NFT to propose");    
+//   require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 FounderzNFT to propose");    
 //   _;
 // } 
 // Temporary v1 modifier: will be modified to allow for vetoing by founderz multisig
 // modifier onlyVetoer() {
-//   require(msg.sender == vetoAddress, "Must be vetoer to veto");
+//   require(msg.sender == vetoAddress, "Must be FounderzVetoer to veto");
 //    _;
 // }    
 
