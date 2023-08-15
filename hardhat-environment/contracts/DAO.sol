@@ -15,7 +15,6 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 // @notice: Use https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable2Step.sol for os trfer to treas
 // @notice OpenZeppelin governor contract with modifications for Founderz DAO
 contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
-    
     // DaoEvents
      /// @notice An event emitted when a new proposal is created
     event ProposalCreated(
@@ -185,21 +184,25 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
         return super.supportsInterface(interfaceId);
     }
 }
-// Interface for FounderzNFT: Used to check if a user has a FounderzNFT
-//   interface IFounderzNFT {
-//     function balanceOf(address owner) external view returns (uint256);
-//     }
+
+/// @notice Founderz DAO executor/logic implementation
+contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDaoGovernor, accessControl, reetrancyGuard {
+/// @notice Interface for FounderzNFT: Used to check if a user has a FounderzNFT
+  interface IFounderzNFT {
+    function balanceOf(address owner) external view returns (uint256);
+    }
 
 // // Modifiers
-// modifier onlyFounderz() {
-//   require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 FounderzNFT to propose");    
-//   _;
-// } 
-// Temporary v1 modifier: will be modified to allow for vetoing by founderz multisig
-// modifier onlyVetoer() {
-//   require(msg.sender == vetoAddress, "Must be FounderzVetoer to veto");
-//    _;
-// }    
+  modifier onlyFounderz() {
+  require(IFounderzNFT(nftAddress).balanceOf(msg.sender) > 0, "Must hold at least 1 FounderzNFT to propose");    
+  _;
+} 
+/// @dev Temporary v1 modifier: will be modified to allow for vetoing by founderz multisig
+  modifier onlyVetoer() {
+  // To define vetoer as Founderz Multisig(Tbc..)
+  require(msg.sender == FounderzVetoer, "Must be FounderzVetoer to veto");
+   _;
+}    
 
 // // Key Functions
 // function submitProposal(string memory description) public onlyFounderz {
@@ -218,162 +221,7 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
 //     // logic to record the vote
 // }
 
-/// @notice Momentary Access control contract for Founderz DAO
-/// @title Founderz DAO Access Control: Replace with OpenZepplin AccessControl
-/// @author K42 
-contract FounderzDAOProxystorage {
-    /// @notice Administrator for this contract
-    address public admin;
-
-    /// @notice Pending administrator for this contract
-    address public pendingAdmin;
-
-    /// @notice Active brains of Governor
-    address public implementation;
-}
-
-/// @notice The Founderz DAO executor and treasury
-/**
- * @title Storage for Governor Bravo Delegate
- * @notice For future upgrades, do not change FounderzDAOStorageV1. Create a new
- * contract which implements FounderzDAOStorageV1 and following the naming convention
- * FounderzDAOStorageVX.
- */
-contract FounderzDAOStorageV1 is FounderzDAOProxystorage {
-    /// @notice Vetoer who has the ability to veto any proposal
-    address public vetoer;
-
-    /// @notice The delay before voting on a proposal may take place, once proposed, in blocks
-    uint256 public votingDelay;
-
-    /// @notice The duration of voting on a proposal, in blocks
-    uint256 public votingPeriod;
-
-    /// @notice The basis point number of votes required in order for a voter to become a proposer. *DIFFERS from GovernerBravo
-    uint256 public proposalThresholdBPS;
-
-    /// @notice The basis point number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed. *DIFFERS from GovernerBravo
-    uint256 public quorumVotesBPS;
-
-    /// @notice The total number of proposals
-    uint256 public proposalCount;
-
-    /// @notice The address of the Founderz DAO Executor FounderzDAOExecutor
-    IFounderzDAOExecutor public timelock;
-
-    /// @notice The address of the Founders tokens
-    FoundersTokenLike public founders;
-
-    /// @notice The official record of all proposals ever proposed
-    mapping(uint256 => Proposal) public proposals;
-
-    /// @notice The latest proposal for each proposer
-    mapping(address => uint256) public latestProposalIds;
-
-    struct Proposal {
-        /// @notice Unique id for looking up a proposal
-        uint256 id;
-        /// @notice Creator of the proposal
-        address proposer;
-        /// @notice The number of votes needed to create a proposal at the time of proposal creation. *DIFFERS from GovernerBravo
-        uint256 proposalThreshold;
-        /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed at the time of proposal creation. *DIFFERS from GovernerBravo
-        uint256 quorumVotes;
-        /// @notice The timestamp that the proposal will be available for execution, set once the vote succeeds
-        uint256 eta;
-        /// @notice the ordered list of target addresses for calls to be made
-        address[] targets;
-        /// @notice The ordered list of values (i.e. msg.value) to be passed to the calls to be made
-        uint256[] values;
-        /// @notice The ordered list of function signatures to be called
-        string[] signatures;
-        /// @notice The ordered list of calldata to be passed to each call
-        bytes[] calldatas;
-        /// @notice The block at which voting begins: holders must delegate their votes prior to this block
-        uint256 startBlock;
-        /// @notice The block at which voting ends: votes must be cast prior to this block
-        uint256 endBlock;
-        /// @notice Current number of votes in favor of this proposal
-        uint256 forVotes;
-        /// @notice Current number of votes in opposition to this proposal
-        uint256 againstVotes;
-        /// @notice Current number of votes for abstaining for this proposal
-        uint256 abstainVotes;
-        /// @notice Flag marking whether the proposal has been canceled
-        bool canceled;
-        /// @notice Flag marking whether the proposal has been vetoed
-        bool vetoed;
-        /// @notice Flag marking whether the proposal has been executed
-        bool executed;
-        /// @notice Receipts of ballots for the entire set of voters
-        mapping(address => Receipt) receipts;
-    }
-
-    /// @notice Ballot receipt record for a voter
-    struct Receipt {
-        /// @notice Whether or not a vote has been cast
-        bool hasVoted;
-        /// @notice Whether or not the voter supports the proposal or abstains
-        uint8 support;
-        /// @notice The number of votes the voter had, which were cast
-        uint96 votes;
-    }
-
-    /// @notice Possible states that a proposal may be in
-    enum ProposalState {
-        Pending,
-        Active,
-        Canceled,
-        Defeated,
-        Succeeded,
-        Queued,
-        Expired,
-        Executed,
-        Vetoed
-    }
-}
-
-interface IFounderzDAOExecutor {
-    function delay() external view returns (uint256);
-
-    function GRACE_PERIOD() external view returns (uint256);
-
-    function acceptAdmin() external;
-
-    function queuedTransactions(bytes32 hash) external view returns (bool);
-
-    function queueTransaction(
-        address target,
-        uint256 value,
-        string calldata signature,
-        bytes calldata data,
-        uint256 eta
-    ) external returns (bytes32);
-
-    function cancelTransaction(
-        address target,
-        uint256 value,
-        string calldata signature,
-        bytes calldata data,
-        uint256 eta
-    ) external;
-
-    function executeTransaction(
-        address target,
-        uint256 value,
-        string calldata signature,
-        bytes calldata data,
-        uint256 eta
-    ) external payable returns (bytes memory);
-}
-interface FoundersTokenLike {
-    function getPriorVotes(address account, uint256 blockNumber) external view returns (uint96);
-
-    function totalSupply() external view returns (uint96);
-}
-
-/// @notice Founderz DAO executor
-contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDaoGovernor, accessControl, reetrancyGuard {
+    /// @notice: To be Modified and re-structured given new context of accessControl, FounderzDAOGovernor, potentially Own2Step, IFounderzToken.     
     /// @notice The name of this contract
     string public constant name = 'Founderz DAO';
 
@@ -992,9 +840,10 @@ contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDaoGovernor, accessContr
         return chainId;
     }
 }
+
+
 /// @title The Founderz DAO logic version 1
 
-// LICENSE
 // MODIFICATIONS
 // FounderzDAOLogicV1 adds:
 // - Proposal Threshold basis points instead of fixed number
@@ -1028,3 +877,159 @@ contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDaoGovernor, accessContr
 //   in `execute(uint proposalId)`. This contract should not hold funds and does not
 //   implement `receive()` or `fallback()` functions.
 //
+
+
+/// @dev Old Logic: 
+/// @notice Redundant Access control contract for Founderz DAO
+/// @title Founderz DAO Access Control: Replace with OpenZepplin AccessControl
+/// @author K42 
+// contract FounderzDAOProxystorage {
+//     /// @notice Administrator for this contract
+//     address public admin;
+
+//     /// @notice Pending administrator for this contract
+//     address public pendingAdmin;
+
+//     /// @notice Active brains of Governor
+//     address public implementation;
+// }
+
+/// @notice The Founderz DAO executor and treasury
+/**
+ * @title Storage for Governor Bravo Delegate
+ * @notice For future upgrades, do not change FounderzDAOStorageV1. Create a new
+ * contract which implements FounderzDAOStorageV1 and following the naming convention
+ * FounderzDAOStorageVX. This is now redudant as will re-define neccessary accessControl and using FounderzDaoGovernor for data-structures and logic which I will expand on.
+ */
+// contract FounderzDAOStorageV1 is FounderzDAOProxystorage {
+//     /// @notice Vetoer who has the ability to veto any proposal
+//     address public vetoer;
+
+//     /// @notice The delay before voting on a proposal may take place, once proposed, in blocks
+//     uint256 public votingDelay;
+
+//     /// @notice The duration of voting on a proposal, in blocks
+//     uint256 public votingPeriod;
+
+//     /// @notice The basis point number of votes required in order for a voter to become a proposer. *DIFFERS from GovernerBravo
+//     uint256 public proposalThresholdBPS;
+
+//     /// @notice The basis point number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed. *DIFFERS from GovernerBravo
+//     uint256 public quorumVotesBPS;
+
+//     /// @notice The total number of proposals
+//     uint256 public proposalCount;
+
+//     /// @notice The address of the Founderz DAO Executor FounderzDAOExecutor
+//     IFounderzDAOExecutor public timelock;
+
+//     /// @notice The address of the Founders tokens
+//     FoundersTokenLike public founders;
+
+//     /// @notice The official record of all proposals ever proposed
+//     mapping(uint256 => Proposal) public proposals;
+
+//     /// @notice The latest proposal for each proposer
+//     mapping(address => uint256) public latestProposalIds;
+
+//     struct Proposal {
+//         /// @notice Unique id for looking up a proposal
+//         uint256 id;
+//         /// @notice Creator of the proposal
+//         address proposer;
+//         /// @notice The number of votes needed to create a proposal at the time of proposal creation. *DIFFERS from GovernerBravo
+//         uint256 proposalThreshold;
+//         /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed at the time of proposal creation. *DIFFERS from GovernerBravo
+//         uint256 quorumVotes;
+//         /// @notice The timestamp that the proposal will be available for execution, set once the vote succeeds
+//         uint256 eta;
+//         /// @notice the ordered list of target addresses for calls to be made
+//         address[] targets;
+//         /// @notice The ordered list of values (i.e. msg.value) to be passed to the calls to be made
+//         uint256[] values;
+//         /// @notice The ordered list of function signatures to be called
+//         string[] signatures;
+//         /// @notice The ordered list of calldata to be passed to each call
+//         bytes[] calldatas;
+//         /// @notice The block at which voting begins: holders must delegate their votes prior to this block
+//         uint256 startBlock;
+//         /// @notice The block at which voting ends: votes must be cast prior to this block
+//         uint256 endBlock;
+//         /// @notice Current number of votes in favor of this proposal
+//         uint256 forVotes;
+//         /// @notice Current number of votes in opposition to this proposal
+//         uint256 againstVotes;
+//         /// @notice Current number of votes for abstaining for this proposal
+//         uint256 abstainVotes;
+//         /// @notice Flag marking whether the proposal has been canceled
+//         bool canceled;
+//         /// @notice Flag marking whether the proposal has been vetoed
+//         bool vetoed;
+//         /// @notice Flag marking whether the proposal has been executed
+//         bool executed;
+//         /// @notice Receipts of ballots for the entire set of voters
+//         mapping(address => Receipt) receipts;
+//     }
+
+//     /// @notice Ballot receipt record for a voter
+//     struct Receipt {
+//         /// @notice Whether or not a vote has been cast
+//         bool hasVoted;
+//         /// @notice Whether or not the voter supports the proposal or abstains
+//         uint8 support;
+//         /// @notice The number of votes the voter had, which were cast
+//         uint96 votes;
+//     }
+
+//     /// @notice Possible states that a proposal may be in
+//     enum ProposalState {
+//         Pending,
+//         Active,
+//         Canceled,
+//         Defeated,
+//         Succeeded,
+//         Queued,
+//         Expired,
+//         Executed,
+//         Vetoed
+//     }
+// }
+
+// interface IFounderzDAOExecutor {
+//     function delay() external view returns (uint256);
+
+//     function GRACE_PERIOD() external view returns (uint256);
+
+//     function acceptAdmin() external;
+
+//     function queuedTransactions(bytes32 hash) external view returns (bool);
+
+//     function queueTransaction(
+//         address target,
+//         uint256 value,
+//         string calldata signature,
+//         bytes calldata data,
+//         uint256 eta
+//     ) external returns (bytes32);
+
+//     function cancelTransaction(
+//         address target,
+//         uint256 value,
+//         string calldata signature,
+//         bytes calldata data,
+//         uint256 eta
+//     ) external;
+
+//     function executeTransaction(
+//         address target,
+//         uint256 value,
+//         string calldata signature,
+//         bytes calldata data,
+//         uint256 eta
+//     ) external payable returns (bytes memory);
+// }
+// interface FoundersTokenLike {
+//     function getPriorVotes(address account, uint256 blockNumber) external view returns (uint96);
+
+//     function totalSupply() external view returns (uint96);
+// }
