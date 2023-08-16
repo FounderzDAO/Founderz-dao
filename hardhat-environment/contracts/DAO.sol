@@ -186,7 +186,7 @@ contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilit
 }
 
 /// @notice Founderz DAO executor/logic implementation
-contract FounderzDAOV1 is FounderzDAOStorageV1, FounderzDaoGovernor, accessControl, reetrancyGuard {
+contract FounderzDAOV1 is FounderzDaoGovernor, accessControl, reetrancyGuard {
 /// @notice Interface for FounderzNFT: Used to check if a user has a FounderzNFT
   interface IFounderzNFT {
     function balanceOf(address owner) external view returns (uint256);
