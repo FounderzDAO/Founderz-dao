@@ -208,7 +208,7 @@ contract FounderzDAOV1 is FounderzDaoGovernor, accessControl, reetrancyGuard {
 // function submitProposal(string memory description) public onlyFounderz {
 //     require(FounderzDaoGovernor.state(proposalId) == ProposalState.Pending, "Proposal must be pending to submit");
 //     require(FounderzDaoGovernor.proposalThreshold() > 0, "Proposal threshold must be greater than 0");
-//     
+    
 //     uint256 proposalId = FounderzDaoGovernor.propose(targets, values, calldatas, description);
 //     // logic to create and store the proposal
 // }
