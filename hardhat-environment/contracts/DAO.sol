@@ -842,7 +842,7 @@ contract FounderzDAOV1 is FounderzDaoGovernor, accessControl, reetrancyGuard {
 }
 
 
-/// @title The Founderz DAO logic version 1
+/// @title Founderz DAO logic notes for version 1
 
 // MODIFICATIONS
 // FounderzDAOLogicV1 adds:
