@@ -14,6 +14,12 @@ import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.so
 import "@openzeppelin/contracts/access/AccessControl.sol";
 // @notice: Use https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable2Step.sol for os trfer to treas
 // @notice OpenZeppelin governor contract with modifications for Founderz DAO
+
+// @dev: To be modified: 
+// - Integrate with FounderzNFT: Current structures are present, but in-complete = V1 Contract
+// - To allow for vetoing by Founderz Multisig 
+// - To allow for FounderzNFT holders to submit proposals: Current structures are present, but in-complete = V1 Contract
+// - To allow for FounderzNFT holders to vote on proposals: Current structures are present, but in-complete = V1 Contract
 contract FounderzDaoGovernor is Governor, GovernorSettings, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
     // DaoEvents
      /// @notice An event emitted when a new proposal is created
